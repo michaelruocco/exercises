@@ -1,0 +1,11 @@
+plugins {
+    id "org.unbroken-dome.test-sets" version "3.0.1"
+    id "java-test-fixtures"
+}
+
+testSets {
+    integrationTest
+}
+
+check.dependsOn integrationTest
+integrationTest.mustRunAfter test
