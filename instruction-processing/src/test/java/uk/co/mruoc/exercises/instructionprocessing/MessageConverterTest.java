@@ -2,14 +2,21 @@ package uk.co.mruoc.exercises.instructionprocessing;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.time.format.DateTimeParseException;
 
+import static java.time.Instant.EPOCH;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
 class MessageConverterTest {
 
-    private final MessageConverter converter = new MessageConverter();
+    private static final Instant NOW = Instant.now();
+
+    private final Clock clock = Clock.fixed(NOW, ZoneId.systemDefault());
+    private final MessageConverter converter = new MessageConverter(clock);
 
     @Test
     void shouldConvertValidMessage() {
@@ -82,6 +89,30 @@ class MessageConverterTest {
                 .isInstanceOf(InvalidMessageException.class)
                 .hasMessage(String.format("invalid timestamp %s", invalidTimestamp))
                 .hasCauseInstanceOf(DateTimeParseException.class);
+    }
+
+    @Test
+    void shouldThrowExceptionIfTimestampIsInFuture() {
+        Instant timestamp = NOW.plusMillis(1);
+        String input = MessageMother.withTimestamp(timestamp.toString());
+
+        Throwable error = catchThrowable(() -> converter.toInstructionMessage(input));
+
+        assertThat(error)
+                .isInstanceOf(InvalidMessageException.class)
+                .hasMessage(String.format("timestamp %s cannot be in future current time is %s", timestamp, NOW));
+    }
+
+    @Test
+    void shouldThrowExceptionIfTimestampIsNotGreaterThanUnixEpoch() {
+        Instant timestamp = EPOCH;
+        String input = MessageMother.withTimestamp(timestamp.toString());
+
+        Throwable error = catchThrowable(() -> converter.toInstructionMessage(input));
+
+        assertThat(error)
+                .isInstanceOf(InvalidMessageException.class)
+                .hasMessage(String.format("timestamp %s must be after unix epoch %s", timestamp, EPOCH));
     }
 
 }
