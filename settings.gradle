@@ -2,4 +2,5 @@ rootProject.name = 'exercises'
 
 include ':smallest-missing-positive-integer'
 include ':first-unique-character'
+include ':instruction-processing'
 
