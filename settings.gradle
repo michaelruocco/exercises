@@ -1,4 +1,4 @@
 rootProject.name = 'exercises'
 
-include ':first-missing-positive-integer'
+include ':smallest-missing-positive-integer'
 
