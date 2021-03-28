@@ -6,10 +6,16 @@ import lombok.RequiredArgsConstructor;
 public class DefaultMessageReceiver implements MessageReceiver {
 
     private final InstructionQueue queue;
+    private final MessageConverter converter;
+
+    public DefaultMessageReceiver(InstructionQueue queue) {
+        this(queue, new MessageConverter());
+    }
 
     @Override
-    public void receive(String message) {
-        queue.enqueue(new InstructionMessage());
+    public void receive(String input) {
+        InstructionMessage message = converter.toInstructionMessage(input);
+        queue.enqueue(message);
     }
 
 }

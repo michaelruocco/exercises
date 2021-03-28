@@ -23,4 +23,13 @@ class InstructionQueueTest {
         assertThat(queue.isEmpty()).isFalse();
     }
 
+    @Test
+    void shouldReturnButNotRemoveNextMessageFromPeek() {
+        InstructionMessage message = mock(InstructionMessage.class);
+        queue.enqueue(message);
+
+        assertThat(queue.peek()).isEqualTo(message);
+        assertThat(queue.peek()).isEqualTo(message);
+    }
+
 }

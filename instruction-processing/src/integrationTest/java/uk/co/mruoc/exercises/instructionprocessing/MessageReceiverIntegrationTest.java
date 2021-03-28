@@ -18,4 +18,13 @@ class MessageReceiverIntegrationTest {
         assertThat(queue.isEmpty()).isFalse();
     }
 
+    @Test
+    void shouldReceiveMessageConvertedCorrectly() {
+        String inputMessage = MessageMother.defaultMessage();
+
+        receiver.receive(inputMessage);
+
+        assertThat(queue.peek()).isEqualTo(InstructionMessageMother.defaultMessage());
+    }
+
 }

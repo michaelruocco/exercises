@@ -11,6 +11,10 @@ public class InstructionQueue {
         messages.add(message);
     }
 
+    public InstructionMessage peek() {
+        return messages.peek();
+    }
+
     public boolean isEmpty() {
         return messages.isEmpty();
     }
