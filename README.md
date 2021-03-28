@@ -15,6 +15,8 @@
 This repo contains a collection of different exercises that I have had a go at at some point or another.
 
 * [Smallest Missing Positive Integer](smallest-missing-positive-integer/README.md)
+* [First Unique Character](first-unique-character/README.md)
+* [Instruction Processing](instruction-processing/README.md)
 
 ## Useful Commands
 
