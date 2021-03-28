@@ -1,6 +1,7 @@
 package uk.co.mruoc.exercises.instructionprocessing;
 
 import org.junit.jupiter.api.Test;
+import uk.co.mruoc.exercises.instructionprocessing.queue.InstructionQueue;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;

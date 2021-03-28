@@ -1,6 +1,7 @@
 package uk.co.mruoc.exercises.instructionprocessing;
 
 import lombok.RequiredArgsConstructor;
+import uk.co.mruoc.exercises.instructionprocessing.queue.InstructionQueue;
 
 @RequiredArgsConstructor
 public class DefaultMessageReceiver implements MessageReceiver {

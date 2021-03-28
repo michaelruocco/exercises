@@ -8,6 +8,10 @@ public interface InstructionMessageMother {
         return builder().build();
     }
 
+    static InstructionMessage withType(InstructionType type) {
+        return builder().type(type).build();
+    }
+
     static InstructionMessage.InstructionMessageBuilder builder() {
         return InstructionMessage.builder()
             .type(InstructionType.A)

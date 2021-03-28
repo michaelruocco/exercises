@@ -2,6 +2,7 @@ package uk.co.mruoc.exercises.instructionprocessing;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import uk.co.mruoc.exercises.instructionprocessing.queue.InstructionQueue;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
