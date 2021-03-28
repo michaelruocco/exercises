@@ -9,7 +9,7 @@ public class DefaultMessageReceiver implements MessageReceiver {
 
     @Override
     public void receive(String message) {
-
+        queue.enqueue(new InstructionMessage());
     }
 
 }

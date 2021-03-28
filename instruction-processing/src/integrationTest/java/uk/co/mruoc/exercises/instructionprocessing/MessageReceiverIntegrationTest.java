@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SolutionIntegrationTest {
+class MessageReceiverIntegrationTest {
 
     private final InstructionQueue queue = new InstructionQueue();
     private final MessageReceiver receiver = new DefaultMessageReceiver(queue);
