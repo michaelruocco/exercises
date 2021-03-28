@@ -7,5 +7,10 @@ testSets {
     integrationTest
 }
 
+dependencies {
+    testFixturesCompileOnly "org.projectlombok:lombok:${lombokVersion}"
+    testFixturesAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+}
+
 check.dependsOn integrationTest
 integrationTest.mustRunAfter test
