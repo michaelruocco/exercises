@@ -15,6 +15,11 @@ class InstructionQueueTest {
     }
 
     @Test
+    void shouldHaveZeroCountByDefault() {
+        assertThat(queue.count()).isZero();
+    }
+
+    @Test
     void shouldNotBeEmptyIfMessageEnqueued() {
         InstructionMessage message = mock(InstructionMessage.class);
 
@@ -30,6 +35,25 @@ class InstructionQueueTest {
 
         assertThat(queue.peek()).isEqualTo(message);
         assertThat(queue.peek()).isEqualTo(message);
+    }
+
+    @Test
+    void shouldReturnNumberOfMessagesEnqueued() {
+        queue.enqueue(mock(InstructionMessage.class));
+        queue.enqueue(mock(InstructionMessage.class));
+
+        assertThat(queue.count()).isEqualTo(2);
+    }
+
+    @Test
+    void shouldReturnAndRemoveNextMessageFromDequeue() {
+        InstructionMessage expectedMessage = mock(InstructionMessage.class);
+        queue.enqueue(expectedMessage);
+
+        InstructionMessage message = queue.dequeue();
+
+        assertThat(message).isEqualTo(expectedMessage);
+        assertThat(queue.isEmpty()).isTrue();
     }
 
 }

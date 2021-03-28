@@ -19,4 +19,12 @@ public class InstructionQueue {
         return messages.isEmpty();
     }
 
+    public int count() {
+        return messages.size();
+    }
+
+    public InstructionMessage dequeue() {
+        return messages.poll();
+    }
+
 }

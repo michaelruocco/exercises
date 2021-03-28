@@ -20,12 +20,31 @@ class MessageReceiverIntegrationTest {
     }
 
     @Test
+    void shouldIncrementCountWhenMessageReceived() {
+        String inputMessage = MessageMother.validMessage();
+
+        receiver.receive(inputMessage);
+
+        assertThat(queue.count()).isEqualTo(1);
+    }
+
+    @Test
     void shouldReceiveValidMessageConvertedCorrectly() {
         String inputMessage = MessageMother.validMessage();
 
         receiver.receive(inputMessage);
 
         assertThat(queue.peek()).isEqualTo(InstructionMessageMother.validMessage());
+    }
+
+    @Test
+    void shouldReceiveValidMessageConvertedCorrectlyAndRemoveIfDequeued() {
+        String inputMessage = MessageMother.validMessage();
+
+        receiver.receive(inputMessage);
+
+        assertThat(queue.dequeue()).isEqualTo(InstructionMessageMother.validMessage());
+        assertThat(queue.isEmpty()).isTrue();
     }
 
     @Test
