@@ -6,6 +6,7 @@ import uk.co.mruoc.exercises.instructionprocessing.InstructionMessageMother;
 import uk.co.mruoc.exercises.instructionprocessing.InstructionType;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static uk.co.mruoc.exercises.instructionprocessing.InstructionType.*;
@@ -59,6 +60,20 @@ class InstructionQueueTest {
 
         assertThat(message).isEqualTo(expectedMessage);
         assertThat(queue.isEmpty()).isTrue();
+    }
+
+    @Test
+    void shouldThrowExceptionIfAttemptToPeekFromEmptyQueue() {
+        Throwable error = catchThrowable(queue::peek);
+
+        assertThat(error).isInstanceOf(InstructionQueueEmptyException.class);
+    }
+
+    @Test
+    void shouldThrowExceptionIfAttemptToDequeueFromEmptyQueue() {
+        Throwable error = catchThrowable(queue::dequeue);
+
+        assertThat(error).isInstanceOf(InstructionQueueEmptyException.class);
     }
 
     @Test
