@@ -1,2 +1,4 @@
-rootProject.name = 'library-template'
+rootProject.name = 'exercises'
+
+include ':first-missing-positive-integer'
 
