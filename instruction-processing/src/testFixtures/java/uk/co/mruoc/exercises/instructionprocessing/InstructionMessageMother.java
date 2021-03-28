@@ -4,7 +4,7 @@ import java.time.Instant;
 
 public interface InstructionMessageMother {
 
-    static InstructionMessage defaultMessage() {
+    static InstructionMessage validMessage() {
         return builder().build();
     }
 

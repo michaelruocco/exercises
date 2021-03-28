@@ -11,7 +11,7 @@ public class MessageMother {
         // utility class
     }
 
-    public static String defaultMessage() {
+    public static String validMessage() {
         return builder().asString();
     }
 
@@ -23,7 +23,19 @@ public class MessageMother {
         return builder().productCode(productCode).asString();
     }
 
-    private static Message.MessageBuilder builder() {
+    public static String withQuantity(String quantity) {
+        return builder().quantity(quantity).asString();
+    }
+
+    public static String withUom(String uom) {
+        return builder().uom(uom).asString();
+    }
+
+    public static String withTimestamp(String timestamp) {
+        return builder().timestamp(timestamp).asString();
+    }
+
+    public static Message.MessageBuilder builder() {
         return Message.builder();
     }
 

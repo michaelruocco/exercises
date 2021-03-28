@@ -3,6 +3,7 @@ package uk.co.mruoc.exercises.instructionprocessing;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 class MessageReceiverIntegrationTest {
 
@@ -11,7 +12,7 @@ class MessageReceiverIntegrationTest {
 
     @Test
     void shouldReceiveMessage() {
-        String inputMessage = MessageMother.defaultMessage();
+        String inputMessage = MessageMother.validMessage();
 
         receiver.receive(inputMessage);
 
@@ -19,12 +20,24 @@ class MessageReceiverIntegrationTest {
     }
 
     @Test
-    void shouldReceiveMessageConvertedCorrectly() {
-        String inputMessage = MessageMother.defaultMessage();
+    void shouldReceiveValidMessageConvertedCorrectly() {
+        String inputMessage = MessageMother.validMessage();
 
         receiver.receive(inputMessage);
 
-        assertThat(queue.peek()).isEqualTo(InstructionMessageMother.defaultMessage());
+        assertThat(queue.peek()).isEqualTo(InstructionMessageMother.validMessage());
+    }
+
+    @Test
+    void shouldThrowExceptionIfInvalidMessageIsReceived() {
+        String invalidInstructionType = "Z";
+        String inputMessage = MessageMother.builder().instructionType("Z").asString();
+
+        Throwable error = catchThrowable(() -> receiver.receive(inputMessage));
+
+        assertThat(error)
+                .isInstanceOf(InvalidMessageException.class)
+                .hasMessage(String.format("invalid instruction type %s", invalidInstructionType));
     }
 
 }

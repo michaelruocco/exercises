@@ -17,7 +17,7 @@ class DefaultMessageReceiverTest {
 
     @Test
     void shouldConvertInputToInstructionMessageAndEnqueue() {
-        String input = MessageMother.defaultMessage();
+        String input = MessageMother.validMessage();
         InstructionMessage message = givenConvertsTo(input);
 
         receiver.receive(input);
@@ -28,7 +28,7 @@ class DefaultMessageReceiverTest {
     }
 
     private InstructionMessage givenConvertsTo(String input) {
-        InstructionMessage message = InstructionMessageMother.defaultMessage();
+        InstructionMessage message = InstructionMessageMother.validMessage();
         given(converter.toInstructionMessage(input)).willReturn(message);
         return message;
     }
