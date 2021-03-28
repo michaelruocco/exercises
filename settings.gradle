@@ -4,4 +4,5 @@ include ':smallest-missing-positive-integer'
 include ':first-unique-character'
 include ':instruction-processing'
 include ':matrix-transpose'
+include ':area-of-circle'
 

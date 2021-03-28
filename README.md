@@ -17,6 +17,8 @@ This repo contains a collection of different exercises that I have had a go at a
 * [Smallest Missing Positive Integer](smallest-missing-positive-integer/README.md)
 * [First Unique Character](first-unique-character/README.md)
 * [Instruction Processing](instruction-processing/README.md)
+* [Matrix Transpose](matrix-transpose/README.md)
+* [Area of Circle](area-of-circle/README.md)
 
 ## Useful Commands
 
