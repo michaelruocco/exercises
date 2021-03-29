@@ -10,9 +10,9 @@ import java.util.function.Supplier;
 
 public class InstructionQueue {
 
-    private final AtomicInteger fifoIndex = new AtomicInteger();
+    private final AtomicInteger insertionIndex = new AtomicInteger();
 
-    private final Queue<PriorityEntry> messages = new PriorityBlockingQueue<>();
+    private final Queue<PriorityEntry> messages = new PriorityBlockingQueue<>(1, new PriorityEntryComparator());
 
     public void enqueue(InstructionMessage message) {
         add(message);
@@ -35,7 +35,11 @@ public class InstructionQueue {
     }
 
     private void add(InstructionMessage message) {
-        messages.add(new PriorityEntry(fifoIndex.getAndIncrement(), message));
+        messages.add(toEntry(message));
+    }
+
+    private PriorityEntry toEntry(InstructionMessage message) {
+        return new PriorityEntry(insertionIndex.getAndIncrement(), message);
     }
 
     private InstructionMessage tryExtract(Supplier<PriorityEntry> supplier) {
