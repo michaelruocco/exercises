@@ -8,14 +8,14 @@ matrix.
 ## 2D Example
 
 An example with a 2D matrix input would be:
-```
+```matrix
  1 | 2
 ---|---
  3 | 4
 ```
 
 Should be transposed into:
-```
+```matrix
  1 | 3
 ---|---
  2 | 4
@@ -24,7 +24,7 @@ Should be transposed into:
 ## 3D Example
 
 An example with a 3D matrix input would be:
-```
+```matrix
  1 | 2 | 3
 ---|---|---
  4 | 5 | 6
@@ -33,7 +33,7 @@ An example with a 3D matrix input would be:
 ```
 
 Should be transposed into:
-```
+```matrix
  1 | 4 | 7
 ---|---|---
  2 | 5 | 8

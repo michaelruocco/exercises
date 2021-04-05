@@ -3,13 +3,15 @@ package uk.co.mruoc.exercises.instructionprocessing.queue;
 import org.junit.jupiter.api.Test;
 import uk.co.mruoc.exercises.instructionprocessing.InstructionMessage;
 import uk.co.mruoc.exercises.instructionprocessing.InstructionMessageMother;
-import uk.co.mruoc.exercises.instructionprocessing.InstructionType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
-import static uk.co.mruoc.exercises.instructionprocessing.InstructionType.*;
+import static uk.co.mruoc.exercises.instructionprocessing.InstructionType.B;
+import static uk.co.mruoc.exercises.instructionprocessing.InstructionType.C;
+import static uk.co.mruoc.exercises.instructionprocessing.InstructionType.A;
+import static uk.co.mruoc.exercises.instructionprocessing.InstructionType.D;
 
 class InstructionQueueTest {
 
@@ -117,7 +119,7 @@ class InstructionQueueTest {
 
     private static InstructionMessage mockMessage() {
         InstructionMessage message = mock(InstructionMessage.class);
-        given(message.getType()).willReturn(InstructionType.A);
+        given(message.getType()).willReturn(A);
         return message;
     }
 
