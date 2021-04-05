@@ -14,12 +14,12 @@
 
 This repo contains a collection of different exercises that I have had a go at at some point or another.
 
-* [Smallest Missing Positive Integer](smallest-missing-positive-integer/README.md)
-* [First Unique Character](first-unique-character/README.md)
-* [Instruction Processing](instruction-processing/README.md)
-* [Matrix Transpose](matrix-transpose/README.md)
-* [Area of Circle](area-of-circle/README.md)
-* [Palindrome Application](palindrome-app/README.md)
+*   [Smallest Missing Positive Integer](smallest-missing-positive-integer/README.md)
+*   [First Unique Character](first-unique-character/README.md)
+*   [Instruction Processing](instruction-processing/README.md)
+*   [Matrix Transpose](matrix-transpose/README.md)
+*   [Area of Circle](area-of-circle/README.md)
+*   [Palindrome Application](palindrome-app/README.md)
 
 ## Useful Commands
 

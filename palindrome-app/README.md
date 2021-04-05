@@ -13,7 +13,7 @@ true if that string is a palindrome, otherwise it will return false.
 This example solves the problem by building a reactive web service using spring web
 flux. The application exposes the following get endpoint:
 
-```
+```http
 GET /palindromes/{input}
 ```
 
@@ -24,7 +24,7 @@ or not.
 
 Some curl commands with the responses returned from the calls are shown below:
 
-```
+```curl
 curl http://localhost:8010/palindromes/racecar
 {"input":"racecar","reversed":"racecar","palindrome":true}
 
@@ -36,6 +36,6 @@ curl http://localhost:8010/palindromes/1234
 
 You can run the app by running the following gradle command:
 
-```
+```gradle
 ./gradlew palindrome-app:bootRun
 ```
