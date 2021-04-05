@@ -19,6 +19,7 @@ This repo contains a collection of different exercises that I have had a go at a
 * [Instruction Processing](instruction-processing/README.md)
 * [Matrix Transpose](matrix-transpose/README.md)
 * [Area of Circle](area-of-circle/README.md)
+* [Palindrome Application](palindrome-app/README.md)
 
 ## Useful Commands
 
