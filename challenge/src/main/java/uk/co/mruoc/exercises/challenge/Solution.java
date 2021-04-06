@@ -1,69 +1,65 @@
 package uk.co.mruoc.exercises.challenge;
 
-import java.util.Arrays;
-import java.util.stream.IntStream;
-
 public class Solution {
 
     private Solution() {
         //utility class
     }
 
-    public static int solution(int numberOfCakes, int requiredLayers, int[] start, int[] end, int[] flavours) {
-        Cake[] cakes = setupCakes(numberOfCakes, requiredLayers);
-        for (int i = 0; i < flavours.length; i++) {
-            process(cakes, start[i], end[i], flavours[i]);
-        }
-        return (int) Arrays.stream(cakes)
-                .filter(cake -> cake.isWellFormed(requiredLayers))
-                .count();
-    }
-
-    private static Cake[] setupCakes(int numberOfCakes, int requiredLayers) {
-        return IntStream.range(0, numberOfCakes)
-                .mapToObj(i -> new Cake(requiredLayers))
-                .toArray(Cake[]::new);
-    }
-
-    private static void process(Cake[] cakes, int start, int end, int flavour) {
-        for (int i = start - 1; i < end; i++) {
-            cakes[i].add(flavour);
-        }
-    }
-
-    private static class Cake {
-
-        private final int[] layers;
-        private int index;
-        private boolean overflowed;
-
-        public Cake(int requiredLayers) {
-            layers = new int[requiredLayers];
-        }
-
-        public void add(int flavour) {
-            if (index >= layers.length) {
-                overflowed = true;
-                return;
-            }
-            layers[index] = flavour;
-            index++;
-        }
-
-        public boolean isWellFormed(int requiredLayers) {
-            if (overflowed) {
-                return false;
-            }
-            if (layers.length != requiredLayers) {
-                return false;
-            }
-            for (int i = 0; i < layers.length; i++) {
-                if (layers[i] != i + 1) {
-                    return false;
+    public static int solution(int numberOfCakes, int requiredLayers, int[] starts, int[] ends, int[] flavours) {
+        int[][] cakes = new int[numberOfCakes][requiredLayers];
+        int[] indexes = new int[numberOfCakes];
+        boolean[] invalids = new boolean[numberOfCakes];
+        for (int f = 0; f < flavours.length; f++) {
+            int start = starts[f];
+            int end = ends[f];
+            int flavour = flavours[f];
+            for (int c = start - 1; c < end; c++) {
+                int index = indexes[c];
+                if (index >= requiredLayers) {
+                    invalids[c] = true;
+                } else {
+                    cakes[c][index] = flavour;
+                    if (index > 0 && cakes[c][index - 1] != flavour - 1) {
+                        invalids[c] = true;
+                    }
+                    indexes[c] = index + 1;
                 }
             }
-            return true;
         }
+
+        updateInvalids(cakes, invalids);
+
+        print(cakes, invalids);
+        return toValidCount(invalids);
+    }
+
+    private static void updateInvalids(int[][] cakes, boolean[] invalids) {
+        for (int c = 0; c < cakes.length; c++) {
+            if (cakes[c][cakes[c].length-1] == 0) {
+                invalids[c] = true;
+            }
+        }
+    }
+
+    private static void print(int[][] cakes, boolean[] invalids) {
+        for (int c = 0; c < cakes.length; c++) {
+            for (int d = 0; d < cakes[0].length; d++) {
+                System.out.print(cakes[c][d]);
+            }
+            System.out.print(" " + invalids[c]);
+            System.out.println();
+        }
+    }
+
+    private static int toValidCount(boolean[] invalids) {
+        int count = 0;
+        for (boolean invalid : invalids) {
+            if (invalid) {
+                count++;
+            }
+        }
+        return invalids.length - count;
     }
 
 }
