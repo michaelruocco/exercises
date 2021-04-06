@@ -7,4 +7,5 @@ include ':matrix-transpose'
 include ':area-of-circle'
 include ':palindrome-app'
 include ':reactive-batch-processor'
+include ':challenge'
 
