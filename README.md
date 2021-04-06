@@ -20,6 +20,7 @@ This repo contains a collection of different exercises that I have had a go at a
 *   [Matrix Transpose](matrix-transpose/README.md)
 *   [Area of Circle](area-of-circle/README.md)
 *   [Palindrome Application](palindrome-app/README.md)
+*   [Reactive Batch Processor](reactive-batch-processor/README.md)
 
 ## Useful Commands
 
