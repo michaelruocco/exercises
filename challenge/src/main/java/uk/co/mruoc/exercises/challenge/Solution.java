@@ -1,10 +1,5 @@
 package uk.co.mruoc.exercises.challenge;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Optional;
-import java.util.stream.IntStream;
-
 public class Solution {
 
     private Solution() {
@@ -12,27 +7,29 @@ public class Solution {
     }
 
     public static int solution(int numberOfCakes, int requiredLayers, int[] starts, int[] ends, int[] flavours) {
-        int wellPrepared = IntStream.rangeClosed(1, requiredLayers).sum();
-        return (int) IntStream.rangeClosed(1, numberOfCakes)
-                .filter(cake -> isWellPrepared(cake, requiredLayers, starts, ends, flavours, wellPrepared))
-                .count();
-    }
-
-    private static boolean isWellPrepared(int cake, int requiredLayers, int[] starts, int[] ends, int[] flavours, int wellPrepared) {
-        Deque<Integer> layers = new ArrayDeque<>();
-        for (int i = 0; i < flavours.length; i++) {
-            if (cake >= starts[i] && cake <= ends[i]) {
-                int flavour = flavours[i];
-                if (Optional.ofNullable(layers.peek()).orElse(0) == flavour - 1) {
-                    layers.push(flavour);
-                } else {
-                    return false;
+        int[] lastLayers = new int[numberOfCakes];
+        for (int f = 0; f < flavours.length; f++) {
+            for (int c = 0; c < numberOfCakes; c++) {
+                int cake = c + 1;
+                int lastLayer = lastLayers[c];
+                if (cake >= starts[f] && cake <= ends[f] && lastLayer != -1) {
+                    int flavour = flavours[f];
+                    if ((lastLayer + 1) == flavour) {
+                        lastLayers[c] = flavour;
+                    } else {
+                        lastLayers[c] = -1;
+                    }
                 }
             }
         }
 
-        int sumOfLayers = layers.stream().mapToInt(Integer::intValue).sum();
-        return layers.size() == requiredLayers && sumOfLayers == wellPrepared;
+        int count = 0;
+        for (int lastLayer : lastLayers) {
+            if (lastLayer == requiredLayers) {
+                count++;
+            }
+        }
+        return count;
     }
 
 }
