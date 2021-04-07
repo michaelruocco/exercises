@@ -14,6 +14,10 @@ public class SimpleSubscriber<T> implements Subscriber<T> {
 
     private Subscription subscription;
 
+    public SimpleSubscriber() {
+        this(1, 1);
+    }
+
     @Override
     public void onSubscribe(Subscription subscription) {
         this.subscription = subscription;
@@ -27,8 +31,8 @@ public class SimpleSubscriber<T> implements Subscriber<T> {
     }
 
     @Override
-    public void onError(Throwable t) {
-        log.error("error");
+    public void onError(Throwable error) {
+        log.error(error.getMessage());
     }
 
     @Override

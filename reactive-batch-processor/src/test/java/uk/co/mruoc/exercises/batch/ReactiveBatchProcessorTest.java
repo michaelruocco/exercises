@@ -1,13 +1,11 @@
 package uk.co.mruoc.exercises.batch;
 
 import lombok.extern.slf4j.Slf4j;
-import org.awaitility.core.ConditionTimeoutException;
 import org.junit.jupiter.api.Test;
 
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.awaitility.Awaitility.await;
 
 @Slf4j
@@ -23,52 +21,7 @@ class ReactiveBatchProcessorTest {
     private final TestMessageHandler handler = new TestMessageHandler();
 
     @Test
-    void allMessagesProcessedOnSameThreadAndTimesOutWithV1Implementation() {
-        Processor processor = new ReactiveBatchProcessorV1(
-                messageSource,
-                handler,
-                THREADS,
-                THREAD_POOL_QUEUE_SIZE);
-
-        processor.start();
-
-        Throwable error = catchThrowable(this::waitForAllMessagesToBeProcessed);
-
-        assertThat(error).isInstanceOf(ConditionTimeoutException.class);
-    }
-
-    @Test
-    void allMessagesProcessedOnDifferentThreadsAndDifferentThreadPoolsForV2Implementation() {
-        Processor processor = new ReactiveBatchProcessorV2(
-                messageSource,
-                handler,
-                THREADS,
-                THREAD_POOL_QUEUE_SIZE);
-
-        processor.start();
-
-        waitForAllMessagesToBeProcessed();
-
-        assertThat(handler.threadNames().size()).isEqualTo(EXPECTED_MESSAGES);
-    }
-
-    @Test
-    void shouldRejectMessagesIfQueueFilledAndTasksRejectedForV3Implementation() {
-        Processor processor = new ReactiveBatchProcessorV3(
-                messageSource,
-                handler,
-                THREADS,
-                THREAD_POOL_QUEUE_SIZE);
-
-        processor.start();
-
-        Throwable error = catchThrowable(this::waitForAllMessagesToBeProcessed);
-
-        assertThat(error).isInstanceOf(ConditionTimeoutException.class);
-    }
-
-    @Test
-    void allMessagesProcessedOnAlternatingThreadsFromSameThreadPoolForFinalVersion() {
+    void shouldProcessAllMessagesOnThreadsFromSameThreadPool() {
         Processor processor = new ReactiveBatchProcessor(
                 messageSource,
                 handler,
