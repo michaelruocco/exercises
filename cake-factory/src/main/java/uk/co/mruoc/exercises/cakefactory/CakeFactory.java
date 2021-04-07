@@ -6,8 +6,11 @@ public class CakeFactory {
         //utility class
     }
 
-    public static int solution(int numberOfCakes, int requiredLayers, int[] starts, int[] ends, int[] flavours) {
-        int[] lastLayers = new int[numberOfCakes];
+    public static int solution(CakeFactoryRequest request) {
+        int[] lastLayers = new int[request.getNumberOfCakes()];
+        int[] flavours = request.getFlavours();
+        int[] starts = request.getStarts();
+        int[] ends = request.getEnds();
         for (int f = 0; f < flavours.length; f++) {
             for (int c = starts[f]; c <= ends[f]; c++) {
                 int cake = c - 1;
@@ -21,7 +24,7 @@ public class CakeFactory {
         }
         int count = 0;
         for (int lastLayer : lastLayers) {
-            if (lastLayer == requiredLayers) {
+            if (lastLayer == request.getRequiredLayers()) {
                 count++;
             }
         }

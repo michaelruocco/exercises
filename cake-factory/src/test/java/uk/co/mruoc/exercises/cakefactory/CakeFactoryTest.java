@@ -9,56 +9,60 @@ class CakeFactoryTest {
 
     @Test
     void test1() {
-        int N = 5;
-        int K = 3;
+        CakeFactoryRequest request = CakeFactoryRequest.builder()
+                .numberOfCakes(5)
+                .requiredLayers(3)
+                .starts(new int[]{1, 1, 4, 1, 4})
+                .ends(new int[]{5, 2, 5, 5, 4})
+                .flavours(new int[]{1, 2, 2, 3, 3})
+                .build();
 
-        int[] A = {1, 1, 4, 1, 4};
-        int[] B = {5, 2, 5, 5, 4};
-        int[] C = {1, 2, 2, 3, 3};
-
-        int result = CakeFactory.solution(N, K, A, B, C);
+        int result = CakeFactory.solution(request);
 
         assertThat(result).isEqualTo(3);
     }
 
     @Test
     void test2() {
-        int N = 6;
-        int K = 4;
+        CakeFactoryRequest request = CakeFactoryRequest.builder()
+                .numberOfCakes(6)
+                .requiredLayers(4)
+                .starts(new int[]{1, 2, 1, 1})
+                .ends(new int[]{3, 3, 6, 6})
+                .flavours(new int[]{1, 2, 3, 4})
+                .build();
 
-        int[] A = {1, 2, 1, 1};
-        int[] B = {3, 3, 6, 6};
-        int[] C = {1, 2, 3, 4};
-
-        int result = CakeFactory.solution(N, K, A, B, C);
+        int result = CakeFactory.solution(request);
 
         assertThat(result).isEqualTo(2);
     }
 
     @Test
     void test3() {
-        int N = 3;
-        int K = 2;
+        CakeFactoryRequest request = CakeFactoryRequest.builder()
+                .numberOfCakes(3)
+                .requiredLayers(2)
+                .starts(new int[]{1, 3, 3, 1, 1})
+                .ends(new int[]{2, 3, 3, 1, 2})
+                .flavours(new int[]{1, 2, 1, 2, 2})
+                .build();
 
-        int[] A = {1, 3, 3, 1, 1};
-        int[] B = {2, 3, 3, 1, 2};
-        int[] C = {1, 2, 1, 2, 2};
-
-        int result = CakeFactory.solution(N, K, A, B, C);
+        int result = CakeFactory.solution(request);
 
         assertThat(result).isEqualTo(1);
     }
 
     @Test
     void test4() {
-        int N = 5;
-        int K = 2;
+        CakeFactoryRequest request = CakeFactoryRequest.builder()
+                .numberOfCakes(5)
+                .requiredLayers(2)
+                .starts(new int[]{1, 1, 2})
+                .ends(new int[]{5, 5, 3})
+                .flavours(new int[]{1, 2, 1})
+                .build();
 
-        int[] A = {1, 1, 2};
-        int[] B = {5, 5, 3};
-        int[] C = {1, 2, 1};
-
-        int result = CakeFactory.solution(N, K, A, B, C);
+        int result = CakeFactory.solution(request);
 
         assertThat(result).isEqualTo(3);
     }
