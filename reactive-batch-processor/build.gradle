@@ -2,4 +2,5 @@ dependencies {
     implementation "io.projectreactor:reactor-core:3.4.4"
 
     testImplementation "org.awaitility:awaitility:4.0.3"
+    testImplementation "uk.org.webcompere:system-stubs-jupiter:1.2.0"
 }
