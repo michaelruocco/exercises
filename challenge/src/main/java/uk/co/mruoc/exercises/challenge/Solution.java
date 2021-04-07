@@ -10,12 +10,12 @@ public class Solution {
         int[] lastLayers = new int[numberOfCakes];
         for (int f = 0; f < flavours.length; f++) {
             for (int c = starts[f]; c <= ends[f]; c++) {
-                int index = c - 1;
+                int cake = c - 1;
                 int flavour = flavours[f];
-                if ((lastLayers[index] + 1) == flavour) {
-                    lastLayers[index] = flavour;
+                if ((lastLayers[cake] + 1) == flavour) {
+                    lastLayers[cake] = flavour;
                 } else {
-                    lastLayers[index] = -1;
+                    lastLayers[cake] = -1;
                 }
             }
         }
