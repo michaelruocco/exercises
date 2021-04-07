@@ -2,11 +2,7 @@ package uk.co.mruoc.exercises.cakefactory;
 
 public class CakeFactory {
 
-    private CakeFactory() {
-        //utility class
-    }
-
-    public static int solution(CakeFactoryRequest request) {
+    public int calculateWellPrepared(CakeFactoryRequest request) {
         int[] lastLayers = new int[request.getNumberOfCakes()];
         int[] flavours = request.getFlavours();
         int[] starts = request.getStarts();

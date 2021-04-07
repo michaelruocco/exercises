@@ -7,6 +7,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class CakeFactoryTest {
 
+    private final CakeFactory factory = new CakeFactory();
+
     @Test
     void test1() {
         CakeFactoryRequest request = CakeFactoryRequest.builder()
@@ -17,7 +19,7 @@ class CakeFactoryTest {
                 .flavours(new int[]{1, 2, 2, 3, 3})
                 .build();
 
-        int result = CakeFactory.solution(request);
+        int result = factory.calculateWellPrepared(request);
 
         assertThat(result).isEqualTo(3);
     }
@@ -32,7 +34,7 @@ class CakeFactoryTest {
                 .flavours(new int[]{1, 2, 3, 4})
                 .build();
 
-        int result = CakeFactory.solution(request);
+        int result = factory.calculateWellPrepared(request);
 
         assertThat(result).isEqualTo(2);
     }
@@ -47,7 +49,7 @@ class CakeFactoryTest {
                 .flavours(new int[]{1, 2, 1, 2, 2})
                 .build();
 
-        int result = CakeFactory.solution(request);
+        int result = factory.calculateWellPrepared(request);
 
         assertThat(result).isEqualTo(1);
     }
@@ -62,7 +64,7 @@ class CakeFactoryTest {
                 .flavours(new int[]{1, 2, 1})
                 .build();
 
-        int result = CakeFactory.solution(request);
+        int result = factory.calculateWellPrepared(request);
 
         assertThat(result).isEqualTo(3);
     }
