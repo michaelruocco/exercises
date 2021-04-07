@@ -1,8 +1,8 @@
-package uk.co.mruoc.exercises.challenge;
+package uk.co.mruoc.exercises.cakefactory;
 
-public class Solution {
+public class CakeFactory {
 
-    private Solution() {
+    private CakeFactory() {
         //utility class
     }
 

@@ -1,11 +1,11 @@
-package uk.co.mruoc.exercises.challenge;
+package uk.co.mruoc.exercises.cakefactory;
 
 import org.junit.jupiter.api.Test;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SolutionTest {
+class CakeFactoryTest {
 
     @Test
     void test1() {
@@ -16,7 +16,7 @@ class SolutionTest {
         int[] B = {5, 2, 5, 5, 4};
         int[] C = {1, 2, 2, 3, 3};
 
-        int result = Solution.solution(N, K, A, B, C);
+        int result = CakeFactory.solution(N, K, A, B, C);
 
         assertThat(result).isEqualTo(3);
     }
@@ -30,7 +30,7 @@ class SolutionTest {
         int[] B = {3, 3, 6, 6};
         int[] C = {1, 2, 3, 4};
 
-        int result = Solution.solution(N, K, A, B, C);
+        int result = CakeFactory.solution(N, K, A, B, C);
 
         assertThat(result).isEqualTo(2);
     }
@@ -44,7 +44,7 @@ class SolutionTest {
         int[] B = {2, 3, 3, 1, 2};
         int[] C = {1, 2, 1, 2, 2};
 
-        int result = Solution.solution(N, K, A, B, C);
+        int result = CakeFactory.solution(N, K, A, B, C);
 
         assertThat(result).isEqualTo(1);
     }
@@ -58,7 +58,7 @@ class SolutionTest {
         int[] B = {5, 5, 3};
         int[] C = {1, 2, 1};
 
-        int result = Solution.solution(N, K, A, B, C);
+        int result = CakeFactory.solution(N, K, A, B, C);
 
         assertThat(result).isEqualTo(3);
     }
