@@ -10,7 +10,7 @@ class CakeFactoryTest {
     private final CakeFactory factory = new CakeFactory();
 
     @Test
-    void test1() {
+    void shouldReturn3WellPreparedCakesFrom5With3Layers() {
         CakeFactoryRequest request = CakeFactoryRequest.builder()
                 .numberOfCakes(5)
                 .requiredLayers(3)
@@ -25,7 +25,7 @@ class CakeFactoryTest {
     }
 
     @Test
-    void test2() {
+    void shouldReturn2WellPreparedCakesFrom6With4Layers() {
         CakeFactoryRequest request = CakeFactoryRequest.builder()
                 .numberOfCakes(6)
                 .requiredLayers(4)
@@ -40,7 +40,7 @@ class CakeFactoryTest {
     }
 
     @Test
-    void test3() {
+    void shouldReturn1WellPreparedCakeFrom3With2Layers() {
         CakeFactoryRequest request = CakeFactoryRequest.builder()
                 .numberOfCakes(3)
                 .requiredLayers(2)
@@ -55,7 +55,7 @@ class CakeFactoryTest {
     }
 
     @Test
-    void test4() {
+    void shouldReturn3WellPreparedCakesFrom5With2Layers() {
         CakeFactoryRequest request = CakeFactoryRequest.builder()
                 .numberOfCakes(5)
                 .requiredLayers(2)

@@ -6,6 +6,7 @@ plugins {
     id "pl.allegro.tech.build.axion-release" version "1.13.1"
     id "org.sonarqube" version "3.1.1"
     id "nebula.lint" version "16.17.1"
+    id "com.adarshr.test-logger" version "3.0.0"
 }
 
 scmVersion {
@@ -19,6 +20,7 @@ allprojects {
     apply plugin: "idea"
     apply plugin: "jacoco"
     apply plugin: "nebula.lint"
+    apply plugin: 'com.adarshr.test-logger'
 
     group "com.github.michaelruocco.idv"
     version = rootProject.version
@@ -72,11 +74,11 @@ subprojects {
     tasks.withType(Test) {
         useJUnitPlatform()
         systemProperty "org.slf4j.simpleLogger.defaultLogLevel", "debug"
-        testLogging {
-            events "failed"
-            exceptionFormat "full"
-            showStandardStreams true
-        }
+    }
+
+    testlogger {
+        theme 'mocha'
+        showStandardStreams true
     }
 
     spotless {

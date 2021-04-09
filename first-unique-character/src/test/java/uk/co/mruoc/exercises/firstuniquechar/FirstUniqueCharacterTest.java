@@ -62,7 +62,7 @@ class FirstUniqueCharacterTest {
     }
 
     @Test
-    void shouldHandleInLongString() {
+    void shouldHandleLongString() {
         char expected = '@';
         String input = StringUtils.repeat("ABCDEFGHIJKLMNOPQRSTUVWXYZ", 2500000) + expected;
 

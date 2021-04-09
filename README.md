@@ -22,6 +22,7 @@ This repo contains a collection of different exercises that I have had a go at a
 *   [Palindrome Application](palindrome-app/README.md)
 *   [Reactive Batch Processor](reactive-batch-processor/README.md)
 *   [Cake Factory](cake-factory/README.md)
+*   [Binary Gap](binary-gap/README.md)
 
 ## Useful Commands
 
