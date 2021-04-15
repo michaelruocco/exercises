@@ -2,6 +2,8 @@ package uk.co.mruoc.exercises.cronparser;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.stream.IntStream;
+
 @RequiredArgsConstructor
 public enum TimeUnit {
 
@@ -13,6 +15,10 @@ public enum TimeUnit {
 
     private final int lowerBound;
     private final int upperBound;
+
+    public int[] allValues() {
+        return IntStream.rangeClosed(lowerBound, upperBound).toArray();
+    }
 
     public void validate(int value) {
         if (value < lowerBound || value > upperBound) {

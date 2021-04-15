@@ -7,6 +7,7 @@ public class CronResult {
 
     private final int[] hours;
     private final int[] daysOfMonth;
+    private final int[] months;
 
     public int[] getMinutes() {
         return new int[]{-1};
@@ -21,7 +22,7 @@ public class CronResult {
     }
 
     public int[] getMonths() {
-        return new int[]{-1};
+        return months;
     }
 
     public int[] getDayOfWeek() {
