@@ -1,3 +1,12 @@
+plugins {
+    id "application"
+}
+
 dependencies {
+    runtimeOnly "org.slf4j:slf4j-simple:1.7.30"
     implementation "org.apache.commons:commons-lang3:${commonsLangVersion}"
+}
+
+application {
+    mainClass.set("uk.co.mruoc.exercises.cronparser.Main")
 }

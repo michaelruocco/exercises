@@ -22,3 +22,13 @@ month 1 2 3 4 5 6 7 8 9 10 11 12
 day of week 1 2 3 4 5
 command /usr/bin/find
 ```
+## Running from gradle
+
+```./gradlew run --args='*/15 0 1,15 * 1-5 /usr/bin/find'```
+
+## TODO
+
+*   Add unit tests for errors, edge cases and each time unit against each parser
+*   Add testing output formatter (also with testing output using system stubs)
+*   Use JCommander to handle user input
+*   Build runnable shadow jar

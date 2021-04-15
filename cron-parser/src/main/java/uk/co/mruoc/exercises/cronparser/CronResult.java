@@ -1,8 +1,10 @@
 package uk.co.mruoc.exercises.cronparser;
 
 import lombok.Builder;
+import lombok.Data;
 
 @Builder
+@Data
 public class CronResult {
 
     private final int[] minutes;
