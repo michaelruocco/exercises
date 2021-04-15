@@ -6,7 +6,7 @@ Parses Cron Expressions of the following format:
 *   `*` means all possible time units
 *   `-` a range of time units
 *   `,` a comma separated list of individual time units
-*   `/` increments of a time unit, the left value is the starting value and the right value is the max value
+*   `/` intervals time units, the left value is the starting value and the right value is the max value
 
 For example given the input argument:
 

@@ -51,6 +51,7 @@ subprojects {
         lombokVersion = "1.18.20"
         slf4jVersion = "1.7.30"
         projectReactorVersion = "3.4.5"
+        commonsLangVersion = "3.12.0"
 
         junitVersion = "5.7.1"
         assertjVersion = "3.19.0"
