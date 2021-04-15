@@ -1,11 +1,13 @@
 package uk.co.mruoc.exercises.cronparser;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
 @RequiredArgsConstructor
+@Getter
 public enum TimeUnit {
 
     MINUTES(0, 59),

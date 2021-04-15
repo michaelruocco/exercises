@@ -5,6 +5,7 @@ import lombok.Builder;
 @Builder
 public class CronResult {
 
+    private final int[] minutes;
     private final int[] hours;
     private final int[] daysOfMonth;
     private final int[] months;
@@ -12,7 +13,7 @@ public class CronResult {
     private final String command;
 
     public int[] getMinutes() {
-        return new int[]{-1};
+        return minutes;
     }
 
     public int[] getHours() {
