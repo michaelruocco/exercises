@@ -23,6 +23,7 @@ This repo contains a collection of different exercises that I have had a go at a
 *   [Reactive Batch Processor](reactive-batch-processor/README.md)
 *   [Cake Factory](cake-factory/README.md)
 *   [Binary Gap](binary-gap/README.md)
+*   [Cron Parser](cron-parser/README.md)
 
 ## Useful Commands
 
