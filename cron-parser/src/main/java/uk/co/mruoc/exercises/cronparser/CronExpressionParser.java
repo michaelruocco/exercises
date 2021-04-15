@@ -2,9 +2,10 @@ package uk.co.mruoc.exercises.cronparser;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-import uk.co.mruoc.exercises.cronparser.parser.AsteriskNotation;
+import uk.co.mruoc.exercises.cronparser.parser.AsteriskNotationParser;
 import uk.co.mruoc.exercises.cronparser.parser.CommaNotationParser;
 import uk.co.mruoc.exercises.cronparser.parser.NotationParser;
+import uk.co.mruoc.exercises.cronparser.parser.RangeNotationParser;
 import uk.co.mruoc.exercises.cronparser.parser.SimpleNotationParser;
 
 import java.util.Arrays;
@@ -17,7 +18,8 @@ public class CronExpressionParser {
 
     public CronExpressionParser() {
         this(new CommaNotationParser(),
-                new AsteriskNotation(),
+                new AsteriskNotationParser(),
+                new RangeNotationParser(),
                 new SimpleNotationParser()
         );
     }
@@ -32,6 +34,8 @@ public class CronExpressionParser {
                 .hours(parse(values, TimeUnit.HOURS))
                 .daysOfMonth(parse(values, TimeUnit.DAYS_OF_MONTH))
                 .months(parse(values, TimeUnit.MONTHS))
+                .daysOfWeek(parse(values, TimeUnit.DAYS_OF_WEEK))
+                .command(values[5])
                 .build();
     }
 

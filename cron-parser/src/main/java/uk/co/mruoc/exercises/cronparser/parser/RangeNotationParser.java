@@ -1,19 +1,32 @@
 package uk.co.mruoc.exercises.cronparser.parser;
 
 import lombok.extern.slf4j.Slf4j;
+import uk.co.mruoc.exercises.cronparser.InvalidValueException;
 import uk.co.mruoc.exercises.cronparser.TimeUnit;
 
+import java.util.stream.IntStream;
+
 @Slf4j
-public class AsteriskNotationParser implements NotationParser {
+public class RangeNotationParser implements NotationParser {
+
+    private static final String HYPHEN = "-";
 
     @Override
     public boolean appliesTo(String value) {
-        return value.equals("*");
+        return value.contains(HYPHEN);
     }
 
     @Override
     public int[] toValues(String input, TimeUnit unit) {
-        return unit.allValues();
+        try {
+            String[] parts = input.split(HYPHEN);
+            int start = Integer.parseInt(parts[0]);
+            int end = Integer.parseInt(parts[1]);
+            unit.validate(start, end);
+            return IntStream.rangeClosed(start, end).toArray();
+        } catch (NumberFormatException e) {
+            throw new InvalidValueException(input, unit);
+        }
     }
 
 }

@@ -50,7 +50,7 @@ class CronExpressionParserTest {
 
         CronResult result = parser.parse(expression);
 
-        assertThat(result.getDayOfWeek()).containsExactly(1, 2, 3, 4, 5);
+        assertThat(result.getDaysOfWeek()).containsExactly(1, 2, 3, 4, 5);
     }
 
     @Test

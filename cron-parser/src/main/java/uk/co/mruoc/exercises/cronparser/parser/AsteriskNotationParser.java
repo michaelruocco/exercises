@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import uk.co.mruoc.exercises.cronparser.TimeUnit;
 
 @Slf4j
-public class AsteriskNotation implements NotationParser {
+public class AsteriskNotationParser implements NotationParser {
 
     @Override
     public boolean appliesTo(String value) {

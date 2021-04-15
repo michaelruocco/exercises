@@ -2,6 +2,7 @@ package uk.co.mruoc.exercises.cronparser;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 @RequiredArgsConstructor
@@ -20,10 +21,18 @@ public enum TimeUnit {
         return IntStream.rangeClosed(lowerBound, upperBound).toArray();
     }
 
+    public void validate(int... values) {
+        Arrays.stream(values).forEach(this::validate);
+    }
+
     public void validate(int value) {
-        if (value < lowerBound || value > upperBound) {
+        if (isOutOfBounds(value)) {
             throw new InvalidValueException(value, this);
         }
+    }
+
+    private boolean isOutOfBounds(int value) {
+        return value < lowerBound || value > upperBound;
     }
 
 }
