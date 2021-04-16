@@ -1,8 +1,6 @@
-package uk.co.mruoc.exercises.cronparser;
+package uk.co.mruoc.exercises.cronparser.expression;
 
 import org.junit.jupiter.api.Test;
-import uk.co.mruoc.exercises.cronparser.expression.CronExpressionParser;
-import uk.co.mruoc.exercises.cronparser.expression.CronResult;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

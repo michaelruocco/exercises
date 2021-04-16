@@ -6,6 +6,7 @@ plugins {
 dependencies {
     runtimeOnly "org.slf4j:slf4j-simple:1.7.30"
     implementation "org.apache.commons:commons-lang3:${commonsLangVersion}"
+    implementation "uk.org.webcompere:system-stubs-core:1.2.0"
 }
 
 mainClassName = "uk.co.mruoc.exercises.cronparser.Main"

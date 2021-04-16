@@ -2,7 +2,7 @@ package uk.co.mruoc.exercises.cronparser.expression.notation;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import uk.co.mruoc.exercises.cronparser.expression.InvalidValueException;
+import uk.co.mruoc.exercises.cronparser.expression.NotationOutOfBoundsException;
 import uk.co.mruoc.exercises.cronparser.expression.TimeUnit;
 
 import java.util.Arrays;
@@ -30,7 +30,7 @@ public class CommaNotationParser implements NotationParser {
             unit.validate(value);
             return value;
         } catch (NumberFormatException e) {
-            throw new InvalidValueException(input, unit);
+            throw new NotationOutOfBoundsException(input, unit);
         }
     }
 

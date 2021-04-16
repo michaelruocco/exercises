@@ -1,7 +1,7 @@
 package uk.co.mruoc.exercises.cronparser.expression.notation;
 
 import lombok.extern.slf4j.Slf4j;
-import uk.co.mruoc.exercises.cronparser.expression.InvalidValueException;
+import uk.co.mruoc.exercises.cronparser.expression.InvalidNotationException;
 import uk.co.mruoc.exercises.cronparser.expression.TimeUnit;
 
 import java.util.stream.IntStream;
@@ -13,7 +13,7 @@ public class RangeNotationParser implements NotationParser {
 
     @Override
     public boolean appliesTo(String value) {
-        return value.contains(HYPHEN);
+        return value.contains(HYPHEN) && value.length() >= 3;
     }
 
     @Override
@@ -24,8 +24,8 @@ public class RangeNotationParser implements NotationParser {
             int end = Integer.parseInt(parts[1]);
             unit.validate(start, end);
             return IntStream.rangeClosed(start, end).toArray();
-        } catch (NumberFormatException e) {
-            throw new InvalidValueException(input, unit);
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+            throw new InvalidNotationException(input, e);
         }
     }
 

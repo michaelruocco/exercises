@@ -29,7 +29,7 @@ public enum TimeUnit {
 
     public void validate(int value) {
         if (isOutOfBounds(value)) {
-            throw new InvalidValueException(value, this);
+            throw new NotationOutOfBoundsException(value, this);
         }
     }
 

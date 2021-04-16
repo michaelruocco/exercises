@@ -1,14 +1,19 @@
 package uk.co.mruoc.exercises.cronparser.expression.notation;
 
 import lombok.extern.slf4j.Slf4j;
+import uk.co.mruoc.exercises.cronparser.expression.InvalidNotationException;
 import uk.co.mruoc.exercises.cronparser.expression.TimeUnit;
+
+import java.util.regex.Pattern;
 
 @Slf4j
 public class SimpleNotationParser implements NotationParser {
 
+    private static final Pattern PATTERN = Pattern.compile("\\d+");
+
     @Override
     public boolean appliesTo(String value) {
-        return isInteger(value);
+        return PATTERN.matcher(value).matches();
     }
 
     @Override
@@ -18,16 +23,11 @@ public class SimpleNotationParser implements NotationParser {
         return new int[] { value };
     }
 
-    private static boolean isInteger(String input) {
-        return toInteger(input) > -1;
-    }
-
     private static int toInteger(String input) {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            log.debug(e.getMessage(), e);
-            return -1;
+            throw new InvalidNotationException(input, e);
         }
     }
 

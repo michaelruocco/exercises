@@ -1,7 +1,7 @@
 package uk.co.mruoc.exercises.cronparser.expression.notation;
 
 import lombok.extern.slf4j.Slf4j;
-import uk.co.mruoc.exercises.cronparser.expression.InvalidValueException;
+import uk.co.mruoc.exercises.cronparser.expression.NotationOutOfBoundsException;
 import uk.co.mruoc.exercises.cronparser.expression.TimeUnit;
 
 import java.util.function.IntPredicate;
@@ -27,7 +27,7 @@ public class IntervalNotationParser implements NotationParser {
             int interval = Integer.parseInt(parts[1]);
             return calculateIntervals(start, unit, interval).toArray();
         } catch (NumberFormatException e) {
-            throw new InvalidValueException(input, unit);
+            throw new NotationOutOfBoundsException(input, unit);
         }
     }
 
