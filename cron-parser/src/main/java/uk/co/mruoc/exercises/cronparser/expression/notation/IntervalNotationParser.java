@@ -1,8 +1,8 @@
-package uk.co.mruoc.exercises.cronparser.parser;
+package uk.co.mruoc.exercises.cronparser.expression.notation;
 
 import lombok.extern.slf4j.Slf4j;
-import uk.co.mruoc.exercises.cronparser.InvalidValueException;
-import uk.co.mruoc.exercises.cronparser.TimeUnit;
+import uk.co.mruoc.exercises.cronparser.expression.InvalidValueException;
+import uk.co.mruoc.exercises.cronparser.expression.TimeUnit;
 
 import java.util.function.IntPredicate;
 import java.util.function.IntUnaryOperator;

@@ -1,6 +1,6 @@
-package uk.co.mruoc.exercises.cronparser.parser;
+package uk.co.mruoc.exercises.cronparser.expression.notation;
 
-import uk.co.mruoc.exercises.cronparser.TimeUnit;
+import uk.co.mruoc.exercises.cronparser.expression.TimeUnit;
 
 public interface NotationParser {
 

@@ -1,4 +1,4 @@
-package uk.co.mruoc.exercises.cronparser;
+package uk.co.mruoc.exercises.cronparser.expression;
 
 import lombok.Builder;
 import lombok.Data;

@@ -1,13 +1,11 @@
 package uk.co.mruoc.exercises.cronparser;
 
-import org.apache.commons.lang3.StringUtils;
-
 public class Main {
 
+    private static final App APP = App.builder().build();
+
     public static void main(String[] args) {
-        CronExpressionParser parser = new CronExpressionParser();
-        CronResult result = parser.parse(StringUtils.join(args, " "));
-        System.out.println(CronResultFormatter.format(result));
+        APP.run(args);
     }
 
 }

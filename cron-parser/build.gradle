@@ -1,5 +1,6 @@
 plugins {
     id "application"
+    id "com.github.johnrengelman.shadow" version "6.1.0"
 }
 
 dependencies {
@@ -7,6 +8,4 @@ dependencies {
     implementation "org.apache.commons:commons-lang3:${commonsLangVersion}"
 }
 
-application {
-    mainClass.set("uk.co.mruoc.exercises.cronparser.Main")
-}
+mainClassName = "uk.co.mruoc.exercises.cronparser.Main"

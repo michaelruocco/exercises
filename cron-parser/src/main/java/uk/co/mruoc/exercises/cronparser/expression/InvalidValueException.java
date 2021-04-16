@@ -1,4 +1,5 @@
-package uk.co.mruoc.exercises.cronparser;
+package uk.co.mruoc.exercises.cronparser.expression;
+
 
 public class InvalidValueException extends RuntimeException {
 

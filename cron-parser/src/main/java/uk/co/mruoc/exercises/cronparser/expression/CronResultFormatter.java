@@ -1,4 +1,4 @@
-package uk.co.mruoc.exercises.cronparser;
+package uk.co.mruoc.exercises.cronparser.expression;
 
 import java.util.Arrays;
 import java.util.function.Supplier;
@@ -9,11 +9,7 @@ import static java.lang.System.lineSeparator;
 
 public class CronResultFormatter {
 
-    private CronResultFormatter() {
-        // utility class
-    }
-
-    public static String format(CronResult result) {
+    public String format(CronResult result) {
         return toLines(result).collect(Collectors.joining(lineSeparator()));
     }
 

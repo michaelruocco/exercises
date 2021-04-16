@@ -25,11 +25,15 @@ command /usr/bin/find
 
 ## Running from gradle
 
-```./gradlew run --args='*/15 0 1,15 * 1-5 /usr/bin/find'```
+`./gradlew run --args="*/15 0 1,15 * 1-5 /usr/bin/find"`
+
+## Running jar file
+
+`java -jar cron-parser/build/libs/cron-parser-all.jar "1,30 * 1-6 6 */2 /usr/bin/find"`
 
 ## TODO
 
 *   Add unit tests for errors, edge cases and each time unit against each parser
-*   Add testing output formatter (also with testing output using system stubs)
-*   Use JCommander to handle user input
-*   Build runnable shadow jar
+*   Add unit tests for output formatter
+*   Add unit tests for argument parser
+*   Add tests for main class using system stubs
