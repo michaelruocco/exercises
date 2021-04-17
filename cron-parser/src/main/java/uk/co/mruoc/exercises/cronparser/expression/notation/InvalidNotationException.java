@@ -1,4 +1,4 @@
-package uk.co.mruoc.exercises.cronparser.expression;
+package uk.co.mruoc.exercises.cronparser.expression.notation;
 
 import uk.co.mruoc.exercises.cronparser.ParserException;
 

@@ -1,7 +1,6 @@
 package uk.co.mruoc.exercises.cronparser.expression.notation;
 
 import org.junit.jupiter.api.Test;
-import uk.co.mruoc.exercises.cronparser.expression.InvalidNotationException;
 import uk.co.mruoc.exercises.cronparser.expression.NotationOutOfBoundsException;
 import uk.co.mruoc.exercises.cronparser.expression.TimeUnit;
 

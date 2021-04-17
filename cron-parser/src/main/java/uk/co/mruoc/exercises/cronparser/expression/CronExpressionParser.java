@@ -2,7 +2,6 @@ package uk.co.mruoc.exercises.cronparser.expression;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
-import uk.co.mruoc.exercises.cronparser.expression.notation.NotationParserNotFoundException;
 import uk.co.mruoc.exercises.cronparser.expression.notation.AsteriskNotationParser;
 import uk.co.mruoc.exercises.cronparser.expression.notation.CommaNotationParser;
 import uk.co.mruoc.exercises.cronparser.expression.notation.IntervalNotationParser;

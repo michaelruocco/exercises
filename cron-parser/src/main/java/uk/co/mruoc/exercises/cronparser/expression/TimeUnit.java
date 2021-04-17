@@ -33,6 +33,10 @@ public enum TimeUnit {
         }
     }
 
+    public String formattedName() {
+        return name().toLowerCase().replace("_", " ");
+    }
+
     private boolean isOutOfBounds(int value) {
         return value < lowerBound || value > upperBound;
     }

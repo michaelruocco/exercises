@@ -11,7 +11,7 @@ public class NotationOutOfBoundsException extends ParserException {
 
     public NotationOutOfBoundsException(String value, TimeUnit unit) {
         super(String.format("invalid %s value %s, outside bounds %d and %d",
-                unit.name().toLowerCase(),
+                unit.formattedName(),
                 value,
                 unit.getLowerBound(),
                 unit.getUpperBound()));
