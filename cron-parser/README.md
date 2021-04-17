@@ -14,7 +14,7 @@ For example given the input argument:
 
 The output should be:
 
-```
+```bash
 minute 0 15 30 45
 hour 0
 day of month 1 15
