@@ -18,9 +18,13 @@ public class App {
     private final CronResultFormatter formatter = new CronResultFormatter();
 
     public void run(String[] args) {
-        argumentParser.toExpression(args)
-                .map(expressionParser::parse)
-                .ifPresentOrElse(this::print, App::printUsage);
+        try {
+            argumentParser.toExpression(args)
+                    .map(expressionParser::parse)
+                    .ifPresentOrElse(this::print, App::printUsage);
+        } catch (ParserException e) {
+            printErrorMessage(e);
+        }
     }
 
     private void print(CronResult result) {
@@ -29,6 +33,10 @@ public class App {
 
     private static void printUsage() {
         System.err.println("usage: please provide a cron expression as an argument");
+    }
+
+    private static void printErrorMessage(Throwable e) {
+        System.err.println(e.getMessage());
     }
 
 }

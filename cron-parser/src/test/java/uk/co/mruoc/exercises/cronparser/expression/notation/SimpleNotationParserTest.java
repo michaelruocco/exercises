@@ -13,7 +13,7 @@ class SimpleNotationParserTest {
     private final NotationParser parser = new SimpleNotationParser();
 
     @Test
-    void shouldOnlyApplyToPlainNumericInput() {
+    void shouldOnlyApplyToPlainIntegerInput() {
         assertThat(parser.appliesTo("1")).isTrue();
 
         assertThat(parser.appliesTo("*")).isFalse();

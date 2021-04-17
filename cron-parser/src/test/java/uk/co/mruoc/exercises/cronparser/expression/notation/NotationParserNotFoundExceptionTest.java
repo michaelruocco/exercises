@@ -4,15 +4,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ParserNotFoundExceptionTest {
+class NotationParserNotFoundExceptionTest {
 
     @Test
     void shouldReturnMessage() {
         String input = "my-input";
 
-        Throwable error = new ParserNotFoundException(input);
+        Throwable error = new NotationParserNotFoundException(input);
 
-        assertThat(error.getMessage()).isEqualTo("parser not found for value my-input");
+        assertThat(error.getMessage()).isEqualTo("notation parser not found for value my-input");
     }
 
 }

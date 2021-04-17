@@ -13,7 +13,7 @@ class RangeNotationParserTest {
     private final NotationParser parser = new RangeNotationParser();
 
     @Test
-    void shouldOnlyApplyToNumericRangeInput() {
+    void shouldOnlyApplyToRangeIntegerInput() {
         assertThat(parser.appliesTo("5-6")).isTrue();
 
         assertThat(parser.appliesTo("1")).isFalse();
@@ -57,7 +57,7 @@ class RangeNotationParserTest {
     }
 
     @Test
-    void shouldThrowExceptionIfInputIsBoundsButInputIsNotInteger() {
+    void shouldThrowExceptionIfInputIsInBoundsOfTimeUnitButIsNotInteger() {
         String input = "2-3.5";
 
         Throwable error = catchThrowable(() -> parser.toValues(input, TimeUnit.HOURS));

@@ -1,7 +1,7 @@
 package uk.co.mruoc.exercises.cronparser.expression.notation;
 
 import lombok.extern.slf4j.Slf4j;
-import uk.co.mruoc.exercises.cronparser.expression.NotationOutOfBoundsException;
+import uk.co.mruoc.exercises.cronparser.expression.InvalidNotationException;
 import uk.co.mruoc.exercises.cronparser.expression.TimeUnit;
 
 import java.util.function.IntPredicate;
@@ -26,8 +26,8 @@ public class IntervalNotationParser implements NotationParser {
             unit.validate(start);
             int interval = Integer.parseInt(parts[1]);
             return calculateIntervals(start, unit, interval).toArray();
-        } catch (NumberFormatException e) {
-            throw new NotationOutOfBoundsException(input, unit);
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+            throw new InvalidNotationException(input, e);
         }
     }
 
@@ -39,11 +39,11 @@ public class IntervalNotationParser implements NotationParser {
     }
 
     private static IntStream calculateIntervals(int start, TimeUnit unit, int interval) {
-        return IntStream.iterate(start, lessThanUpperBound(unit), incrementBy(interval));
+        return IntStream.iterate(start, lessThanOrEqualToUpperBound(unit), incrementBy(interval));
     }
 
-    private static IntPredicate lessThanUpperBound(TimeUnit unit) {
-        return i -> i < unit.getUpperBound();
+    private static IntPredicate lessThanOrEqualToUpperBound(TimeUnit unit) {
+        return i -> i <= unit.getUpperBound();
     }
 
     private static IntUnaryOperator incrementBy(int interval) {
