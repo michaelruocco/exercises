@@ -3,8 +3,7 @@ package uk.co.mruoc.exercises.cronparser;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static uk.org.webcompere.systemstubs.SystemStubs.tapSystemErr;
-import static uk.org.webcompere.systemstubs.SystemStubs.tapSystemOut;
+import static uk.org.webcompere.systemstubs.SystemStubs.tapSystemErrAndOut;
 
 class MainTest {
 
@@ -12,9 +11,9 @@ class MainTest {
     void shouldParseValidCronExpression() throws Exception {
         String[] args = {"*/15", "0", "1,15", "*", "1-5", "/usr/bin/find"};
 
-        String output = tapSystemOut(() -> Main.main(args));
+        String output = tapSystemErrAndOut(() -> Main.main(args));
 
-        assertThat(output).isEqualTo("""
+        assertThat(output).contains("""
                 minute 0 15 30 45
                 hour 0
                 day of month 1 15
@@ -28,27 +27,27 @@ class MainTest {
     void shouldPrintUsageIfNoExpressionPassed() throws Exception {
         String[] args = new String[0];
 
-        String output = tapSystemErr(() -> Main.main(args));
+        String output = tapSystemErrAndOut(() -> Main.main(args));
 
-        assertThat(output).isEqualToIgnoringNewLines("usage: please provide a cron expression as an argument");
+        assertThat(output).contains("usage: please provide a cron expression as an argument");
     }
 
     @Test
     void shouldPrintErrorIfValueIsOutOfBounds() throws Exception {
         String[] args = {"60", "0", "1,15", "*", "1-5", "/usr/bin/find"};
 
-        String output = tapSystemErr(() -> Main.main(args));
+        String output = tapSystemErrAndOut(() -> Main.main(args));
 
-        assertThat(output).isEqualToIgnoringNewLines("invalid minutes value 60, outside bounds 0 and 59");
+        assertThat(output).contains("invalid minutes value 60, outside bounds 0 and 59");
     }
 
     @Test
     void shouldPrintErrorIfNotationParserNotFound() throws Exception {
         String[] args = {"3.5", "0", "1,15", "*", "1-5", "/usr/bin/find"};
 
-        String output = tapSystemErr(() -> Main.main(args));
+        String output = tapSystemErrAndOut(() -> Main.main(args));
 
-        assertThat(output).isEqualToIgnoringNewLines("notation parser not found for value 3.5");
+        assertThat(output).contains("notation parser not found for value 3.5");
     }
 
 }

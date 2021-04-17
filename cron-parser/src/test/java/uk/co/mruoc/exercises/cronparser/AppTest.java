@@ -10,8 +10,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
-import static uk.org.webcompere.systemstubs.SystemStubs.tapSystemErr;
-import static uk.org.webcompere.systemstubs.SystemStubs.tapSystemOut;
+import static uk.org.webcompere.systemstubs.SystemStubs.tapSystemErrAndOut;
 
 class AppTest {
 
@@ -30,9 +29,9 @@ class AppTest {
         String[] args = new String[0];
         given(argumentParser.toExpression(args)).willReturn(Optional.empty());
 
-        String output = tapSystemErr(() -> app.run(args));
+        String output = tapSystemErrAndOut(() -> app.run(args));
 
-        assertThat(output).isEqualToIgnoringNewLines("usage: please provide a cron expression as an argument");
+        assertThat(output).contains("usage: please provide a cron expression as an argument");
     }
 
     @Test
@@ -42,9 +41,9 @@ class AppTest {
         CronResult result = givenExpressionParsedToResult(expression);
         String expectedFormattedResult = givenExpectedFormattedResult(result);
 
-        String output = tapSystemOut(() -> app.run(args));
+        String output = tapSystemErrAndOut(() -> app.run(args));
 
-        assertThat(output).isEqualToIgnoringNewLines(expectedFormattedResult);
+        assertThat(output).contains(expectedFormattedResult);
     }
 
     private String givenArgsParsedToExpression(String[] args) {

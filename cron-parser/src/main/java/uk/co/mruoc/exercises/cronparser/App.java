@@ -1,11 +1,13 @@
 package uk.co.mruoc.exercises.cronparser;
 
 import lombok.Builder;
+import lombok.extern.slf4j.Slf4j;
 import uk.co.mruoc.exercises.cronparser.expression.CronExpressionParser;
 import uk.co.mruoc.exercises.cronparser.expression.CronResult;
 import uk.co.mruoc.exercises.cronparser.expression.CronResultFormatter;
 
 @Builder
+@Slf4j
 public class App {
 
     @Builder.Default
@@ -28,15 +30,15 @@ public class App {
     }
 
     private void print(CronResult result) {
-        System.out.println(formatter.format(result));
+        log.info(formatter.format(result));
     }
 
     private static void printUsage() {
-        System.err.println("usage: please provide a cron expression as an argument");
+        log.error("usage: please provide a cron expression as an argument");
     }
 
     private static void printErrorMessage(Throwable e) {
-        System.err.println(e.getMessage());
+        log.error(e.getMessage());
     }
 
 }
