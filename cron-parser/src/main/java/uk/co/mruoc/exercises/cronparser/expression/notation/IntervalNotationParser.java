@@ -11,17 +11,17 @@ import java.util.stream.IntStream;
 @Slf4j
 public class IntervalNotationParser implements NotationParser {
 
-    private static final String SLASH = "/";
+    private static final String FORWARD_SLASH = "/";
 
     @Override
     public boolean appliesTo(String value) {
-        return value.contains(SLASH);
+        return value.contains(FORWARD_SLASH);
     }
 
     @Override
     public int[] toValues(String input, TimeUnit unit) {
         try {
-            String[] parts = input.split(SLASH);
+            String[] parts = input.split(FORWARD_SLASH);
             int start = toStart(parts[0], unit);
             unit.validate(start);
             int interval = Integer.parseInt(parts[1]);
