@@ -9,4 +9,5 @@ include ':palindrome-app'
 include ':reactive-batch-processor'
 include ':cake-factory'
 include ':binary-gap'
+include ':cron-parser'
 
