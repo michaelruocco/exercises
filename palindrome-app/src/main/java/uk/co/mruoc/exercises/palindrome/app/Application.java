@@ -8,10 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @Slf4j
 public class Application {
 
-    private Application() {
-        // main application class
-    }
-    
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
