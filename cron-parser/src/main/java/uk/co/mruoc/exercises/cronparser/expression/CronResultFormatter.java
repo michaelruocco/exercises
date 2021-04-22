@@ -45,11 +45,15 @@ public class CronResultFormatter {
     }
 
     private static String formatCommand(CronResult result) {
-        return String.format("%s %s", "command", result.getCommand());
+        return formatValues("command", result.getCommand());
     }
 
     private static String formatValues(String name, Supplier<int[]> values) {
-        return String.format("%s %s", name, toString(values.get()));
+        return formatValues(name, toString(values.get()));
+    }
+
+    private static String formatValues(String name, String values) {
+        return String.format("%s %s", name, values);
     }
 
     private static String toString(int[] values) {
