@@ -1,12 +1,10 @@
 package uk.co.mruoc.exercises.cronparser.expression.notation;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import uk.co.mruoc.exercises.cronparser.expression.TimeUnit;
 
 import java.util.Arrays;
 
-@Slf4j
 public class CommaNotationParser implements NotationParser {
 
     private static final String COMMA = ",";

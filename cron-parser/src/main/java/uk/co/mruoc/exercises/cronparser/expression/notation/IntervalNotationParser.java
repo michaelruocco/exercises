@@ -1,13 +1,11 @@
 package uk.co.mruoc.exercises.cronparser.expression.notation;
 
-import lombok.extern.slf4j.Slf4j;
 import uk.co.mruoc.exercises.cronparser.expression.TimeUnit;
 
 import java.util.function.IntPredicate;
 import java.util.function.IntUnaryOperator;
 import java.util.stream.IntStream;
 
-@Slf4j
 public class IntervalNotationParser implements NotationParser {
 
     private static final String FORWARD_SLASH = "/";

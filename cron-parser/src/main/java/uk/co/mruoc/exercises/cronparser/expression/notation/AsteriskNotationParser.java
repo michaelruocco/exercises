@@ -1,9 +1,7 @@
 package uk.co.mruoc.exercises.cronparser.expression.notation;
 
-import lombok.extern.slf4j.Slf4j;
 import uk.co.mruoc.exercises.cronparser.expression.TimeUnit;
 
-@Slf4j
 public class AsteriskNotationParser implements NotationParser {
 
     @Override

@@ -13,7 +13,7 @@ class MainTest {
 
         String output = tapSystemErrAndOut(() -> Main.main(args));
 
-        assertThat(output).contains("""
+        assertThat(output).isEqualToIgnoringNewLines("""
                 minute 0 15 30 45
                 hour 0
                 day of month 1 15
@@ -29,7 +29,17 @@ class MainTest {
 
         String output = tapSystemErrAndOut(() -> Main.main(args));
 
-        assertThat(output).contains("usage: please provide a cron expression as an argument");
+        assertThat(output).isEqualToIgnoringNewLines("usage: please provide a valid cron expression");
+    }
+
+    @Test
+    void shouldPrintErrorIfLessThanSixArgumentsProvided() throws Exception {
+        String[] args = {"59", "0", "1,15", "*", "1-5"};
+
+        String output = tapSystemErrAndOut(() -> Main.main(args));
+
+        assertThat(output).isEqualToIgnoringNewLines("usage: please provide a valid cron expression, " +
+                "invalid cron expression provided 59 0 1,15 * 1-5");
     }
 
     @Test
@@ -38,7 +48,7 @@ class MainTest {
 
         String output = tapSystemErrAndOut(() -> Main.main(args));
 
-        assertThat(output).contains("invalid minutes value 60, outside bounds 0 and 59");
+        assertThat(output).isEqualToIgnoringNewLines("invalid minutes value 60, outside bounds 0 and 59");
     }
 
     @Test
@@ -47,7 +57,7 @@ class MainTest {
 
         String output = tapSystemErrAndOut(() -> Main.main(args));
 
-        assertThat(output).contains("notation parser not found for value 3.5");
+        assertThat(output).isEqualToIgnoringNewLines("notation parser not found for value 3.5");
     }
 
 }

@@ -1,7 +1,6 @@
 package uk.co.mruoc.exercises.cronparser.expression;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import uk.co.mruoc.exercises.cronparser.expression.notation.AsteriskNotationParser;
 import uk.co.mruoc.exercises.cronparser.expression.notation.CommaNotationParser;
 import uk.co.mruoc.exercises.cronparser.expression.notation.IntervalNotationParser;
@@ -30,8 +29,7 @@ public class CronExpressionParser {
         this(Arrays.asList(parsers));
     }
 
-    public CronResult parse(String expression) {
-        String[] values = StringUtils.split(expression);
+    public CronResult parse(String[] values) {
         return CronResult.builder()
                 .minutes(parse(values, TimeUnit.MINUTES))
                 .hours(parse(values, TimeUnit.HOURS))

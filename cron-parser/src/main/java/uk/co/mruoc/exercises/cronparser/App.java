@@ -1,44 +1,41 @@
 package uk.co.mruoc.exercises.cronparser;
 
 import lombok.Builder;
-import lombok.extern.slf4j.Slf4j;
 import uk.co.mruoc.exercises.cronparser.expression.CronExpressionParser;
 import uk.co.mruoc.exercises.cronparser.expression.CronResult;
 import uk.co.mruoc.exercises.cronparser.expression.CronResultFormatter;
 
 @Builder
-@Slf4j
 public class App {
 
     @Builder.Default
-    private final ArgumentParser argumentParser = new ArgumentParser();
+    private final ArgumentsValidator validator = new ArgumentsValidator();
 
     @Builder.Default
-    private final CronExpressionParser expressionParser = new CronExpressionParser();
+    private final CronExpressionParser parser = new CronExpressionParser();
 
     @Builder.Default
     private final CronResultFormatter formatter = new CronResultFormatter();
 
+    @Builder.Default
+    private final Writer writer = new SystemWriter();
+
     public void run(String[] args) {
         try {
-            argumentParser.toExpression(args)
-                    .map(expressionParser::parse)
-                    .ifPresentOrElse(this::print, App::printUsage);
+            validator.validate(args);
+            CronResult result = parser.parse(args);
+            print(result);
         } catch (ParserException e) {
             printErrorMessage(e);
         }
     }
 
     private void print(CronResult result) {
-        log.info(formatter.format(result));
+        writer.writeOutput(formatter.format(result));
     }
 
-    private static void printUsage() {
-        log.error("usage: please provide a cron expression as an argument");
-    }
-
-    private static void printErrorMessage(Throwable e) {
-        log.error(e.getMessage());
+    private void printErrorMessage(Throwable e) {
+        writer.writeError(e.getMessage());
     }
 
 }

@@ -1,11 +1,9 @@
 package uk.co.mruoc.exercises.cronparser.expression.notation;
 
-import lombok.extern.slf4j.Slf4j;
 import uk.co.mruoc.exercises.cronparser.expression.TimeUnit;
 
 import java.util.stream.IntStream;
 
-@Slf4j
 public class RangeNotationParser implements NotationParser {
 
     private static final String HYPHEN = "-";
