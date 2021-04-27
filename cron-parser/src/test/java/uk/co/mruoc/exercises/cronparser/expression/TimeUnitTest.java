@@ -146,8 +146,8 @@ public class TimeUnitTest {
 
     }
 
-    private static int[] allValuesIncluding(int start, int end) {
-        return IntStream.rangeClosed(start, end).toArray();
+    private static Integer[] allValuesIncluding(int start, int end) {
+        return IntStream.rangeClosed(start, end).boxed().toArray(Integer[]::new);
     }
 
 }

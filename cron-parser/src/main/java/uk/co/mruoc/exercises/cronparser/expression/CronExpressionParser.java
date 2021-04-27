@@ -1,12 +1,8 @@
 package uk.co.mruoc.exercises.cronparser.expression;
 
 import lombok.RequiredArgsConstructor;
-import uk.co.mruoc.exercises.cronparser.expression.notation.AsteriskNotationParser;
-import uk.co.mruoc.exercises.cronparser.expression.notation.CommaNotationParser;
-import uk.co.mruoc.exercises.cronparser.expression.notation.IntervalNotationParser;
+import uk.co.mruoc.exercises.cronparser.expression.notation.ComplexNotationParser;
 import uk.co.mruoc.exercises.cronparser.expression.notation.NotationParser;
-import uk.co.mruoc.exercises.cronparser.expression.notation.RangeNotationParser;
-import uk.co.mruoc.exercises.cronparser.expression.notation.SimpleNotationParser;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -17,12 +13,7 @@ public class CronExpressionParser {
     private final Collection<NotationParser> parsers;
 
     public CronExpressionParser() {
-        this(new CommaNotationParser(),
-                new AsteriskNotationParser(),
-                new RangeNotationParser(),
-                new IntervalNotationParser(),
-                new SimpleNotationParser()
-        );
+        this(new ComplexNotationParser());
     }
 
     public CronExpressionParser(NotationParser... parsers) {

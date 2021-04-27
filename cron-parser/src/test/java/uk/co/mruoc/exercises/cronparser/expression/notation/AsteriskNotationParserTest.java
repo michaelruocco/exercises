@@ -38,8 +38,8 @@ class AsteriskNotationParserTest {
         assertThat(parser.toValues(anyInput, MONTHS)).containsExactly(allValuesInclusive(1, 12));
     }
 
-    private static int[] allValuesInclusive(int start, int end) {
-        return IntStream.rangeClosed(start, end).toArray();
+    private static Integer[] allValuesInclusive(int start, int end) {
+        return IntStream.rangeClosed(start, end).boxed().toArray(Integer[]::new);
     }
 
 }

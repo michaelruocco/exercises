@@ -22,7 +22,7 @@ public class IntervalNotationParser implements NotationParser {
             int start = toStart(parts[0], unit);
             unit.validate(start);
             int interval = Integer.parseInt(parts[1]);
-            return calculateIntervals(start, unit, interval).toArray();
+            return calculateIntervals(start, unit, interval);
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             throw new InvalidNotationException(input, e);
         }
@@ -35,8 +35,9 @@ public class IntervalNotationParser implements NotationParser {
         return Integer.parseInt(value);
     }
 
-    private static IntStream calculateIntervals(int start, TimeUnit unit, int interval) {
-        return IntStream.iterate(start, lessThanOrEqualToUpperBound(unit), incrementBy(interval));
+    private static int[] calculateIntervals(int start, TimeUnit unit, int interval) {
+        return IntStream.iterate(start, lessThanOrEqualToUpperBound(unit), incrementBy(interval))
+                .toArray();
     }
 
     private static IntPredicate lessThanOrEqualToUpperBound(TimeUnit unit) {
