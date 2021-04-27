@@ -29,7 +29,7 @@ class MainTest {
 
         String output = tapSystemErrAndOut(() -> Main.main(args));
 
-        assertThat(output).contains("minute 1 4 5 6 7 8 0 15 30 45");
+        assertThat(output).contains("minute 0 1 4 5 6 7 8 15 30 45");
     }
 
     @Test

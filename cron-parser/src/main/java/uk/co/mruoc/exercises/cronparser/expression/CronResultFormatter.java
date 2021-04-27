@@ -58,6 +58,7 @@ public class CronResultFormatter {
 
     private static String toString(int[] values) {
         return Arrays.stream(values)
+                .sorted()
                 .mapToObj(Integer::toString)
                 .collect(Collectors.joining(" "));
     }
