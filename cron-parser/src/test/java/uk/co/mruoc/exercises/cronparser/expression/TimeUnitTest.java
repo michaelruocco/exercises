@@ -40,6 +40,11 @@ public class TimeUnitTest {
                     .hasMessage("invalid minutes value 60, outside bounds 0 and 59");
         }
 
+        @Test
+        void shouldReturnInputAsIntValues() {
+            assertThat(MINUTES.toIntValues("1,2,3")).isEqualTo("1,2,3");
+        }
+
     }
 
     @Nested
@@ -64,6 +69,11 @@ public class TimeUnitTest {
             assertThat(catchThrowable(() -> HOURS.validate(24)))
                     .isInstanceOf(NotationOutOfBoundsException.class)
                     .hasMessage("invalid hours value 24, outside bounds 0 and 23");
+        }
+
+        @Test
+        void shouldReturnInputAsIntValues() {
+            assertThat(HOURS.toIntValues("1,2,3")).isEqualTo("1,2,3");
         }
 
     }
@@ -92,6 +102,11 @@ public class TimeUnitTest {
                     .hasMessage("invalid days of month value 32, outside bounds 1 and 31");
         }
 
+        @Test
+        void shouldReturnInputAsIntValues() {
+            assertThat(DAYS_OF_MONTH.toIntValues("1,2,3")).isEqualTo("1,2,3");
+        }
+
     }
 
     @Nested
@@ -118,6 +133,18 @@ public class TimeUnitTest {
                     .hasMessage("invalid months value 13, outside bounds 1 and 12");
         }
 
+        @Test
+        void shouldReturnTextualMonthsAsIntValues() {
+            assertThat(MONTHS.toIntValues("JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC"))
+                    .isEqualTo("1,2,3,4,5,6,7,8,9,10,11,12");
+        }
+
+        @Test
+        void shouldReturnLowerCaseTextualMonthsAsIntValues() {
+            assertThat(MONTHS.toIntValues("jan,feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec"))
+                    .isEqualTo("1,2,3,4,5,6,7,8,9,10,11,12");
+        }
+
     }
 
     @Nested
@@ -142,6 +169,18 @@ public class TimeUnitTest {
             assertThat(catchThrowable(() -> DAYS_OF_WEEK.validate(7)))
                     .isInstanceOf(NotationOutOfBoundsException.class)
                     .hasMessage("invalid days of week value 7, outside bounds 0 and 6");
+        }
+
+        @Test
+        void shouldReturnTextualDaysOfWeekAsIntValues() {
+            assertThat(DAYS_OF_WEEK.toIntValues("MON,TUE,WED,THU,FRI,SAT,SUN"))
+                    .isEqualTo("0,1,2,3,4,5,6");
+        }
+
+        @Test
+        void shouldReturnLowerCaseTextualDaysOfWeekAsIntValues() {
+            assertThat(DAYS_OF_WEEK.toIntValues("mon,tue,wed,thu,fri,sat,sun"))
+                    .isEqualTo("0,1,2,3,4,5,6");
         }
 
     }

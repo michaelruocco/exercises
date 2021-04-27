@@ -9,7 +9,7 @@ class MainTest {
 
     @Test
     void shouldParseValidCronExpression() throws Exception {
-        String[] args = {"*/15", "0", "1,15", "*", "1-5", "/usr/bin/find"};
+        String[] args = {"*/15", "0", "1,15", "*", "0-4", "/usr/bin/find"};
 
         String output = tapSystemErrAndOut(() -> Main.main(args));
 
@@ -18,9 +18,36 @@ class MainTest {
                 hour 0
                 day of month 1 15
                 month 1 2 3 4 5 6 7 8 9 10 11 12
-                day of week 1 2 3 4 5
+                day of week 0 1 2 3 4
                 command /usr/bin/find
                 """);
+    }
+
+    @Test
+    void shouldParseValidComplexMinutesCronExpression() throws Exception {
+        String[] args = {"1,4-8,*/15", "0", "1,15", "*", "1-5", "/usr/bin/find"};
+
+        String output = tapSystemErrAndOut(() -> Main.main(args));
+
+        assertThat(output).contains("minute 1 4 5 6 7 8 0 15 30 45");
+    }
+
+    @Test
+    void shouldParseValidTextualDaysOfWeekCronExpression() throws Exception {
+        String[] args = {"1,4-8,*/15", "0", "1,15", "*", "Mon-Fri", "/usr/bin/find"};
+
+        String output = tapSystemErrAndOut(() -> Main.main(args));
+
+        assertThat(output).contains("day of week 0 1 2 3 4");
+    }
+
+    @Test
+    void shouldParseValidTextualMonthsCronExpression() throws Exception {
+        String[] args = {"1,4-8,*/15", "0", "1,15", "jan,jun,dec", "1-5", "/usr/bin/find"};
+
+        String output = tapSystemErrAndOut(() -> Main.main(args));
+
+        assertThat(output).contains("month 1 6 12");
     }
 
     @Test

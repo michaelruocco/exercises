@@ -32,12 +32,13 @@ public class CronExpressionParser {
     }
 
     private int[] parse(String[] values, TimeUnit timeUnit) {
-        String value = values[timeUnit.ordinal()];
+        String rawValues = values[timeUnit.ordinal()];
+        String intValues = timeUnit.toIntValues(rawValues);
         return parsers.stream()
-                .filter(parser -> parser.appliesTo(value))
-                .map(parser -> parser.toValues(value, timeUnit))
+                .filter(parser -> parser.appliesTo(intValues))
+                .map(parser -> parser.toValues(intValues, timeUnit))
                 .findFirst()
-                .orElseThrow(() -> new NotationParserNotFoundException(value));
+                .orElseThrow(() -> new NotationParserNotFoundException(rawValues));
     }
 
 }
