@@ -15,8 +15,7 @@ public class ComplexNotationParser implements NotationParser {
     private final Collection<NotationParser> parsers;
 
     public ComplexNotationParser() {
-        this(new CommaNotationParser(),
-                new AsteriskNotationParser(),
+        this(new AsteriskNotationParser(),
                 new RangeNotationParser(),
                 new IntervalNotationParser(),
                 new SimpleNotationParser()
