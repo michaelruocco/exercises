@@ -19,7 +19,7 @@ public class ArgumentsValidator {
     }
 
     private static String toInvalidExpressionMessage(String[] args) {
-        String expression = String.join(" ", args);
+        var expression = String.join(" ", args);
         return String.format("%s, invalid cron expression provided %s", USAGE_MESSAGE, expression);
     }
 

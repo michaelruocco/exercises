@@ -23,7 +23,7 @@ public class ReactiveBatchProcessor implements Processor {
 
     @Override
     public void start() {
-        Scheduler scheduler = threadPoolScheduler(threads, threadPoolQueueSize);
+        var scheduler = threadPoolScheduler(threads, threadPoolQueueSize);
         messageSource.getMessageBatches()
                 .subscribeOn(Schedulers.fromExecutor(Executors.newSingleThreadExecutor()))
                 .doOnNext(batch -> log.info(batch.toString()))

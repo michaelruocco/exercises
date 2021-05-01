@@ -64,7 +64,7 @@ public class MessageConverter {
 
     private Instant toTimestamp(String value) {
         try {
-            Instant timestamp = Instant.parse(value);
+            var timestamp = Instant.parse(value);
             validate(timestamp);
             return timestamp;
         } catch (DateTimeParseException e) {
@@ -78,16 +78,16 @@ public class MessageConverter {
     }
 
     private void validateNotFuture(Instant timestamp) {
-        Instant now = clock.instant();
+        var now = clock.instant();
         if (timestamp.isAfter(now)) {
-            String message = String.format("timestamp %s cannot be in future current time is %s", timestamp, now);
+            var message = String.format("timestamp %s cannot be in future current time is %s", timestamp, now);
             throw new InvalidMessageException(message);
         }
     }
 
     private static void validateAfterEpoch(Instant timestamp) {
         if (timestamp.equals(EPOCH)) {
-            String message = String.format("timestamp %s must be after unix epoch %s", timestamp, EPOCH);
+            var message = String.format("timestamp %s must be after unix epoch %s", timestamp, EPOCH);
             throw new InvalidMessageException(message);
         }
     }

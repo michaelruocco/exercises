@@ -21,7 +21,7 @@ public class IntervalNotationParser implements NotationParser {
             String[] parts = input.split(FORWARD_SLASH);
             int start = toStart(parts[0], unit);
             unit.validate(start);
-            int interval = Integer.parseInt(parts[1]);
+            var interval = Integer.parseInt(parts[1]);
             return calculateIntervals(start, unit, interval);
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             throw new InvalidNotationException(input, e);

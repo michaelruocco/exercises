@@ -7,13 +7,13 @@ import java.util.Collections;
 public class BinaryGap {
 
     public int calculate(int value) {
-        String binary = Integer.toBinaryString(value);
+        var binary = Integer.toBinaryString(value);
         Collection<Integer> gaps = findGaps(binary);
         return Collections.max(gaps);
     }
 
     private static Collection<Integer> findGaps(String binary) {
-        int previous = 0;
+        var previous = 0;
         int next;
         Collection<Integer> gaps = new ArrayList<>();
         do {

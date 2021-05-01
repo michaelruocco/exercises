@@ -17,8 +17,8 @@ public class RangeNotationParser implements NotationParser {
     public int[] toValues(String input, TimeUnit unit) {
         try {
             String[] parts = input.split(HYPHEN);
-            int start = Integer.parseInt(parts[0]);
-            int end = Integer.parseInt(parts[1]);
+            var start = Integer.parseInt(parts[0]);
+            var end = Integer.parseInt(parts[1]);
             unit.validate(start, end);
             return IntStream.rangeClosed(start, end).toArray();
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {

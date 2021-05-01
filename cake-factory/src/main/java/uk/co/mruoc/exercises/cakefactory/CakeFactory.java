@@ -3,11 +3,11 @@ package uk.co.mruoc.exercises.cakefactory;
 public class CakeFactory {
 
     public int calculateWellPrepared(CakeFactoryRequest request) {
-        int[] lastLayers = new int[request.getNumberOfCakes()];
+        var lastLayers = new int[request.getNumberOfCakes()];
         int[] flavours = request.getFlavours();
         int[] starts = request.getStarts();
         int[] ends = request.getEnds();
-        for (int f = 0; f < flavours.length; f++) {
+        for (var f = 0; f < flavours.length; f++) {
             for (int c = starts[f]; c <= ends[f]; c++) {
                 int cake = c - 1;
                 int flavour = flavours[f];
@@ -18,7 +18,7 @@ public class CakeFactory {
                 }
             }
         }
-        int count = 0;
+        var count = 0;
         for (int lastLayer : lastLayers) {
             if (lastLayer == request.getRequiredLayers()) {
                 count++;

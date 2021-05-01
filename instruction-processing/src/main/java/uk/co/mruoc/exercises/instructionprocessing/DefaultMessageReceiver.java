@@ -15,7 +15,7 @@ public class DefaultMessageReceiver implements MessageReceiver {
 
     @Override
     public void receive(String input) {
-        InstructionMessage message = converter.toInstructionMessage(input);
+        var message = converter.toInstructionMessage(input);
         queue.enqueue(message);
     }
 

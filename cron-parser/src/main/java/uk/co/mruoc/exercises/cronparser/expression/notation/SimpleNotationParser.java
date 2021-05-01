@@ -15,7 +15,7 @@ public class SimpleNotationParser implements NotationParser {
 
     @Override
     public int[] toValues(String input, TimeUnit unit) {
-        int value = toInteger(input);
+        var value = toInteger(input);
         unit.validate(value);
         return new int[] { value };
     }

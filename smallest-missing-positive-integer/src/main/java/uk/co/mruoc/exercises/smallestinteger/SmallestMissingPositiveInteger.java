@@ -20,7 +20,7 @@ public class SmallestMissingPositiveInteger {
             return 1;
         }
         boolean[] isPresent = toIsPresentFlags(positiveInts);
-        for (int i = 1; i < isPresent.length; i++) {
+        for (var i = 1; i < isPresent.length; i++) {
             if (!isPresent[i]) {
                 return i;
             }
@@ -37,7 +37,7 @@ public class SmallestMissingPositiveInteger {
     }
 
     private static boolean[] toIsPresentFlags(int[] positiveInts) {
-        boolean[] isPresent = new boolean[positiveInts.length];
+        var isPresent = new boolean[positiveInts.length];
         for (int number : positiveInts) {
             if (number < isPresent.length) {
                 isPresent[number] = true;
