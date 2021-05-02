@@ -14,14 +14,13 @@ class CronResultFormatterTest {
 
         String formatted = formatter.format(result);
 
-        assertThat(formatted).isEqualToIgnoringNewLines("""
+        assertThat(formatted).isEqualTo("""
                 minute 39 40
                 hour 9 10
                 day of month 20 21
                 month 3 4
                 day of week 1 2
-                command my-command
-                """);
+                command my-command""");
     }
 
     private static CronResult buildResult() {

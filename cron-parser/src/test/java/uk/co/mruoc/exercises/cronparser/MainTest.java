@@ -13,7 +13,7 @@ class MainTest {
 
         String output = tapSystemErrAndOut(() -> Main.main(args));
 
-        assertThat(output).isEqualToIgnoringNewLines("""
+        assertThat(output).isEqualTo("""
                 minute 0 15 30 45
                 hour 0
                 day of month 1 15
@@ -56,7 +56,7 @@ class MainTest {
 
         String output = tapSystemErrAndOut(() -> Main.main(args));
 
-        assertThat(output).isEqualToIgnoringNewLines("usage: please provide a valid cron expression");
+        assertThat(output).isEqualTo("usage: please provide a valid cron expression\n");
     }
 
     @Test
@@ -65,8 +65,8 @@ class MainTest {
 
         String output = tapSystemErrAndOut(() -> Main.main(args));
 
-        assertThat(output).isEqualToIgnoringNewLines("usage: please provide a valid cron expression, " +
-                "invalid cron expression provided 59 0 1,15 * 1-5");
+        assertThat(output).isEqualTo("usage: please provide a valid cron expression, " +
+                "invalid cron expression provided 59 0 1,15 * 1-5\n");
     }
 
     @Test
@@ -75,7 +75,7 @@ class MainTest {
 
         String output = tapSystemErrAndOut(() -> Main.main(args));
 
-        assertThat(output).isEqualToIgnoringNewLines("invalid minutes value 60, outside bounds 0 and 59");
+        assertThat(output).isEqualTo("invalid minutes value 60, outside bounds 0 and 59\n");
     }
 
     @Test
@@ -84,7 +84,7 @@ class MainTest {
 
         String output = tapSystemErrAndOut(() -> Main.main(args));
 
-        assertThat(output).isEqualToIgnoringNewLines("notation parser not found for value 3.5");
+        assertThat(output).isEqualTo("notation parser not found for value 3.5\n");
     }
 
 }
