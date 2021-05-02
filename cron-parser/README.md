@@ -29,6 +29,10 @@ command /usr/bin/find
 
 `./gradlew run --args="*/15 0 1,15 * 1-5 /usr/bin/find"`
 
+or
+
+`./gradlew run --args="-arguments */15 0 1,15 * 1-5 /usr/bin/find"`
+
 ## Running built jar
 
 The build will build two jars:
@@ -41,6 +45,10 @@ need to configure your terminal to disable globbing. I found that using zsh shel
 and issue. If I try to run the following command:
 
 `java -jar cron-parser/build/libs/cron-parser-all.jar */15 0 1,15 * 1-5 /usr/bin/find`
+
+or
+
+`java -jar cron-parser/build/libs/cron-parser-all.jar -arguments */15 0 1,15 * 1-5 /usr/bin/find`
 
 Then the following output is returned:
 

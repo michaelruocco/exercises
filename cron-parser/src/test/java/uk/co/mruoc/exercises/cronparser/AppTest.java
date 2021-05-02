@@ -13,12 +13,12 @@ import static uk.org.webcompere.systemstubs.SystemStubs.tapSystemErrAndOut;
 
 class AppTest {
 
-    private final ArgumentsValidator argumentsValidator = mock(ArgumentsValidator.class);
+    private final ArgumentsSanitizer argumentsSanitizer = mock(ArgumentsSanitizer.class);
     private final CronExpressionParser expressionParser = mock(CronExpressionParser.class);
     private final CronResultFormatter formatter = mock(CronResultFormatter.class);
 
     private final App app = App.builder()
-            .validator(argumentsValidator)
+            .sanitizer(argumentsSanitizer)
             .parser(expressionParser)
             .formatter(formatter)
             .build();
@@ -27,7 +27,7 @@ class AppTest {
     void shouldPrintUsageMessageIfInvalidExpressionPassed() throws Exception {
         String expectedMessage = "usage: please provide a cron expression as an argument";
         String[] args = new String[0];
-        doThrow(new ParserException(expectedMessage)).when(argumentsValidator).validate(args);
+        doThrow(new ParserException(expectedMessage)).when(argumentsSanitizer).sanitize(args);
 
         String output = tapSystemErrAndOut(() -> app.run(args));
 
@@ -36,18 +36,25 @@ class AppTest {
 
     @Test
     void shouldPrintFormattedResultsIfValidExpressionPassed() throws Exception {
-        String[] expression = new String[0];
-        CronResult result = givenExpressionParsedToResult(expression);
+        String[] args = new String[7];
+        String[] sanitizedArgs = givenSanitizedArguments(args);
+        CronResult result = givenExpressionParsedToResult(sanitizedArgs);
         String expectedFormattedResult = givenExpectedFormattedResult(result);
 
-        String output = tapSystemErrAndOut(() -> app.run(expression));
+        String output = tapSystemErrAndOut(() -> app.run(args));
 
         assertThat(output).contains(expectedFormattedResult);
     }
 
-    private CronResult givenExpressionParsedToResult(String[] expression) {
+    private String[] givenSanitizedArguments(String[] args) {
+        String[] sanitizedArgs = new String[6];
+        given(argumentsSanitizer.sanitize(args)).willReturn(sanitizedArgs);
+        return sanitizedArgs;
+    }
+
+    private CronResult givenExpressionParsedToResult(String[] sanitizedArgs) {
         CronResult result = mock(CronResult.class);
-        given(expressionParser.parse(expression)).willReturn(result);
+        given(expressionParser.parse(sanitizedArgs)).willReturn(result);
         return result;
     }
 

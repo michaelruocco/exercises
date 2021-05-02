@@ -9,7 +9,7 @@ import uk.co.mruoc.exercises.cronparser.expression.CronResultFormatter;
 public class App {
 
     @Builder.Default
-    private final ArgumentsValidator validator = new ArgumentsValidator();
+    private final ArgumentsSanitizer sanitizer = new ArgumentsSanitizer();
 
     @Builder.Default
     private final CronExpressionParser parser = new CronExpressionParser();
@@ -22,8 +22,8 @@ public class App {
 
     public void run(String[] args) {
         try {
-            validator.validate(args);
-            CronResult result = parser.parse(args);
+            String[] sanitizedArgs = sanitizer.sanitize(args);
+            CronResult result = parser.parse(sanitizedArgs);
             print(result);
         } catch (ParserException e) {
             printErrorMessage(e);
