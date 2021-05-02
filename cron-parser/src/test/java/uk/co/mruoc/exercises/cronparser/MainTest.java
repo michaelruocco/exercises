@@ -14,12 +14,12 @@ class MainTest {
         String output = tapSystemErrAndOut(() -> Main.main(args));
 
         assertThat(output).isEqualTo("""
-                minute 0 15 30 45
-                hour 0
-                day of month 1 15
-                month 1 2 3 4 5 6 7 8 9 10 11 12
-                day of week 0 1 2 3 4
-                command /usr/bin/find
+                minute        0 15 30 45
+                hour          0
+                day of month  1 15
+                month         1 2 3 4 5 6 7 8 9 10 11 12
+                day of week   0 1 2 3 4
+                command       /usr/bin/find
                 """);
     }
 
@@ -29,7 +29,7 @@ class MainTest {
 
         String output = tapSystemErrAndOut(() -> Main.main(args));
 
-        assertThat(output).contains("minute 0 1 4 5 6 7 8 15 30 45");
+        assertThat(output).contains("minute        0 1 4 5 6 7 8 15 30 45");
     }
 
     @Test
@@ -38,7 +38,7 @@ class MainTest {
 
         String output = tapSystemErrAndOut(() -> Main.main(args));
 
-        assertThat(output).contains("day of week 0 1 2 3 4");
+        assertThat(output).contains("day of week   0 1 2 3 4");
     }
 
     @Test
@@ -47,7 +47,7 @@ class MainTest {
 
         String output = tapSystemErrAndOut(() -> Main.main(args));
 
-        assertThat(output).contains("month 1 6 12");
+        assertThat(output).contains("month         1 6 12");
     }
 
     @Test

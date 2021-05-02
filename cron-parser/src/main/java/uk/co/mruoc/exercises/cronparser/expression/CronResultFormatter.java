@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.lang.System.lineSeparator;
+import static org.apache.commons.lang3.StringUtils.rightPad;
 
 public class CronResultFormatter {
 
@@ -53,7 +54,7 @@ public class CronResultFormatter {
     }
 
     private static String formatValues(String name, String values) {
-        return String.format("%s %s", name, values);
+        return String.format("%s%s", rightPad(name, 14), values);
     }
 
     private static String toString(int[] values) {
