@@ -37,8 +37,8 @@ or
 
 The build will build two jars:
 
-1.   A plain jar that is built for use a library at build/libs/cron-parser.jar
-2.   A shadow jar that is built for running as a standalone application build/libs/cron-parser-all.jar
+1.  A plain jar that is built for use a library at build/libs/cron-parser.jar
+2.  A shadow jar that is built for running as a standalone application build/libs/cron-parser-all.jar
 
 To run the shadow jar if you are planning to pass any arguments with `*` notation you may
 need to configure your terminal to disable globbing. I found that using zsh shell on my mac this was
@@ -63,7 +63,7 @@ running the following command to disable globbing:
 Once globbing has been disabled, when the jar command list above is run again the following output will
 be displayed:
 
-```
+```shell
 minute        0 15 30 45
 hour          0
 day of month  1 15
