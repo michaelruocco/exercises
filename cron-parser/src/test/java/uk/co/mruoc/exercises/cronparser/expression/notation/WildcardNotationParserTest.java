@@ -16,7 +16,7 @@ class WildcardNotationParserTest {
     private final NotationParser parser = new WildcardNotationParser();
 
     @Test
-    void shouldOnlyApplyToAsterisk() {
+    void shouldOnlyApplyToWildcard() {
         assertThat(parser.appliesTo("*")).isTrue();
 
         assertThat(parser.appliesTo("1")).isFalse();

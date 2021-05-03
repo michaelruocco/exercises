@@ -4,20 +4,13 @@ import lombok.RequiredArgsConstructor;
 import uk.co.mruoc.exercises.cronparser.expression.notation.ComplexNotationParser;
 import uk.co.mruoc.exercises.cronparser.expression.notation.NotationParser;
 
-import java.util.Arrays;
-import java.util.Collection;
-
 @RequiredArgsConstructor
 public class CronExpressionParser {
 
-    private final Collection<NotationParser> parsers;
+    private final NotationParser notationParser;
 
     public CronExpressionParser() {
         this(new ComplexNotationParser());
-    }
-
-    public CronExpressionParser(NotationParser... parsers) {
-        this(Arrays.asList(parsers));
     }
 
     public CronResult parse(String[] values) {
@@ -34,11 +27,10 @@ public class CronExpressionParser {
     private int[] parse(String[] values, TimeUnit timeUnit) {
         String rawValues = values[timeUnit.ordinal()];
         String intValues = timeUnit.toIntValues(rawValues);
-        return parsers.stream()
-                .filter(parser -> parser.appliesTo(intValues))
-                .map(parser -> parser.toValues(intValues, timeUnit))
-                .findFirst()
-                .orElseThrow(() -> new NotationParserNotFoundException(rawValues));
+        if (notationParser.appliesTo(intValues)) {
+            return notationParser.toValues(intValues, timeUnit);
+        }
+        throw new NotationParserNotFoundException(rawValues);
     }
 
 }
