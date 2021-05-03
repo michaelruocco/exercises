@@ -30,11 +30,14 @@ public class TimeUnitTest {
         }
 
         @Test
-        void shouldThrowExceptionIfValueIsOutOfBounds() {
-            assertThat(catchThrowable(() -> MINUTES.validate(-1)))
+        void shouldThrowExceptionIfValueIsLessThanLowerBound() {
+            assertThat(catchThrowable(() -> MINUTES.validate(60)))
                     .isInstanceOf(NotationOutOfBoundsException.class)
-                    .hasMessage("invalid minutes value -1, outside bounds 0 and 59");
+                    .hasMessage("invalid minutes value 60, outside bounds 0 and 59");
+        }
 
+        @Test
+        void shouldThrowExceptionIfValueIsGreaterThanUpperBound() {
             assertThat(catchThrowable(() -> MINUTES.validate(60)))
                     .isInstanceOf(NotationOutOfBoundsException.class)
                     .hasMessage("invalid minutes value 60, outside bounds 0 and 59");
@@ -61,11 +64,14 @@ public class TimeUnitTest {
         }
 
         @Test
-        void shouldThrowExceptionIfValueIsOutOfBounds() {
+        void shouldThrowExceptionIfValueIsLessThanLowerBound() {
             assertThat(catchThrowable(() -> HOURS.validate(-1)))
                     .isInstanceOf(NotationOutOfBoundsException.class)
                     .hasMessage("invalid hours value -1, outside bounds 0 and 23");
+        }
 
+        @Test
+        void shouldThrowExceptionIfValueIsGreaterThanUpperBound() {
             assertThat(catchThrowable(() -> HOURS.validate(24)))
                     .isInstanceOf(NotationOutOfBoundsException.class)
                     .hasMessage("invalid hours value 24, outside bounds 0 and 23");
@@ -92,11 +98,14 @@ public class TimeUnitTest {
         }
 
         @Test
-        void shouldThrowExceptionIfValueIsOutOfBounds() {
+        void shouldThrowExceptionIfValueIsLessThanLowerBound() {
             assertThat(catchThrowable(() -> DAYS_OF_MONTH.validate(0)))
                     .isInstanceOf(NotationOutOfBoundsException.class)
                     .hasMessage("invalid days of month value 0, outside bounds 1 and 31");
+        }
 
+        @Test
+        void shouldThrowExceptionIfValueIsGreaterThanUpperBound() {
             assertThat(catchThrowable(() -> DAYS_OF_MONTH.validate(32)))
                     .isInstanceOf(NotationOutOfBoundsException.class)
                     .hasMessage("invalid days of month value 32, outside bounds 1 and 31");
@@ -123,11 +132,14 @@ public class TimeUnitTest {
         }
 
         @Test
-        void shouldThrowExceptionIfValueIsOutOfBounds() {
+        void shouldThrowExceptionIfValueLessThanLowerBound() {
             assertThat(catchThrowable(() -> MONTHS.validate(0)))
                     .isInstanceOf(NotationOutOfBoundsException.class)
                     .hasMessage("invalid months value 0, outside bounds 1 and 12");
+        }
 
+        @Test
+        void shouldThrowExceptionIfValueIsGreaterThanUpperBound() {
             assertThat(catchThrowable(() -> MONTHS.validate(13)))
                     .isInstanceOf(NotationOutOfBoundsException.class)
                     .hasMessage("invalid months value 13, outside bounds 1 and 12");
@@ -161,11 +173,14 @@ public class TimeUnitTest {
         }
 
         @Test
-        void shouldThrowExceptionIfValueIsOutOfBounds() {
+        void shouldThrowExceptionIfValueIsLessThanLowerBound() {
             assertThat(catchThrowable(() -> DAYS_OF_WEEK.validate(-1)))
                     .isInstanceOf(NotationOutOfBoundsException.class)
                     .hasMessage("invalid days of week value -1, outside bounds 0 and 6");
+        }
 
+        @Test
+        void shouldThrowExceptionIfValueIsGreaterThanUpperBound() {
             assertThat(catchThrowable(() -> DAYS_OF_WEEK.validate(7)))
                     .isInstanceOf(NotationOutOfBoundsException.class)
                     .hasMessage("invalid days of week value 7, outside bounds 0 and 6");
