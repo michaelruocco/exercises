@@ -55,7 +55,7 @@ Then the following output is returned:
 `usage: please provide a valid cron expression, invalid cron expression provided */15 0 1,15 LICENSE README.md area-of-circle binary-gap build build.gradle cake-factory cron-parser first-unique-character gradle gradlew gradlew.bat instruction-processing lombok.config matrix-transpose palindrome-app reactive-batch-processor settings.gradle smallest-missing-positive-integer 1-5 /usr/bin/find`
 
 As you can see the * command has been expanded to include all the files and folders
-from the current direction where the command is being run from. This can be fixed by
+from the current directory where the command is being run from. This can be fixed by
 running the following command to disable globbing:
 
 `set -o noglob`
