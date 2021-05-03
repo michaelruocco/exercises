@@ -3,7 +3,7 @@ package uk.co.mruoc.exercises.cronparser.expression.notation;
 import uk.co.mruoc.exercises.cronparser.expression.TimeUnit;
 
 
-public class AsteriskNotationParser implements NotationParser {
+public class WildcardNotationParser implements NotationParser {
 
     @Override
     public boolean appliesTo(String value) {

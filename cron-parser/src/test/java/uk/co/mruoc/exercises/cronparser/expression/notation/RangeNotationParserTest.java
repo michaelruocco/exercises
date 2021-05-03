@@ -15,6 +15,8 @@ class RangeNotationParserTest {
     void shouldOnlyApplyToRangeIntegerInput() {
         assertThat(parser.appliesTo("5-6")).isTrue();
 
+        assertThat(parser.appliesTo("5-6.6")).isFalse();
+        assertThat(parser.appliesTo("5.5-6")).isFalse();
         assertThat(parser.appliesTo("1")).isFalse();
         assertThat(parser.appliesTo("*")).isFalse();
         assertThat(parser.appliesTo("-1")).isFalse();

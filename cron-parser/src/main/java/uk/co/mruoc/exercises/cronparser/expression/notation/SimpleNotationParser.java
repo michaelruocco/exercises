@@ -2,15 +2,13 @@ package uk.co.mruoc.exercises.cronparser.expression.notation;
 
 import uk.co.mruoc.exercises.cronparser.expression.TimeUnit;
 
-import java.util.regex.Pattern;
+import static uk.co.mruoc.exercises.cronparser.expression.notation.StringUtil.isInt;
 
 public class SimpleNotationParser implements NotationParser {
 
-    private static final Pattern PATTERN = Pattern.compile("\\d+");
-
     @Override
     public boolean appliesTo(String value) {
-        return PATTERN.matcher(value).matches();
+        return isInt(value);
     }
 
     @Override

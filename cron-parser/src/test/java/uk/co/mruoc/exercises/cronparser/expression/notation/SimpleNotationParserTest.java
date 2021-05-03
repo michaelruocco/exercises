@@ -15,6 +15,7 @@ class SimpleNotationParserTest {
     void shouldOnlyApplyToPlainIntegerInput() {
         assertThat(parser.appliesTo("1")).isTrue();
 
+        assertThat(parser.appliesTo("1.5")).isFalse();
         assertThat(parser.appliesTo("*")).isFalse();
         assertThat(parser.appliesTo("-1")).isFalse();
         assertThat(parser.appliesTo("*/2")).isFalse();

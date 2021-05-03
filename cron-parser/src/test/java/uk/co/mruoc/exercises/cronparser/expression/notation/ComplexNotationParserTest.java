@@ -43,15 +43,4 @@ class ComplexNotationParserTest {
                 .hasMessage("invalid minutes value 60, outside bounds 0 and 59");
     }
 
-    @Test
-    void shouldThrowExceptionIfInputIsInBoundsOfTimeUnitButIsNotInteger() {
-        String input = "2,3.5";
-
-        Throwable error = catchThrowable(() -> parser.toValues(input, TimeUnit.MINUTES));
-
-        assertThat(error)
-                .isInstanceOf(InvalidNotationException.class)
-                .hasMessage("3.5");
-    }
-
 }

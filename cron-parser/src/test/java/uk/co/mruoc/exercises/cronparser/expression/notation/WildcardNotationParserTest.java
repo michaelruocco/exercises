@@ -11,9 +11,9 @@ import static uk.co.mruoc.exercises.cronparser.expression.TimeUnit.HOURS;
 import static uk.co.mruoc.exercises.cronparser.expression.TimeUnit.MINUTES;
 import static uk.co.mruoc.exercises.cronparser.expression.TimeUnit.MONTHS;
 
-class AsteriskNotationParserTest {
+class WildcardNotationParserTest {
 
-    private final NotationParser parser = new AsteriskNotationParser();
+    private final NotationParser parser = new WildcardNotationParser();
 
     @Test
     void shouldOnlyApplyToAsterisk() {

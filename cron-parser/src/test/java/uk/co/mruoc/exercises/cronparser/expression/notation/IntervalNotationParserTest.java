@@ -16,6 +16,8 @@ class IntervalNotationParserTest {
         assertThat(parser.appliesTo("2/2")).isTrue();
         assertThat(parser.appliesTo("*/6")).isTrue();
 
+        assertThat(parser.appliesTo("*/6.5")).isFalse();
+        assertThat(parser.appliesTo("2.5/6")).isFalse();
         assertThat(parser.appliesTo("1")).isFalse();
         assertThat(parser.appliesTo("*")).isFalse();
         assertThat(parser.appliesTo("-1")).isFalse();

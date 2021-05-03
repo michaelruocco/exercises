@@ -79,12 +79,30 @@ class MainTest {
     }
 
     @Test
-    void shouldPrintErrorIfNotationParserNotFound() throws Exception {
+    void shouldPrintErrorIfNotationParserNotFoundForSimpleDecimalValue() throws Exception {
         String[] args = {"3.5", "0", "1,15", "*", "1-5", "/usr/bin/find"};
 
         String output = tapSystemErrAndOut(() -> Main.main(args));
 
         assertThat(output).isEqualTo("notation parser not found for value 3.5\n");
+    }
+
+    @Test
+    void shouldPrintErrorIfNotationParserNotFoundForIntervalWithDecimalValue() throws Exception {
+        String[] args = {"3", "0", "1,15", "*", "*/2.5", "/usr/bin/find"};
+
+        String output = tapSystemErrAndOut(() -> Main.main(args));
+
+        assertThat(output).isEqualTo("notation parser not found for value */2.5\n");
+    }
+
+    @Test
+    void shouldPrintErrorIfNotationParserNotFoundForRangeWithDecimalValue() throws Exception {
+        String[] args = {"3", "0", "1,15", "*", "1-5.5", "/usr/bin/find"};
+
+        String output = tapSystemErrAndOut(() -> Main.main(args));
+
+        assertThat(output).isEqualTo("notation parser not found for value 1-5.5\n");
     }
 
 }

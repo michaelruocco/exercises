@@ -15,7 +15,7 @@ public class ComplexNotationParser implements NotationParser {
     private final Collection<NotationParser> parsers;
 
     public ComplexNotationParser() {
-        this(new AsteriskNotationParser(),
+        this(new WildcardNotationParser(),
                 new RangeNotationParser(),
                 new IntervalNotationParser(),
                 new SimpleNotationParser()
@@ -33,23 +33,11 @@ public class ComplexNotationParser implements NotationParser {
 
     @Override
     public int[] toValues(String input, TimeUnit unit) {
-        Collection<String> segments = toSegments(input);
-        validate(segments);
-        return segments.stream().flatMapToInt(segment -> segmentToValues(segment, unit)).toArray();
+        return toSegments(input).stream().flatMapToInt(segment -> segmentToValues(segment, unit)).toArray();
     }
 
     private Collection<String> toSegments(String value) {
         return Arrays.asList(StringUtils.split(value, ","));
-    }
-
-    private void validate(Collection<String> segments) {
-        segments.forEach(this::validateSegment);
-    }
-
-    private void validateSegment(String segment) {
-        if (parsers.stream().noneMatch(parser -> parser.appliesTo(segment))) {
-            throw new InvalidNotationException(segment);
-        }
     }
 
     private boolean appliesToSegment(String segment) {
