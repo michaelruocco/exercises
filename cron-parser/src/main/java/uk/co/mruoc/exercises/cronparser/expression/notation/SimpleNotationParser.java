@@ -1,21 +1,27 @@
 package uk.co.mruoc.exercises.cronparser.expression.notation;
 
+import org.apache.commons.lang3.StringUtils;
 import uk.co.mruoc.exercises.cronparser.expression.TimeUnit;
 
-import static uk.co.mruoc.exercises.cronparser.expression.notation.StringUtil.isInt;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class SimpleNotationParser implements NotationParser {
 
     @Override
-    public boolean appliesTo(String value) {
-        return isInt(value);
+    public boolean appliesTo(String input) {
+        return split(input).allMatch(StringUtil::isInt);
     }
 
     @Override
     public int[] toValues(String input, TimeUnit unit) {
-        var value = toInteger(input);
-        unit.validate(value);
-        return new int[] { value };
+        int[] values = toIntegers(input);
+        unit.validate(values);
+        return values;
+    }
+
+    private static int[] toIntegers(String input) {
+        return split(input).mapToInt(SimpleNotationParser::toInteger).toArray();
     }
 
     private static int toInteger(String input) {
@@ -24,6 +30,10 @@ public class SimpleNotationParser implements NotationParser {
         } catch (NumberFormatException e) {
             throw new InvalidNotationException(input, e);
         }
+    }
+
+    private static Stream<String> split(String input) {
+        return Arrays.stream(StringUtils.split(input, ","));
     }
 
 }

@@ -12,14 +12,14 @@ class SimpleNotationParserTest {
     private final NotationParser parser = new SimpleNotationParser();
 
     @Test
-    void shouldOnlyApplyToPlainIntegerInput() {
+    void shouldOnlyApplyToIntegerInput() {
         assertThat(parser.appliesTo("1")).isTrue();
+        assertThat(parser.appliesTo("3,4")).isTrue();
 
         assertThat(parser.appliesTo("1.5")).isFalse();
         assertThat(parser.appliesTo("*")).isFalse();
         assertThat(parser.appliesTo("-1")).isFalse();
         assertThat(parser.appliesTo("*/2")).isFalse();
-        assertThat(parser.appliesTo("3,4")).isFalse();
         assertThat(parser.appliesTo("5-6")).isFalse();
         assertThat(parser.appliesTo("text")).isFalse();
     }
@@ -31,6 +31,15 @@ class SimpleNotationParserTest {
         int[] values = parser.toValues(input, TimeUnit.HOURS);
 
         assertThat(values).containsExactly(1);
+    }
+
+    @Test
+    void shouldReturnIntegerForMultipleValidIntegerInputs() {
+        String input = "1,3";
+
+        int[] values = parser.toValues(input, TimeUnit.HOURS);
+
+        assertThat(values).containsExactly(1, 3);
     }
 
     @Test

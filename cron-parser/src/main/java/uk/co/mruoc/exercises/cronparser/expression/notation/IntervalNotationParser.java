@@ -1,23 +1,33 @@
 package uk.co.mruoc.exercises.cronparser.expression.notation;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import uk.co.mruoc.exercises.cronparser.expression.TimeUnit;
 
+import java.util.Arrays;
 import java.util.function.IntPredicate;
 import java.util.function.IntUnaryOperator;
 import java.util.stream.IntStream;
 
 import static uk.co.mruoc.exercises.cronparser.expression.notation.StringUtil.isInt;
 
+@RequiredArgsConstructor
 public class IntervalNotationParser implements NotationParser {
 
     private static final String WILDCARD = "*";
+
+    private final SimpleNotationParser simpleParser;
+    private final RangeNotationParser rangeParser;
+
+    public IntervalNotationParser() {
+        this(new SimpleNotationParser(), new RangeNotationParser());
+    }
 
     @Override
     public boolean appliesTo(String value) {
         String[] parts = split(value);
         if (parts.length == 2) {
-            return isIntOrWildcard(parts[0]) && isInt(parts[1]);
+            return isIntWildcardRangeOrIntegers(parts[0]) && isInt(parts[1]);
         }
         return false;
     }
@@ -26,11 +36,11 @@ public class IntervalNotationParser implements NotationParser {
     public int[] toValues(String input, TimeUnit unit) {
         try {
             String[] parts = split(input);
-            int start = toStart(parts[0], unit);
-            unit.validate(start);
+            int[] starts = toStarts(parts[0], unit);
+            unit.validate(starts);
             var interval = Integer.parseInt(parts[1]);
-            return calculateIntervals(start, unit, interval);
-        } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
+            return calculateIntervals(starts, unit, interval);
+        } catch (ArrayIndexOutOfBoundsException | InvalidNotationException e) {
             throw new InvalidNotationException(input, e);
         }
     }
@@ -39,16 +49,26 @@ public class IntervalNotationParser implements NotationParser {
         return StringUtils.split(value, "/");
     }
 
-    private static int toStart(String value, TimeUnit unit) {
+    private int[] toStarts(String value, TimeUnit unit) {
         if (WILDCARD.equals(value)) {
-            return unit.getLowerBound();
+            return new int[]{unit.getLowerBound()};
         }
-        return Integer.parseInt(value);
+        if (rangeParser.appliesTo(value)) {
+            return rangeParser.toValues(value, unit);
+        }
+        return simpleParser.toValues(value, unit);
     }
 
-    private static int[] calculateIntervals(int start, TimeUnit unit, int interval) {
-        return IntStream.iterate(start, lessThanOrEqualToUpperBound(unit), incrementBy(interval))
+    private static int[] calculateIntervals(int[] starts, TimeUnit unit, int interval) {
+        return Arrays.stream(starts)
+                .flatMap(start -> calculateIntervals(start, unit, interval))
+                .distinct()
+                .sorted()
                 .toArray();
+    }
+
+    private static IntStream calculateIntervals(int start, TimeUnit unit, int interval) {
+        return IntStream.iterate(start, lessThanOrEqualToUpperBound(unit), incrementBy(interval));
     }
 
     private static IntPredicate lessThanOrEqualToUpperBound(TimeUnit unit) {
@@ -59,8 +79,10 @@ public class IntervalNotationParser implements NotationParser {
         return i -> i + interval;
     }
 
-    private static boolean isIntOrWildcard(String value) {
-        return isInt(value) || WILDCARD.equals(value);
+    private boolean isIntWildcardRangeOrIntegers(String value) {
+        return WILDCARD.equals(value) ||
+                rangeParser.appliesTo(value) ||
+                simpleParser.appliesTo(value);
     }
 
 }
