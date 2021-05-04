@@ -44,6 +44,15 @@ class RangeNotationParserTest {
     }
 
     @Test
+    void shouldReturnValueWhenRangeStartIsEqualToEnd() {
+        String input = "3-3";
+
+        int[] values = parser.toValues(input, TimeUnit.HOURS);
+
+        assertThat(values).containsExactly(3);
+    }
+
+    @Test
     void shouldThrowExceptionIfInputIsOutsideBoundsOfTimeUnit() {
         String input = "20-25";
 
