@@ -5,6 +5,8 @@ import uk.co.mruoc.exercises.cronparser.expression.TimeUnit;
 
 import java.util.stream.IntStream;
 
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 import static uk.co.mruoc.exercises.cronparser.expression.notation.StringUtil.isInt;
 
 public class RangeNotationParser implements NotationParser {
@@ -25,7 +27,7 @@ public class RangeNotationParser implements NotationParser {
             var start = Integer.parseInt(parts[0]);
             var end = Integer.parseInt(parts[1]);
             unit.validate(start, end);
-            return IntStream.rangeClosed(start, end).toArray();
+            return IntStream.rangeClosed(min(start, end), max(start, end)).toArray();
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException e) {
             throw new InvalidNotationException(input, e);
         }
