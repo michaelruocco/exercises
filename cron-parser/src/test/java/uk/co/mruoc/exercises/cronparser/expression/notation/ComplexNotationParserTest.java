@@ -12,8 +12,9 @@ class ComplexNotationParserTest {
     private final NotationParser parser = new ComplexNotationParser();
 
     @Test
-    void shouldOnlyApplyToIntegerInputs() {
+    void shouldOnlyApplyToValidIntegerInputs() {
         assertThat(parser.appliesTo("1,4-8,*/15")).isTrue();
+        assertThat(parser.appliesTo("3,45/15")).isTrue();
         assertThat(parser.appliesTo("1")).isTrue();
         assertThat(parser.appliesTo("*")).isTrue();
         assertThat(parser.appliesTo("*/2")).isTrue();
@@ -24,12 +25,21 @@ class ComplexNotationParserTest {
     }
 
     @Test
-    void shouldReturnCorrectValues() {
+    void shouldReturnCorrectValuesForComplexNotation() {
         String input = "1,4-8,*/15";
 
         int[] values = parser.toValues(input, TimeUnit.MINUTES);
 
-        assertThat(values).containsExactly(1, 4, 5, 6, 7, 8, 0, 15, 30, 45);
+        assertThat(values).containsExactly(0, 1, 4, 5, 6, 7, 8, 15, 30, 45);
+    }
+
+    @Test
+    void shouldReturnCorrectValuesForComplexIntervalStartNotation() {
+        String input = "3,45/15";
+
+        int[] values = parser.toValues(input, TimeUnit.MINUTES);
+
+        assertThat(values).containsExactly(3, 18, 33, 45, 48);
     }
 
     @Test

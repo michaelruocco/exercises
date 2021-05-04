@@ -28,12 +28,21 @@ public class ComplexNotationParser implements NotationParser {
 
     @Override
     public boolean appliesTo(String value) {
+        if (appliesToSegment(value)) {
+            return true;
+        }
         return toSegments(value).stream().allMatch(this::appliesToSegment);
     }
 
     @Override
     public int[] toValues(String input, TimeUnit unit) {
-        return toSegments(input).stream().flatMapToInt(segment -> segmentToValues(segment, unit)).toArray();
+        if (appliesToSegment(input)) {
+            return segmentToValues(input, unit).toArray();
+        }
+        return toSegments(input).stream()
+                .flatMapToInt(segment -> segmentToValues(segment, unit))
+                .sorted()
+                .toArray();
     }
 
     private Collection<String> toSegments(String value) {

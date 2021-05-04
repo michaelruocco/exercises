@@ -18,6 +18,8 @@ class IntervalNotationParserTest {
         assertThat(parser.appliesTo("2-4/6")).isTrue();
         assertThat(parser.appliesTo("2,4/6")).isTrue();
 
+        assertThat(parser.appliesTo("2-4.4/6")).isFalse();
+        assertThat(parser.appliesTo("2.2,4/6")).isFalse();
         assertThat(parser.appliesTo("*/6.5")).isFalse();
         assertThat(parser.appliesTo("2.5/6")).isFalse();
         assertThat(parser.appliesTo("1")).isFalse();
@@ -65,7 +67,7 @@ class IntervalNotationParserTest {
     }
 
     @Test
-    void shouldThrowExceptionIfInputIsOutsideBoundsOfTimeUnit() {
+    void shouldThrowExceptionIfStartIsOutsideBoundsOfTimeUnit() {
         String input = "25/2";
 
         Throwable error = catchThrowable(() -> parser.toValues(input, TimeUnit.HOURS));

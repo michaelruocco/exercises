@@ -12,7 +12,7 @@ class SimpleNotationParserTest {
     private final NotationParser parser = new SimpleNotationParser();
 
     @Test
-    void shouldOnlyApplyToIntegerInput() {
+    void shouldOnlyApplyToIntegerInputs() {
         assertThat(parser.appliesTo("1")).isTrue();
         assertThat(parser.appliesTo("3,4")).isTrue();
 
@@ -34,7 +34,7 @@ class SimpleNotationParserTest {
     }
 
     @Test
-    void shouldReturnIntegerForMultipleValidIntegerInputs() {
+    void shouldReturnIntegersForMultipleValidIntegerInputs() {
         String input = "1,3";
 
         int[] values = parser.toValues(input, TimeUnit.HOURS);

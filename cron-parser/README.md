@@ -31,7 +31,7 @@ command /usr/bin/find
 
 or
 
-`./gradlew run --args="-arguments */15 0 1,15 * 1-5 /usr/bin/find"`
+`./gradlew run --args="-arguments 3,45/15 0 1,15 * 1-5 /usr/bin/find"`
 
 ## Running built jar
 
@@ -44,11 +44,11 @@ To run the shadow jar if you are planning to pass any arguments with `*` notatio
 need to configure your terminal to disable globbing. I found that using zsh shell on my mac this was
 and issue. If I try to run the following command:
 
-`java -jar cron-parser/build/libs/cron-parser-all.jar */15 0 1,15 * 1-5 /usr/bin/find`
+`java -jar cron-parser/build/libs/cron-parser-all.jar 3,45/15 0 1,15 * 1-5 /usr/bin/find`
 
 or
 
-`java -jar cron-parser/build/libs/cron-parser-all.jar -arguments */15 0 1,15 * 1-5 /usr/bin/find`
+`java -jar cron-parser/build/libs/cron-parser-all.jar -arguments 3,45/15 0 1,15 * 1-5 /usr/bin/find`
 
 Then the following output is returned:
 
