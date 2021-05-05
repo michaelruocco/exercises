@@ -1,7 +1,6 @@
 package uk.co.mruoc.exercises.cronparser;
 
 import org.junit.jupiter.api.Test;
-import uk.co.mruoc.exercises.cronparser.domain.Main;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static uk.org.webcompere.systemstubs.SystemStubs.tapSystemErrAndOut;

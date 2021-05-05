@@ -1,8 +1,6 @@
 package uk.co.mruoc.exercises.cronparser.domain;
 
 
-import uk.co.mruoc.exercises.cronparser.ParserException;
-
 public class NotationOutOfBoundsException extends ParserException {
 
     public NotationOutOfBoundsException(int value, TimeUnit unit) {

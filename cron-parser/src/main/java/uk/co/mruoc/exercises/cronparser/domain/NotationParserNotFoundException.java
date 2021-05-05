@@ -1,7 +1,5 @@
 package uk.co.mruoc.exercises.cronparser.domain;
 
-import uk.co.mruoc.exercises.cronparser.ParserException;
-
 public class NotationParserNotFoundException extends ParserException {
 
     public NotationParserNotFoundException(String value) {

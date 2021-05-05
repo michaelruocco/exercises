@@ -1,6 +1,6 @@
 package uk.co.mruoc.exercises.cronparser.domain.notation;
 
-import uk.co.mruoc.exercises.cronparser.ParserException;
+import uk.co.mruoc.exercises.cronparser.domain.ParserException;
 
 public class InvalidNotationException extends ParserException {
 

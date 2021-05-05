@@ -1,4 +1,6 @@
-package uk.co.mruoc.exercises.cronparser.domain;
+package uk.co.mruoc.exercises.cronparser;
+
+import uk.co.mruoc.exercises.cronparser.domain.App;
 
 public class Main {
 

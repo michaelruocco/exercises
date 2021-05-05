@@ -1,7 +1,5 @@
 package uk.co.mruoc.exercises.cronparser.domain;
 
-import uk.co.mruoc.exercises.cronparser.ParserException;
-
 import java.util.Arrays;
 
 public class ArgumentsSanitizer {

@@ -1,7 +1,6 @@
 package uk.co.mruoc.exercises.cronparser.domain;
 
 import lombok.Builder;
-import uk.co.mruoc.exercises.cronparser.ParserException;
 
 @Builder
 public class App {

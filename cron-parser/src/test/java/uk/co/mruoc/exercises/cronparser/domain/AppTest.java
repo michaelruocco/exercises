@@ -1,11 +1,6 @@
-package uk.co.mruoc.exercises.cronparser;
+package uk.co.mruoc.exercises.cronparser.domain;
 
 import org.junit.jupiter.api.Test;
-import uk.co.mruoc.exercises.cronparser.domain.App;
-import uk.co.mruoc.exercises.cronparser.domain.ArgumentsSanitizer;
-import uk.co.mruoc.exercises.cronparser.domain.CronExpressionParser;
-import uk.co.mruoc.exercises.cronparser.domain.CronResult;
-import uk.co.mruoc.exercises.cronparser.domain.CronResultFormatter;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;

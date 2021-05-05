@@ -1,7 +1,6 @@
-package uk.co.mruoc.exercises.cronparser;
+package uk.co.mruoc.exercises.cronparser.domain;
 
 import org.junit.jupiter.api.Test;
-import uk.co.mruoc.exercises.cronparser.domain.ArgumentsSanitizer;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
