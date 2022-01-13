@@ -48,14 +48,14 @@ subprojects {
     apply plugin: "com.diffplug.spotless"
 
     ext {
-        lombokVersion = "1.18.20"
-        slf4jVersion = "1.7.30"
-        projectReactorVersion = "3.4.5"
+        lombokVersion = "1.18.22"
+        slf4jVersion = "1.7.32"
+        projectReactorVersion = "3.4.14"
         commonsLangVersion = "3.12.0"
 
-        junitVersion = "5.7.1"
-        assertjVersion = "3.19.0"
-        mockitoVersion = "3.9.0"
+        junitVersion = "5.8.2"
+        assertjVersion = "3.22.0"
+        mockitoVersion = "4.2.0"
     }
 
     dependencies {
