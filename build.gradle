@@ -1,11 +1,11 @@
 plugins {
     id "java-library"
     id "jacoco"
-    id "com.diffplug.spotless" version "6.2.0"
-    id "com.github.ben-manes.versions" version "0.41.0"
+    id "com.diffplug.spotless" version "6.3.0"
+    id "com.github.ben-manes.versions" version "0.42.0"
     id "pl.allegro.tech.build.axion-release" version "1.13.6"
     id "org.sonarqube" version "3.3"
-    id "nebula.lint" version "17.6.0"
+    id "nebula.lint" version "17.7.0"
     id "com.adarshr.test-logger" version "3.1.0"
 }
 
@@ -49,13 +49,13 @@ subprojects {
 
     ext {
         lombokVersion = "1.18.22"
-        slf4jVersion = "1.7.32"
-        projectReactorVersion = "3.4.14"
+        slf4jVersion = "1.7.36"
+        projectReactorVersion = "3.4.15"
         commonsLangVersion = "3.12.0"
 
         junitVersion = "5.8.2"
         assertjVersion = "3.22.0"
-        mockitoVersion = "4.2.0"
+        mockitoVersion = "4.3.1"
     }
 
     dependencies {
