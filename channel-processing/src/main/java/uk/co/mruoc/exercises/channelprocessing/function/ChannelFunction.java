@@ -1,6 +1,6 @@
-package uk.co.mruoc.exercises.channelprocessing;
+package uk.co.mruoc.exercises.channelprocessing.function;
 
-import uk.co.mruoc.exercises.channelprocessing.argument.Arguments;
+import uk.co.mruoc.exercises.channelprocessing.Arguments;
 import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
 
 import java.util.function.BiFunction;

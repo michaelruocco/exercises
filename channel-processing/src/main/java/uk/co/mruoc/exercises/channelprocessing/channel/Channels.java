@@ -2,7 +2,7 @@ package uk.co.mruoc.exercises.channelprocessing.channel;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
-import uk.co.mruoc.exercises.channelprocessing.argument.Arguments;
+import uk.co.mruoc.exercises.channelprocessing.Arguments;
 
 import java.util.Map;
 import java.util.Optional;

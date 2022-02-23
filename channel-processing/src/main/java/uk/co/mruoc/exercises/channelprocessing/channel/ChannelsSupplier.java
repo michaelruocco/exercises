@@ -2,13 +2,12 @@ package uk.co.mruoc.exercises.channelprocessing.channel;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
-import uk.co.mruoc.exercises.channelprocessing.argument.Arguments;
+import uk.co.mruoc.exercises.channelprocessing.Arguments;
 import uk.co.mruoc.file.content.ContentLoader;
 
 import java.math.BigDecimal;
 import java.util.AbstractMap;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;

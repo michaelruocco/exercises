@@ -2,8 +2,7 @@ package uk.co.mruoc.exercises.channelprocessing.function;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import uk.co.mruoc.exercises.channelprocessing.ChannelFunction;
-import uk.co.mruoc.exercises.channelprocessing.argument.Arguments;
+import uk.co.mruoc.exercises.channelprocessing.Arguments;
 import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
 
 import java.math.BigDecimal;
