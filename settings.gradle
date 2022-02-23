@@ -10,5 +10,5 @@ include ':reactive-batch-processor'
 include ':cake-factory'
 include ':binary-gap'
 include ':naughts-and-crosses'
-include ':'
+include ':channel-processing'
 
