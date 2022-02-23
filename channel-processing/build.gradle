@@ -1,0 +1,5 @@
+dependencies {
+    implementation "io.projectreactor:reactor-core:${projectReactorVersion}"
+    implementation "com.github.michaelruocco:file-loader:6.0.5"
+    implementation "org.slf4j:slf4j-simple:1.7.36"
+}
