@@ -1,22 +1,12 @@
 package uk.co.mruoc.exercises.channelprocessing.function;
 
 import lombok.extern.slf4j.Slf4j;
-import uk.co.mruoc.exercises.channelprocessing.Arguments;
-import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
-
-import java.math.BigDecimal;
 
 @Slf4j
-public class Function4 implements ChannelFunction  {
+public class Function4 extends Sum {
 
-    @Override
-    public Arguments apply(Parameters parameters, Arguments arguments) {
-        BigDecimal X = arguments.get('X');
-        BigDecimal b = arguments.get('b');
-        BigDecimal C = X.add(b);
-        arguments.set('C', C);
-        log.debug("C=X+b {}={}+{}", C, X, b);
-        return arguments;
+    public Function4() {
+        super('X', 'b', 'C');
     }
 
 }

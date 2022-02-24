@@ -18,6 +18,10 @@ public class Arguments {
 
     private final Map<Character, BigDecimal> values;
 
+    public Arguments() {
+        this(new HashMap<>());
+    }
+
     public Arguments(Character id, BigDecimal value) {
         this(new HashMap<>(Map.of(id, value)));
     }

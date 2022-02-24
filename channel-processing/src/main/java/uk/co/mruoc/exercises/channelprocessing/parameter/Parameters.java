@@ -3,6 +3,7 @@ package uk.co.mruoc.exercises.channelprocessing.parameter;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
@@ -10,6 +11,10 @@ import java.util.Optional;
 public class Parameters {
 
     private final Map<Character, BigDecimal> values;
+
+    public Parameters() {
+        this(Collections.emptyMap());
+    }
 
     public BigDecimal get(char id) {
         return Optional.ofNullable(values.get(id))
