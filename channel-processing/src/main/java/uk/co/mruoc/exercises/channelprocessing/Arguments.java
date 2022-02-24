@@ -4,12 +4,15 @@ import com.google.common.collect.MapDifference;
 import com.google.common.collect.MapDifference.ValueDifference;
 import com.google.common.collect.Maps;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import reactor.util.function.Tuple2;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
 @RequiredArgsConstructor
+@Slf4j
 public class Arguments {
 
     private final Map<Character, BigDecimal> values;
@@ -30,12 +33,18 @@ public class Arguments {
         return values.size();
     }
 
-    public void addAll(Arguments other) {
-        MapDifference<Character, BigDecimal> diff = Maps.difference(this.values, other.values);
+    public static Arguments zip(Tuple2<Arguments, Arguments> tuple) {
+        return zip(tuple.getT1(), tuple.getT2());
+    }
+
+    public static Arguments zip(Arguments args1, Arguments args2) {
+        MapDifference<Character, BigDecimal> diff = Maps.difference(args1.values, args2.values);
         Map<Character, ValueDifference<BigDecimal>> entriesDiffering = diff.entriesDiffering();
         if (!entriesDiffering.isEmpty()) {
-            throw new IllegalArgumentException(String.format("arguments cannot be combined as they have differing entries %s", entriesDiffering));
+            throw new IllegalArgumentException(String.format("arguments cannot be zipped as they have differing entries %s", entriesDiffering));
         }
-        this.values.putAll(other.values);
+        Map<Character, BigDecimal> copy = new HashMap<>(args1.values);
+        copy.putAll(args2.values);
+        return new Arguments(copy);
     }
 }

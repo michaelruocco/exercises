@@ -15,7 +15,7 @@ public class Function1 implements ChannelFunction  {
         BigDecimal c = parameters.get('c');
         BigDecimal X = arguments.get('X');
         BigDecimal Y = m.multiply(X).add(c);
-        log.info("Y=(m*X)+c --- {}=({}*{})+{}", Y, m, X, c);
+        log.debug("Y=(m*X)+c --- {}=({}*{})+{}", Y, m, X, c);
         arguments.set('Y', Y);
         return arguments;
     }

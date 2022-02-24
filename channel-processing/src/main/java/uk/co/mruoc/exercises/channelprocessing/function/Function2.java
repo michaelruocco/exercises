@@ -27,7 +27,7 @@ public class Function2 implements ChannelFunction {
         BigDecimal A = arguments.get('A');
         BigDecimal Y = arguments.get('Y');
         BigDecimal B = A.add(Y);
-        log.info("B=A+Y --- {}={}+{}", B, A, Y);
+        log.debug("B=A+Y --- {}={}+{}", B, A, Y);
         BigDecimal b = toMean(B);
         arguments.set('b', b);
         return arguments;
@@ -37,7 +37,7 @@ public class Function2 implements ChannelFunction {
         BigDecimal t = total.accumulateAndGet(B, BigDecimal::add);
         BigDecimal c = BigDecimal.valueOf(count.incrementAndGet());
         BigDecimal mean = t.divide(c, CONTEXT);
-        log.info("b=mean(B) --- {}={}/{}", mean, t, c);
+        log.debug("b=mean(B) --- {}={}/{}", mean, t, c);
         return mean;
     }
 

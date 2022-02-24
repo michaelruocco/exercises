@@ -32,7 +32,7 @@ C=X+b
 
 Channels are arrays of data and are denoted with a capital letter, e.g. Y.
 Metrics and parameters are scalars and are denoted with a lowercase letter, e.g. m.
-Note that b is the only metric in the above example.  X, m and c are known.
+Note that b is the only metric in the above example. X, m and c are known.
 
 Can you design and implement a flexible and generic system for processing channel data
 using the above functions? Feel free to use a language of your choice.
