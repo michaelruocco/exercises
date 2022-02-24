@@ -9,15 +9,9 @@ import uk.co.mruoc.file.content.ContentLoader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
 @Slf4j
-public class ChannelLoader implements Function<String, Channels> {
-
-    @Override
-    public Channels apply(String path) {
-        return load(path);
-    }
+public class ChannelLoader {
 
     public Channels load(String path) {
         String content = ContentLoader.loadContentFromClasspath(path);

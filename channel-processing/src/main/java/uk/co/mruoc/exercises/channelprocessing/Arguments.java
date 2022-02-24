@@ -3,8 +3,8 @@ package uk.co.mruoc.exercises.channelprocessing;
 import com.google.common.collect.MapDifference;
 import com.google.common.collect.MapDifference.ValueDifference;
 import com.google.common.collect.Maps;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
@@ -13,14 +13,10 @@ import java.util.Map;
 
 @RequiredArgsConstructor
 @Slf4j
-@ToString
+@Data
 public class Arguments {
 
     private final Map<Character, BigDecimal> values;
-
-    public Arguments() {
-        this(new HashMap<>());
-    }
 
     public Arguments(Character id, BigDecimal value) {
         this(new HashMap<>(Map.of(id, value)));

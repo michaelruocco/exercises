@@ -17,7 +17,7 @@ public class Function3 implements ChannelFunction  {
         BigDecimal X = arguments.get('X');
         BigDecimal A = ONE.divide(X, CONTEXT);
         arguments.set('A', A);
-        log.debug("A=1/X --- {}=1/{}", A, X);
+        log.debug("A=1/X {}=1/{}", A, X);
         return arguments;
     }
 

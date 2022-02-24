@@ -23,7 +23,7 @@ class ChannelLoaderTest {
     void shouldLoadTestChannelX() {
         Channels channels = loader.load(TEST_CHANNELS_PATH);
 
-        assertThat(channels.getValues('X')).containsExactly(
+        assertThat(channels.getValuesCollection('X')).containsExactly(
                 new BigDecimal("1.5"),
                 new BigDecimal("1.75"),
                 new BigDecimal("2.0")
@@ -34,7 +34,7 @@ class ChannelLoaderTest {
     void shouldLoadTestChannelY() {
         Channels channels = loader.load(TEST_CHANNELS_PATH);
 
-        assertThat(channels.getValues('Y')).containsExactly(
+        assertThat(channels.getValuesCollection('Y')).containsExactly(
                 new BigDecimal("2.35"),
                 new BigDecimal("2.735")
         );
@@ -46,7 +46,7 @@ class ChannelLoaderTest {
 
         Channels channels = loader.load(path);
 
-        assertThat(channels.getValues('Z')).containsExactly(
+        assertThat(channels.getValuesCollection('Z')).containsExactly(
                 new BigDecimal("3"),
                 new BigDecimal("4"),
                 new BigDecimal("5")

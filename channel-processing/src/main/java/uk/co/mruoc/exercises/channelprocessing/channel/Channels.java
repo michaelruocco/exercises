@@ -16,12 +16,8 @@ public class Channels {
         return arguments;
     }
 
-    public Collection<BigDecimal> getValues(char id) {
-        return getChannelValues(id).collectList().block();
-    }
-
-    public Flux<BigDecimal> get(char id) {
-        return getChannelValues(id);
+    public Collection<BigDecimal> getValuesCollection(char id) {
+        return getValues(id).collectList().block();
     }
 
     public int size() {
@@ -31,7 +27,7 @@ public class Channels {
                 .orElse(0);
     }
 
-    private Flux<BigDecimal> getChannelValues(char id) {
+    public Flux<BigDecimal> getValues(char id) {
         return arguments.filter(arg -> arg.contains(id)).map(arg -> arg.get(id));
     }
 
