@@ -3,28 +3,28 @@ package uk.co.mruoc.exercises.channelprocessing;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Flux;
 import uk.co.mruoc.exercises.channelprocessing.channel.Channels;
-import uk.co.mruoc.exercises.channelprocessing.channel.ChannelsSupplier;
+import uk.co.mruoc.exercises.channelprocessing.channel.ChannelLoader;
 import uk.co.mruoc.exercises.channelprocessing.function.ChannelCFunction;
 import uk.co.mruoc.exercises.channelprocessing.function.ChannelFunction;
 import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
-import uk.co.mruoc.exercises.channelprocessing.parameter.ParametersSupplier;
+import uk.co.mruoc.exercises.channelprocessing.parameter.ParameterLoader;
 
 @Slf4j
 public class Main {
 
-    public static void main(String[] args) {
-        Channels channels = new ChannelsSupplier("channels.txt").get();
-        Parameters parameters = new ParametersSupplier("parameters.txt").get();
+    public static void main(String[] a) {
+        Channels channels = new ChannelLoader().load("channels.txt");
+        Parameters parameters = new ParameterLoader().load("parameters.txt");
 
-        Flux<Arguments> x = channels.get('X');
+        Flux<Arguments> args = channels.getArguments();
 
         ChannelFunction channelC = new ChannelCFunction();
-        x.map(arg -> channelC.apply(parameters, arg))
+        args.map(arg -> channelC.apply(parameters, arg))
                 .last()
                 .subscribe(arg -> logValue(arg, 'C'));
 
         ChannelFunction metricB = new ChannelCFunction();
-        x.map(arg -> metricB.apply(parameters, arg))
+        args.map(arg -> metricB.apply(parameters, arg))
                 .last()
                 .subscribe(arg -> logValue(arg, 'b'));
     }

@@ -4,17 +4,35 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import uk.co.mruoc.exercises.channelprocessing.Arguments;
 
-import java.util.Map;
-import java.util.Optional;
+import java.math.BigDecimal;
+import java.util.Collection;
 
 @RequiredArgsConstructor
 public class Channels {
 
-    private final Map<Character, Flux<Arguments>> values;
+    private final Flux<Arguments> arguments;
 
-    public Flux<Arguments> get(char id) {
-        return Optional.ofNullable(values.get(id))
-                .orElseThrow(() -> new ChannelNotFoundException(id));
+    public Flux<Arguments> getArguments() {
+        return arguments;
+    }
+
+    public Collection<BigDecimal> getValues(char id) {
+        return getChannelValues(id).collectList().block();
+    }
+
+    public Flux<BigDecimal> get(char id) {
+        return getChannelValues(id);
+    }
+
+    public int size() {
+        return arguments.next()
+                .blockOptional()
+                .map(Arguments::size)
+                .orElse(0);
+    }
+
+    private Flux<BigDecimal> getChannelValues(char id) {
+        return arguments.filter(arg -> arg.contains(id)).map(arg -> arg.get(id));
     }
 
 }

@@ -7,23 +7,19 @@ import java.math.BigDecimal;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Arrays;
 import java.util.Map;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
-public class ParametersSupplier implements Supplier<Parameters> {
+public class ParameterLoader {
 
-    private final String path;
-
-    @Override
-    public Parameters get() {
+    public Parameters load(String path) {
         String content = ContentLoader.loadContentFromClasspath(path);
         return new Parameters(toMap(content));
     }
 
     private static Map<Character, BigDecimal> toMap(String content) {
         return Arrays.stream(content.split(System.lineSeparator()))
-                .map(ParametersSupplier::toEntry)
+                .map(ParameterLoader::toEntry)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 

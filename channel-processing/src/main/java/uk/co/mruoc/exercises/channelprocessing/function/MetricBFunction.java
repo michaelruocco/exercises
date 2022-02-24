@@ -13,6 +13,6 @@ public class MetricBFunction implements ChannelFunction {
     public Arguments apply(Parameters parameters, Arguments arguments) {
         Arguments Y = f1.apply(parameters, arguments);
         Arguments A = f3.apply(parameters, arguments);
-        return f2.apply(parameters, Arguments.zip(Y, A));
+        return f2.apply(parameters, Arguments.combine(Y, A));
     }
 }

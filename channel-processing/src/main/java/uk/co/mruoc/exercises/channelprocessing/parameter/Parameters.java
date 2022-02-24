@@ -16,4 +16,8 @@ public class Parameters {
                 .orElseThrow(() -> new ParameterNotFoundException(id));
     }
 
+    public int size() {
+        return values.size();
+    }
+
 }
