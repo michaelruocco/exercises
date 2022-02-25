@@ -11,7 +11,7 @@ import static uk.co.mruoc.exercises.channelprocessing.function.MathConstants.CON
 
 @RequiredArgsConstructor
 @Slf4j
-public class ConstantDividendDivide implements ChannelFunction  {
+public class DivideConstantDividend implements ChannelFunction  {
 
     private final BigDecimal dividend;
     private final char divisorId;

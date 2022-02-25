@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 
 @RequiredArgsConstructor
 @Slf4j
-public class Sum implements ChannelFunction  {
+public class Add implements ChannelFunction  {
 
     private final char inId1;
     private final char inId2;

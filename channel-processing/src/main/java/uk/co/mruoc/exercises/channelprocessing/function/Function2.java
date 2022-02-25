@@ -5,38 +5,21 @@ import lombok.extern.slf4j.Slf4j;
 import uk.co.mruoc.exercises.channelprocessing.Arguments;
 import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
 
-import java.math.BigDecimal;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
-
-import static uk.co.mruoc.exercises.channelprocessing.function.MathConstants.CONTEXT;
-
 @RequiredArgsConstructor
 @Slf4j
 public class Function2 implements ChannelFunction {
 
-    private final Sum sum = new Sum('A', 'Y', 'B');
-    private final AtomicInteger count;
-    private final AtomicReference<BigDecimal> total;
+    private final Add add;
+    private final Mean mean;
 
     public Function2() {
-        this(new AtomicInteger(), new AtomicReference<>(BigDecimal.ZERO));
+        this(new Add('A', 'Y', 'B'), new Mean('B', 'b'));
     }
 
     @Override
     public Arguments apply(Parameters parameters, Arguments arguments) {
-        BigDecimal b = toMean(sum.apply(parameters, arguments));
-        arguments.set('b', b);
-        return arguments;
-    }
-
-    private BigDecimal toMean(Arguments arguments) {
-        BigDecimal B = arguments.get('B');
-        BigDecimal t = total.accumulateAndGet(B, BigDecimal::add);
-        BigDecimal c = BigDecimal.valueOf(count.incrementAndGet());
-        BigDecimal mean = t.divide(c, CONTEXT);
-        log.debug("b=mean(B) {}={}/{}", mean, t, c);
-        return mean;
+        Arguments sumArgs = add.apply(parameters, arguments);
+        return mean.apply(parameters, sumArgs);
     }
 
 }

@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SumTest {
+class AddTest {
 
     private static final char IN_ID_1 = 'A';
     private static final char IN_ID_2 = 'B';
@@ -19,7 +19,7 @@ class SumTest {
         Arguments inputs = new Arguments();
         inputs.set(IN_ID_1, new BigDecimal("2"));
         inputs.set(IN_ID_2, new BigDecimal("3"));
-        ChannelFunction function = new Sum(IN_ID_1, IN_ID_2, OUT_ID);
+        ChannelFunction function = new Add(IN_ID_1, IN_ID_2, OUT_ID);
 
         Arguments outputs = function.apply(new Parameters(), inputs);
 

@@ -18,7 +18,7 @@ class ConstantDividendDivideTest {
     void shouldCalculateSum() {
         Arguments inputs = new Arguments();
         inputs.set(DIVISOR_ID, new BigDecimal("5"));
-        ChannelFunction function = new ConstantDividendDivide(DIVIDEND, DIVISOR_ID, RESULT_ID);
+        ChannelFunction function = new DivideConstantDividend(DIVIDEND, DIVISOR_ID, RESULT_ID);
 
         Arguments outputs = function.apply(new Parameters(), inputs);
 

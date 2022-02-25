@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import static java.math.BigDecimal.ONE;
 
 @Slf4j
-public class Function3 extends ConstantDividendDivide  {
+public class Function3 extends DivideConstantDividend {
 
     public Function3() {
         super(ONE, 'X', 'A');
