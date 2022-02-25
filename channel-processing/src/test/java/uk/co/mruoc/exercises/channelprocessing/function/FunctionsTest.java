@@ -21,7 +21,7 @@ class FunctionsTest {
     @ParameterizedTest
     @MethodSource("functionAndExpectedResult")
     void shouldCalculateExpectedValue(ChannelFunction function, char resultId, BigDecimal expectedResult) {
-        BigDecimal b = CHANNELS.getArguments()
+        BigDecimal b = CHANNELS.getVariables()
                 .map(args -> function.apply(PARAMETERS, args))
                 .map(args -> args.get(resultId))
                 .last()

@@ -16,7 +16,7 @@ public class Main {
         Parameters parameters = new ParameterLoader().load("parameters.txt");
         ChannelFunction metricB = new MetricBFunction();
 
-        channels.getArguments()
+        channels.getVariables()
                 .map(arg -> metricB.apply(parameters, arg))
                 .last()
                 .subscribe(arg -> log.info("b value is {}", arg.get('b')));

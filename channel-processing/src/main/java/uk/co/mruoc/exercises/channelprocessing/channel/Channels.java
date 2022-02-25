@@ -10,10 +10,10 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class Channels {
 
-    private final Flux<Variables> arguments;
+    private final Flux<Variables> variables;
 
-    public Flux<Variables> getArguments() {
-        return arguments;
+    public Flux<Variables> getVariables() {
+        return variables;
     }
 
     public Collection<BigDecimal> getValuesCollection(char id) {
@@ -21,14 +21,14 @@ public class Channels {
     }
 
     public int size() {
-        return arguments.next()
+        return variables.next()
                 .blockOptional()
                 .map(Variables::size)
                 .orElse(0);
     }
 
     public Flux<BigDecimal> getValues(char id) {
-        return arguments.filter(arg -> arg.contains(id)).map(arg -> arg.get(id));
+        return variables.filter(arg -> arg.contains(id)).map(arg -> arg.get(id));
     }
 
 }
