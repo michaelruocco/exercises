@@ -1,7 +1,7 @@
 package uk.co.mruoc.exercises.channelprocessing.function;
 
 import org.junit.jupiter.api.Test;
-import uk.co.mruoc.exercises.channelprocessing.Arguments;
+import uk.co.mruoc.exercises.channelprocessing.Variables;
 import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
 
 import java.math.BigDecimal;
@@ -16,12 +16,12 @@ class AddTest {
 
     @Test
     void shouldCalculateSum() {
-        Arguments inputs = new Arguments();
+        Variables inputs = new Variables();
         inputs.set(IN_ID_1, new BigDecimal("2"));
         inputs.set(IN_ID_2, new BigDecimal("3"));
         ChannelFunction function = new Add(IN_ID_1, IN_ID_2, OUT_ID);
 
-        Arguments outputs = function.apply(new Parameters(), inputs);
+        Variables outputs = function.apply(new Parameters(), inputs);
 
         assertThat(outputs.get(OUT_ID)).isEqualTo(new BigDecimal("5"));
     }

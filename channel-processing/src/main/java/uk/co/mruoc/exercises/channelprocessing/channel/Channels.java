@@ -2,7 +2,7 @@ package uk.co.mruoc.exercises.channelprocessing.channel;
 
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
-import uk.co.mruoc.exercises.channelprocessing.Arguments;
+import uk.co.mruoc.exercises.channelprocessing.Variables;
 
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -10,9 +10,9 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class Channels {
 
-    private final Flux<Arguments> arguments;
+    private final Flux<Variables> arguments;
 
-    public Flux<Arguments> getArguments() {
+    public Flux<Variables> getArguments() {
         return arguments;
     }
 
@@ -23,7 +23,7 @@ public class Channels {
     public int size() {
         return arguments.next()
                 .blockOptional()
-                .map(Arguments::size)
+                .map(Variables::size)
                 .orElse(0);
     }
 

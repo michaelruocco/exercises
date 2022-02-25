@@ -2,7 +2,7 @@ package uk.co.mruoc.exercises.channelprocessing.function;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import uk.co.mruoc.exercises.channelprocessing.Arguments;
+import uk.co.mruoc.exercises.channelprocessing.Variables;
 import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
 
 import java.math.BigDecimal;
@@ -18,12 +18,12 @@ public class DivideConstantDividend implements ChannelFunction  {
     private final char resultId;
 
     @Override
-    public Arguments apply(Parameters parameters, Arguments arguments) {
-        BigDecimal divisor = arguments.get(divisorId);
+    public Variables apply(Parameters parameters, Variables variables) {
+        BigDecimal divisor = variables.get(divisorId);
         BigDecimal result = dividend.divide(divisor, CONTEXT);
-        arguments.set(resultId, result);
+        variables.set(resultId, result);
         log.debug("{}={}/{} {}={}/{}", result, dividend, divisorId, result, dividend, divisor);
-        return arguments;
+        return variables;
     }
 
 }

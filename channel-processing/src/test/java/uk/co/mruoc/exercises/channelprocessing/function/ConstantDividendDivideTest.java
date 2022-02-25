@@ -1,7 +1,7 @@
 package uk.co.mruoc.exercises.channelprocessing.function;
 
 import org.junit.jupiter.api.Test;
-import uk.co.mruoc.exercises.channelprocessing.Arguments;
+import uk.co.mruoc.exercises.channelprocessing.Variables;
 import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
 
 import java.math.BigDecimal;
@@ -16,11 +16,11 @@ class ConstantDividendDivideTest {
 
     @Test
     void shouldCalculateSum() {
-        Arguments inputs = new Arguments();
+        Variables inputs = new Variables();
         inputs.set(DIVISOR_ID, new BigDecimal("5"));
         ChannelFunction function = new DivideConstantDividend(DIVIDEND, DIVISOR_ID, RESULT_ID);
 
-        Arguments outputs = function.apply(new Parameters(), inputs);
+        Variables outputs = function.apply(new Parameters(), inputs);
 
         assertThat(outputs.get(RESULT_ID)).isEqualTo(new BigDecimal("2"));
     }

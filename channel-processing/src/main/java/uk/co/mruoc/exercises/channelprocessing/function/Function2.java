@@ -2,7 +2,7 @@ package uk.co.mruoc.exercises.channelprocessing.function;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import uk.co.mruoc.exercises.channelprocessing.Arguments;
+import uk.co.mruoc.exercises.channelprocessing.Variables;
 import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
 
 @RequiredArgsConstructor
@@ -17,8 +17,8 @@ public class Function2 implements ChannelFunction {
     }
 
     @Override
-    public Arguments apply(Parameters parameters, Arguments arguments) {
-        Arguments sumArgs = add.apply(parameters, arguments);
+    public Variables apply(Parameters parameters, Variables variables) {
+        Variables sumArgs = add.apply(parameters, variables);
         return mean.apply(parameters, sumArgs);
     }
 

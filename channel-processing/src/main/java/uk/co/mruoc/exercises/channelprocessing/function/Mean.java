@@ -2,7 +2,7 @@ package uk.co.mruoc.exercises.channelprocessing.function;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import uk.co.mruoc.exercises.channelprocessing.Arguments;
+import uk.co.mruoc.exercises.channelprocessing.Variables;
 import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
 
 import java.math.BigDecimal;
@@ -26,15 +26,15 @@ public class Mean implements ChannelFunction {
     }
 
     @Override
-    public Arguments apply(Parameters parameters, Arguments arguments) {
-        BigDecimal inValue = arguments.get(inId);
+    public Variables apply(Parameters parameters, Variables variables) {
+        BigDecimal inValue = variables.get(inId);
         log.debug("calculating mean with {} value {}", inId, inValue);
         BigDecimal t = total.accumulateAndGet(inValue, BigDecimal::add);
         BigDecimal c = BigDecimal.valueOf(count.incrementAndGet());
         BigDecimal mean = t.divide(c, CONTEXT);
         log.debug("{}=mean({}) {}={}/{}", outId, inId, mean, t, c);
-        arguments.set(outId, mean);
-        return arguments;
+        variables.set(outId, mean);
+        return variables;
     }
 
 }

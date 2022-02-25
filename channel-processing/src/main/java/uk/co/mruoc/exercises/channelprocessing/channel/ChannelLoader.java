@@ -3,7 +3,7 @@ package uk.co.mruoc.exercises.channelprocessing.channel;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import reactor.core.publisher.Flux;
-import uk.co.mruoc.exercises.channelprocessing.Arguments;
+import uk.co.mruoc.exercises.channelprocessing.Variables;
 import uk.co.mruoc.file.content.ContentLoader;
 
 import java.math.BigDecimal;
@@ -18,8 +18,8 @@ public class ChannelLoader {
         return new Channels(toArguments(content));
     }
 
-    private static Flux<Arguments> toArguments(String content) {
-        List<Arguments> collection = new ArrayList<>();
+    private static Flux<Variables> toArguments(String content) {
+        List<Variables> collection = new ArrayList<>();
         Flux.fromArray(content.split(System.lineSeparator()))
                 .map(StringUtils::deleteWhitespace)
                 .map(line -> line.split(","))
@@ -27,7 +27,7 @@ public class ChannelLoader {
         return Flux.fromIterable(collection);
     }
 
-    private static void populate(String[] line, List<Arguments> collection) {
+    private static void populate(String[] line, List<Variables> collection) {
         char id = line[0].trim().charAt(0);
         log.debug("populating channel {} with {} values", id, line.length - 1);
         for (int i = 0; i < line.length - 1; i++) {
@@ -35,7 +35,7 @@ public class ChannelLoader {
             if (i < collection.size()) {
                 collection.get(i).set(id, value);
             } else {
-                collection.add(new Arguments(id, value));
+                collection.add(new Variables(id, value));
             }
         }
         log.debug("argument collection size {} after populating channel {}", collection.size(), id);

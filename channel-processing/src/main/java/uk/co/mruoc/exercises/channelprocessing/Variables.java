@@ -14,15 +14,15 @@ import java.util.Map;
 @RequiredArgsConstructor
 @Slf4j
 @Data
-public class Arguments {
+public class Variables {
 
     private final Map<Character, BigDecimal> values;
 
-    public Arguments() {
+    public Variables() {
         this(new HashMap<>());
     }
 
-    public Arguments(Character id, BigDecimal value) {
+    public Variables(Character id, BigDecimal value) {
         this(new HashMap<>(Map.of(id, value)));
     }
 
@@ -42,14 +42,14 @@ public class Arguments {
         return values.size();
     }
 
-    public static Arguments combine(Arguments args1, Arguments args2) {
+    public static Variables combine(Variables args1, Variables args2) {
         MapDifference<Character, BigDecimal> diff = Maps.difference(args1.values, args2.values);
         Map<Character, ValueDifference<BigDecimal>> entriesDiffering = diff.entriesDiffering();
         if (!entriesDiffering.isEmpty()) {
-            throw new IllegalArgumentException(String.format("arguments cannot be zipped as they have differing entries %s", entriesDiffering));
+            throw new IllegalArgumentException(String.format("variables cannot be zipped as they have differing entries %s", entriesDiffering));
         }
         Map<Character, BigDecimal> copy = new HashMap<>(args1.values);
         copy.putAll(args2.values);
-        return new Arguments(copy);
+        return new Variables(copy);
     }
 }

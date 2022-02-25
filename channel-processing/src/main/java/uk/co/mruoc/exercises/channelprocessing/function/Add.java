@@ -2,7 +2,7 @@ package uk.co.mruoc.exercises.channelprocessing.function;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import uk.co.mruoc.exercises.channelprocessing.Arguments;
+import uk.co.mruoc.exercises.channelprocessing.Variables;
 import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
 
 import java.math.BigDecimal;
@@ -16,13 +16,13 @@ public class Add implements ChannelFunction  {
     private final char outId;
 
     @Override
-    public Arguments apply(Parameters parameters, Arguments arguments) {
-        BigDecimal inValue1 = arguments.get(inId1);
-        BigDecimal inValue2 = arguments.get(inId2);
+    public Variables apply(Parameters parameters, Variables variables) {
+        BigDecimal inValue1 = variables.get(inId1);
+        BigDecimal inValue2 = variables.get(inId2);
         BigDecimal outValue = inValue1.add(inValue2);
-        arguments.set(outId, outValue);
+        variables.set(outId, outValue);
         log.debug("{}={}+{} {}={}+{}", outId, inId1, inId2, outValue, inValue1, inValue2);
-        return arguments;
+        return variables;
     }
 
 }
