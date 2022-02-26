@@ -10,7 +10,6 @@ public class ChannelCFunction implements ChannelFunction {
 
     @Override
     public Variables apply(Parameters parameters, Variables variables) {
-        Variables b = fb.apply(parameters, variables);
-        return f4.apply(parameters, b);
+        return f4.apply(parameters, fb.apply(parameters, variables));
     }
 }

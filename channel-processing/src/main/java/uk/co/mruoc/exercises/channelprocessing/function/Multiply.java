@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 @RequiredArgsConstructor
 @Slf4j
-public class Add implements ChannelFunction {
+public class Multiply implements ChannelFunction {
 
     private final InputSpec inSpec1;
     private final InputSpec inSpec2;
@@ -20,24 +20,24 @@ public class Add implements ChannelFunction {
     public Variables apply(Parameters parameters, Variables variables) {
         BigDecimal in1 = inSpec1.select(parameters, variables);
         BigDecimal in2 = inSpec2.select(parameters, variables);
-        BigDecimal result = in1.add(in2);
+        BigDecimal result = in1.multiply(in2);
         variables.set(resultId, result);
         log(result, in1, in2);
         return variables;
     }
 
-    private void log(BigDecimal result, BigDecimal dividend, BigDecimal divisor) {
+    private void log(BigDecimal result, BigDecimal in1, BigDecimal in2) {
         if (log.isDebugEnabled()) {
-            log.debug("{} {}", buildAlgorithmString(), toCalculation(result, dividend, divisor));
+            log.debug("{} {}", buildAlgorithmString(), toCalculation(result, in1, in2));
         }
     }
 
     private String buildAlgorithmString() {
-        return String.format("%s=%s+%s", resultId, inSpec1.getId(), inSpec2.getId());
+        return String.format("%s=%s*%s", resultId, inSpec1.getId(), inSpec2.getId());
     }
 
     private static String toCalculation(BigDecimal result, BigDecimal in1, BigDecimal in2) {
-        return String.format("%s=%s+%s", result, in1, in2);
+        return String.format("%s=%s*%s", result, in1, in2);
     }
 
 }

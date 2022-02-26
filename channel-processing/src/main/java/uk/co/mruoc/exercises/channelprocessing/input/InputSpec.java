@@ -1,21 +1,25 @@
 package uk.co.mruoc.exercises.channelprocessing.input;
 
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import uk.co.mruoc.exercises.channelprocessing.Variables;
+import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
 
-@RequiredArgsConstructor
-@Data
-public class InputSpec {
+import java.math.BigDecimal;
 
-    private final InputType type;
-    private final char id;
+public interface InputSpec {
 
-    public boolean isVariable() {
-        return type == InputType.VARIABLE;
+    String getId();
+
+    BigDecimal select(Parameters parameters, Variables variables);
+
+    static InputSpec variable(char id) {
+        return new VariableInputSpec(id);
     }
 
-    protected enum InputType {
-        PARAMETER,
-        VARIABLE;
+    static InputSpec parameter(char id) {
+        return new ParameterInputSpec(id);
+    }
+
+    static InputSpec constant(BigDecimal value) {
+        return new ConstantInputSpec(value);
     }
 }

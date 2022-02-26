@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import uk.co.mruoc.exercises.channelprocessing.Variables;
 import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
 
+import static uk.co.mruoc.exercises.channelprocessing.input.InputSpec.variable;
+
 @RequiredArgsConstructor
 @Slf4j
 public class Function2 implements ChannelFunction {
@@ -13,13 +15,13 @@ public class Function2 implements ChannelFunction {
     private final Mean mean;
 
     public Function2() {
-        this(new Add('A', 'Y', 'B'), new Mean('B', 'b'));
+        this(new Add(variable('A'), variable('Y'), 'B'),
+                new Mean(variable('B'), 'b'));
     }
 
     @Override
     public Variables apply(Parameters parameters, Variables variables) {
-        Variables sumArgs = add.apply(parameters, variables);
-        return mean.apply(parameters, sumArgs);
+        return mean.apply(parameters, add.apply(parameters, variables));
     }
 
 }

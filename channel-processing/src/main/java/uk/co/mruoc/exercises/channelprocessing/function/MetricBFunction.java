@@ -11,8 +11,8 @@ public class MetricBFunction implements ChannelFunction {
 
     @Override
     public Variables apply(Parameters parameters, Variables variables) {
-        Variables Y = f1.apply(parameters, variables);
-        Variables A = f3.apply(parameters, variables);
-        return f2.apply(parameters, Variables.combine(Y, A));
+        Variables out1 = f1.apply(parameters, variables);
+        Variables out3 = f3.apply(parameters, variables);
+        return f2.apply(parameters, Variables.combine(out1, out3));
     }
 }

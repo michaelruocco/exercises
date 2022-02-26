@@ -4,22 +4,20 @@ import com.google.common.collect.MapDifference;
 import com.google.common.collect.MapDifference.ValueDifference;
 import com.google.common.collect.Maps;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
-@RequiredArgsConstructor
 @Slf4j
 @Data
 public class Variables {
 
     private final Map<Character, BigDecimal> values;
 
-    public Variables() {
-        this(new HashMap<>());
+    public Variables(Map<Character, BigDecimal> values) {
+        this.values = new HashMap<>(values);
     }
 
     public Variables(Character id, BigDecimal value) {
