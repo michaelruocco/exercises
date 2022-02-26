@@ -28,7 +28,7 @@ public class Multiply implements ChannelFunction {
 
     private void log(BigDecimal result, BigDecimal in1, BigDecimal in2) {
         if (log.isDebugEnabled()) {
-            log.debug("{} {}", buildAlgorithmString(), toCalculation(result, in1, in2));
+            log.debug("{} - {}", buildAlgorithmString(), toCalculation(result, in1, in2));
         }
     }
 

@@ -30,7 +30,7 @@ public class Divide implements ChannelFunction  {
 
     private void log(BigDecimal result, BigDecimal dividend, BigDecimal divisor) {
         if (log.isDebugEnabled()) {
-            log.debug("{} {}", buildAlgorithmString(), toCalculation(result, dividend, divisor));
+            log.debug("{} - {}", buildAlgorithmString(), toCalculation(result, dividend, divisor));
         }
     }
 
