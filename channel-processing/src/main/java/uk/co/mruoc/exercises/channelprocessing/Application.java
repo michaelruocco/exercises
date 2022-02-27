@@ -18,7 +18,7 @@ public class Application {
     public static void main(String[] args) {
         ApplicationArgs appArgs = new ApplicationArgs();
         JCommander.newBuilder().addObject(appArgs).build().parse(args);
-        log.info("running application with arguments {}", appArgs);
+        log.debug("running application with arguments {}", appArgs);
         UnaryOperator<String> fileSystemLoader = ContentLoader::loadContentFromFileSystem;
         Channels channels = new ChannelLoader(fileSystemLoader).load(appArgs.getChannelsPath());
         Parameters parameters = new ParameterLoader(fileSystemLoader).load(appArgs.getParametersPath());

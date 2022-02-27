@@ -9,8 +9,6 @@ import static uk.org.webcompere.systemstubs.SystemStubs.tapSystemErr;
 
 class ApplicationTest {
 
-    private static final String CURRENT_DIRECTORY = getCurrentDirectory();
-
     @Test
     void shouldRunApplication() throws Exception {
         String[] args = new String[]{
@@ -26,7 +24,7 @@ class ApplicationTest {
     }
 
     private static String toTestDirectory(String fileName) {
-        return String.format("%s/src/test/resources/%s", CURRENT_DIRECTORY, fileName);
+        return String.format("./src/test/resources/%s", fileName);
     }
 
     private static String getCurrentDirectory() {

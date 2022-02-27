@@ -46,7 +46,7 @@ jobs:
         run: ./gradlew clean spotlessCheck assemble
 
       - name: Test
-        run: ./gradlew test
+        run: ./gradlew test loadTest
 
       - name: Sonar Analysis
         env:

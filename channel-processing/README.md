@@ -68,7 +68,3 @@ e.g.
     -f ./src/main/resources/functions-metric-b.csv \
     -o b"
 ```
-
-## TODO
-
-*   Load / Volume test

@@ -14,18 +14,18 @@
 
 This repo contains a collection of different exercises that I have had a go at at some point or another.
 
-* [Smallest Missing Positive Integer](smallest-missing-positive-integer/README.md)
-* [First Unique Character](first-unique-character/README.md)
-* [Instruction Processing](instruction-processing/README.md)
-* [Matrix Transpose](matrix-transpose/README.md)
-* [Area of Circle](area-of-circle/README.md)
-* [Palindrome Application](palindrome-app/README.md)
-* [Reactive Batch Processor](reactive-batch-processor/README.md)
-* [Cake Factory](cake-factory/README.md)
-* [Binary Gap](binary-gap/README.md)
-* [Cron Parser](cron-parser/README.md)
-* [Naughts and Crosses](naughts-and-crosses/README.md)
-* [Channel Processing](channel-processing/README.md)
+*   [Smallest Missing Positive Integer](smallest-missing-positive-integer/README.md)
+*   [First Unique Character](first-unique-character/README.md)
+*   [Instruction Processing](instruction-processing/README.md)
+*   [Matrix Transpose](matrix-transpose/README.md)
+*   [Area of Circle](area-of-circle/README.md)
+*   [Palindrome Application](palindrome-app/README.md)
+*   [Reactive Batch Processor](reactive-batch-processor/README.md)
+*   [Cake Factory](cake-factory/README.md)
+*   [Binary Gap](binary-gap/README.md)
+*   [Cron Parser](cron-parser/README.md)
+*   [Naughts and Crosses](naughts-and-crosses/README.md)
+*   [Channel Processing](channel-processing/README.md)
 
 ## Useful Commands
 
