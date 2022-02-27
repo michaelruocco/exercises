@@ -32,7 +32,7 @@ class ReactiveBatchProcessorTest {
 
         waitForAllMessagesToBeProcessed();
 
-        assertThat(handler.threadNames().size()).isEqualTo(THREADS);
+        assertThat(handler.threadNames()).hasSize(THREADS);
     }
 
     private void waitForAllMessagesToBeProcessed() {

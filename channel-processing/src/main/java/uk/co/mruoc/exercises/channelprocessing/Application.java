@@ -13,10 +13,10 @@ import uk.co.mruoc.file.content.ContentLoader;
 import java.util.function.UnaryOperator;
 
 @Slf4j
-public class Main {
+public class Application {
 
     public static void main(String[] args) {
-        AppArgs appArgs = new AppArgs();
+        ApplicationArgs appArgs = new ApplicationArgs();
         JCommander.newBuilder().addObject(appArgs).build().parse(args);
         log.info("running application with arguments {}", appArgs);
         UnaryOperator<String> fileSystemLoader = ContentLoader::loadContentFromFileSystem;

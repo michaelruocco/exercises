@@ -72,6 +72,4 @@ e.g.
 ## TODO
 
 * Make variables immutable
-* Add unit tests for function loader and input spec loader
-* Add main class integration test
 * Load / Volume test

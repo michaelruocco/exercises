@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Data
-public class AppArgs {
+public class ApplicationArgs {
 
     @Parameter(names = {"-c", "-channels-path"}, description = "Path to channels file to use", required = true)
     private String channelsPath;

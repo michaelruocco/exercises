@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ChannelLoaderTest {
 
-    private static final String TEST_CHANNELS_PATH = "test-channels.txt";
+    private static final String TEST_CHANNELS_PATH = "test-different-size-channels.txt";
 
     private final ChannelLoader loader = new ChannelLoader();
 

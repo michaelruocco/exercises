@@ -31,12 +31,14 @@ public class FunctionLoader {
     public ChannelFunction load(String path) {
         String content = contentLoader.apply(path);
         Collection<ChannelFunction> functions = Flux.fromArray(content.split(System.lineSeparator()))
-                .map(StringUtils::deleteWhitespace)
-                .map(line -> line.split(","))
                 .map(this::toFunction)
                 .collectList()
                 .block();
         return new CompositeFunction(functions);
+    }
+
+    public ChannelFunction toFunction(String line) {
+        return toFunction(StringUtils.deleteWhitespace(line).split(","));
     }
 
     private ChannelFunction toFunction(String[] line) {

@@ -1,0 +1,3 @@
+combine,arithmetic~E=a*X+b~param(a)~channel(X)~param(b),arithmetic~F=1/Y~constant(1)~channel(Y)
+single,arithmetic~C=E*F-Z~channel(E)~channel(F)~channel(Z)
+single,mean~b=mean(C)~channel(C)

@@ -1,10 +1,12 @@
 package uk.co.mruoc.exercises.naughtsandcrosses;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Location implements Comparable<Location> {
 
     private static final String FREE_TOKEN = "-";
