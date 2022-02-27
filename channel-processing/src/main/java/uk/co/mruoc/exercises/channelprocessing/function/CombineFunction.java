@@ -1,19 +1,29 @@
 package uk.co.mruoc.exercises.channelprocessing.function;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import uk.co.mruoc.exercises.channelprocessing.Variables;
 import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 @RequiredArgsConstructor
+@Slf4j
 public class CombineFunction implements ChannelFunction {
 
-    private final ChannelFunction f1;
-    private final ChannelFunction f2;
+    private final Collection<ChannelFunction> functions;
+
+    public CombineFunction(ChannelFunction... functions) {
+        this(Arrays.asList(functions));
+    }
 
     @Override
     public Variables apply(Parameters parameters, Variables variables) {
-        Variables out1 = f1.apply(parameters, variables);
-        Variables out2 = f2.apply(parameters, variables);
-        return Variables.combine(out1, out2);
+        Variables combined = variables.copy();
+        for (ChannelFunction function : functions) {
+            combined = function.apply(parameters, combined);
+        }
+        return combined;
     }
 }

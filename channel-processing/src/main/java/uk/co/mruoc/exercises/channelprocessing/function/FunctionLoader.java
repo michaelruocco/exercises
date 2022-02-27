@@ -12,6 +12,7 @@ import uk.co.mruoc.file.content.ContentLoader;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.function.UnaryOperator;
+import java.util.stream.Collectors;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -53,10 +54,9 @@ public class FunctionLoader {
     }
 
     private ChannelFunction toCombineFunction(String[] specs) {
-        return new CombineFunction(
-                toSingleFunction(specs[0]),
-                toSingleFunction(specs[1])
-        );
+        return new CombineFunction(Arrays.stream(specs)
+                .map(this::toSingleFunction)
+                .collect(Collectors.toList()));
     }
 
     private ChannelFunction toSingleFunction(String spec) {

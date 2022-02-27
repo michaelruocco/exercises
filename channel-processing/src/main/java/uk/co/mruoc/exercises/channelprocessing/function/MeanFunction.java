@@ -31,8 +31,7 @@ public class MeanFunction implements ChannelFunction {
         BigDecimal sum = runningSum.accumulateAndGet(in, BigDecimal::add);
         int count = runningCount.incrementAndGet();
         BigDecimal mean = Operations.divide(sum, BigDecimal.valueOf(count));
-        variables.set(target, mean);
-        return variables;
+        return variables.set(target, mean);
     }
 
     private void logExpression(BigDecimal in) {

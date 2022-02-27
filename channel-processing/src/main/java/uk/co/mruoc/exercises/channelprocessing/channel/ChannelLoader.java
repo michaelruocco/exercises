@@ -42,7 +42,8 @@ public class ChannelLoader {
         for (int i = 0; i < line.length - 1; i++) {
             BigDecimal value = new BigDecimal(line[i + 1].trim());
             if (i < collection.size()) {
-                collection.get(i).set(id, value);
+                Variables variables = collection.get(i);
+                collection.set(i, variables.set(id, value));
             } else {
                 collection.add(new Variables(id, value));
             }

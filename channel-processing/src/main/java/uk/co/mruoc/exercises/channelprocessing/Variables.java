@@ -32,22 +32,30 @@ public class Variables {
         return values.get(id);
     }
 
-    public void set(Character id, BigDecimal value) {
-        values.put(id, value);
+    public Variables set(Character id, BigDecimal value) {
+        Map<Character, BigDecimal> copy = new HashMap<>(values);
+        copy.put(id, value);
+        return new Variables(copy);
     }
 
     public int size() {
         return values.size();
     }
 
-    public static Variables combine(Variables args1, Variables args2) {
-        MapDifference<Character, BigDecimal> diff = Maps.difference(args1.values, args2.values);
+    public Variables setAll(Variables other) {
+        MapDifference<Character, BigDecimal> diff = Maps.difference(this.values, other.values);
         Map<Character, ValueDifference<BigDecimal>> entriesDiffering = diff.entriesDiffering();
         if (!entriesDiffering.isEmpty()) {
             throw new IllegalArgumentException(String.format("variables cannot be zipped as they have differing entries %s", entriesDiffering));
         }
-        Map<Character, BigDecimal> copy = new HashMap<>(args1.values);
-        copy.putAll(args2.values);
+        Map<Character, BigDecimal> copy = new HashMap<>(this.values);
+        copy.putAll(other.values);
         return new Variables(copy);
     }
+
+    public Variables copy() {
+        return new Variables(new HashMap<>(this.values));
+
+    }
+
 }

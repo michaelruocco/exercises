@@ -25,7 +25,6 @@ public class ArithmeticFunction implements ChannelFunction {
         log.debug(spec.getExpression());
         StaticVariableSet<BigDecimal> variables = spec.selectInputs(parameters, inputs);
         BigDecimal result = evaluator.evaluate(spec.getExpressionValue(), variables);
-        inputs.set(spec.getTarget(), result);
-        return inputs;
+        return inputs.set(spec.getTarget(), result);
     }
 }

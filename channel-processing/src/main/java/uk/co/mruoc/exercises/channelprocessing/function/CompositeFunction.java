@@ -19,7 +19,7 @@ public class CompositeFunction implements ChannelFunction {
     @Override
     public Variables apply(Parameters parameters, Variables variables) {
         for (ChannelFunction function : functions) {
-            function.apply(parameters, variables);
+            variables = function.apply(parameters, variables);
         }
         return variables;
     }

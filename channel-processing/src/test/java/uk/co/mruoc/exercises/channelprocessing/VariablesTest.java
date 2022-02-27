@@ -14,7 +14,7 @@ class VariablesTest {
         Variables args1 = new Variables('A', BigDecimal.ZERO);
         Variables args2 = new Variables('A', BigDecimal.ONE);
 
-        Throwable error = catchThrowable(() -> Variables.combine(args1, args2));
+        Throwable error = catchThrowable(() -> args1.setAll(args2));
 
         assertThat(error)
                 .isInstanceOf(IllegalArgumentException.class)
@@ -26,7 +26,7 @@ class VariablesTest {
         Variables args1 = new Variables('B', BigDecimal.ONE);
         Variables args2 = new Variables('B', BigDecimal.ONE);
 
-        Variables combined = Variables.combine(args1, args2);
+        Variables combined = args1.setAll(args2);
 
         assertThat(combined.size()).isEqualTo(1);
         assertThat(combined.get('B')).isEqualTo(BigDecimal.ONE);
@@ -37,7 +37,7 @@ class VariablesTest {
         Variables args1 = new Variables('C', BigDecimal.ONE);
         Variables args2 = new Variables('D', BigDecimal.ZERO);
 
-        Variables combined = Variables.combine(args1, args2);
+        Variables combined = args1.setAll(args2);
 
         assertThat(combined.size()).isEqualTo(2);
         assertThat(combined.get('C')).isEqualTo(BigDecimal.ONE);
