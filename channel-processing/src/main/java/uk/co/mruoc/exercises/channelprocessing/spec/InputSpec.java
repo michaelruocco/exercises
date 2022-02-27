@@ -1,4 +1,4 @@
-package uk.co.mruoc.exercises.channelprocessing.input;
+package uk.co.mruoc.exercises.channelprocessing.spec;
 
 import uk.co.mruoc.exercises.channelprocessing.Variables;
 import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;

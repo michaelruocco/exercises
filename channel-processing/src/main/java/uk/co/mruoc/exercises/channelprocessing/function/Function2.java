@@ -3,21 +3,21 @@ package uk.co.mruoc.exercises.channelprocessing.function;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.co.mruoc.exercises.channelprocessing.Variables;
+import uk.co.mruoc.exercises.channelprocessing.spec.FunctionSpec;
 import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
 
-import static uk.co.mruoc.exercises.channelprocessing.operation.OperationFactory.operation;
-import static uk.co.mruoc.exercises.channelprocessing.input.InputSpec.variable;
+import static uk.co.mruoc.exercises.channelprocessing.spec.InputSpec.variable;
 
 @RequiredArgsConstructor
 @Slf4j
 public class Function2 implements ChannelFunction {
 
-    private final Add add;
-    private final Mean mean;
+    private final ChannelFunction add;
+    private final ChannelFunction mean;
 
     public Function2() {
-        this(new Add(variable('A'), variable('Y'), operation('+'), 'B'),
-                new Mean(variable('B'), 'b'));
+        this(new ArithmeticFunction(new FunctionSpec("B=A+Y", variable('A'), variable('Y'))),
+                new MeanFunction(variable('B'), 'b'));
     }
 
     @Override
