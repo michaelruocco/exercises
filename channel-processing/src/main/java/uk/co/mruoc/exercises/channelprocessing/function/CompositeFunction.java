@@ -23,4 +23,5 @@ public class CompositeFunction implements ChannelFunction {
         }
         return variables;
     }
+
 }

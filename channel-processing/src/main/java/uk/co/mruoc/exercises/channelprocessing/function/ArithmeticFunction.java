@@ -28,5 +28,4 @@ public class ArithmeticFunction implements ChannelFunction {
         inputs.set(spec.getTarget(), result);
         return inputs;
     }
-
 }

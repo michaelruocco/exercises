@@ -1,3 +1,0 @@
-Combine,ArithmeticFunction~m*X+c~param(m)~channel(X)~param(c),ArithmeticFunction~A=1/X~channel(A)~constant(1)~channel(X)
-Single,ArithmeticFunction~B=A+Y~channel(B)~channel(A)~channel(Y)
-Single,MeanFunction~b=mean(B)~metric(b)~channel(A)

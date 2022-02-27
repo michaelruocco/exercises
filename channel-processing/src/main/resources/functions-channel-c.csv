@@ -1,0 +1,4 @@
+combine,arithmetic~Y=m*X+c~param(m)~channel(X)~param(c),arithmetic~A=1/X~constant(1)~channel(X)
+single,arithmetic~B=A+Y~channel(A)~channel(Y)
+single,mean~b=mean(B)~channel(B)
+single,arithmetic~C=X+b~channel(X)~metric(b)

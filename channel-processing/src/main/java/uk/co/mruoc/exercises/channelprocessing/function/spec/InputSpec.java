@@ -11,24 +11,4 @@ public interface InputSpec {
 
     BigDecimal select(Parameters parameters, Variables variables);
 
-    static InputSpec channel(char id) {
-        return new VariableInputSpec(id);
-    }
-
-    static InputSpec metric(char id) {
-        return new VariableInputSpec(id);
-    }
-
-    static InputSpec parameter(char id) {
-        return new ParameterInputSpec(id);
-    }
-
-    static InputSpec constant(double value) {
-        return constant(BigDecimal.valueOf(value));
-    }
-
-    static InputSpec constant(BigDecimal value) {
-        return new ConstantInputSpec(value);
-    }
-
 }

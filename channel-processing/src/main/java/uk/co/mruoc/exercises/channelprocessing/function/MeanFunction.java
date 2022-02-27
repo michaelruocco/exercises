@@ -27,7 +27,7 @@ public class MeanFunction implements ChannelFunction {
     @Override
     public Variables apply(Parameters parameters, Variables variables) {
         BigDecimal in = inSpec.select(parameters, variables);
-        logAlgorithm(in);
+        logExpression(in);
         BigDecimal sum = runningSum.accumulateAndGet(in, BigDecimal::add);
         int count = runningCount.incrementAndGet();
         BigDecimal mean = Operations.divide(sum, BigDecimal.valueOf(count));
@@ -35,12 +35,8 @@ public class MeanFunction implements ChannelFunction {
         return variables;
     }
 
-    private void logAlgorithm(BigDecimal in) {
-        log.debug("{}", buildAlgorithm(in));
-    }
-
-    private String buildAlgorithm(BigDecimal in) {
-        return String.format("%s=mean(%s) %s=%s", target, inSpec.getId(), inSpec.getId(), in);
+    private void logExpression(BigDecimal in) {
+        log.debug("{}=mean({}) {}={}", target, inSpec.getId(), inSpec.getId(), in);
     }
 
 }

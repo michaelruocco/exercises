@@ -15,25 +15,28 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class FunctionsTest {
 
+    private static final FunctionLoader FUNCTION_LOADER = new FunctionLoader();
     private static final Parameters PARAMETERS = new ParameterLoader().load("parameters.txt");
     private static final Channels CHANNELS = new ChannelLoader().load("channels.txt");
 
     @ParameterizedTest
     @MethodSource("functionAndExpectedResult")
-    void shouldCalculateExpectedValue(ChannelFunction function, char resultId, BigDecimal expectedResult) {
+    void shouldCalculateExpectedValue(ChannelFunction function, char resultId, String expectedResult) {
         BigDecimal b = CHANNELS.getVariables()
                 .map(args -> function.apply(PARAMETERS, args))
                 .map(args -> args.get(resultId))
                 .last()
                 .block();
 
-        assertThat(b).isEqualTo(expectedResult);
+        assertThat(b).isEqualTo(new BigDecimal(expectedResult));
     }
 
     private static Stream<Arguments> functionAndExpectedResult() {
         return Stream.of(
-                Arguments.of(new MetricBFunction(), 'b', new BigDecimal("6.26985216677700723479")),
-                Arguments.of(new ChannelCFunction(), 'C', new BigDecimal("6.60697481117588923479"))
+                Arguments.of(FUNCTION_LOADER.load("functions-metric-b.csv"), 'b', "6.26985216677700723479"),
+                Arguments.of(FUNCTION_LOADER.load("functions-channel-c.csv"), 'C', "6.60697481117588923479"),
+                Arguments.of(new MetricBFunction(), 'b', "6.26985216677700723479"),
+                Arguments.of(new ChannelCFunction(), 'C', "6.60697481117588923479")
         );
     }
 }

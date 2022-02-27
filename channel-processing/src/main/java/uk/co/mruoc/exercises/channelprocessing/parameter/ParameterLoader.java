@@ -7,13 +7,20 @@ import java.math.BigDecimal;
 import java.util.AbstractMap.SimpleEntry;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class ParameterLoader {
 
+    private final UnaryOperator<String> contentLoader;
+
+    public ParameterLoader() {
+        this(ContentLoader::loadContentFromClasspath);
+    }
+
     public Parameters load(String path) {
-        String content = ContentLoader.loadContentFromClasspath(path);
+        String content = contentLoader.apply(path);
         return new Parameters(toMap(content));
     }
 

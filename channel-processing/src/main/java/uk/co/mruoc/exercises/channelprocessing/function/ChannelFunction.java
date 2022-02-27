@@ -8,5 +8,4 @@ import java.util.function.BiFunction;
 public interface ChannelFunction extends BiFunction<Parameters, Variables, Variables> {
 
     // intentionally blank
-
 }

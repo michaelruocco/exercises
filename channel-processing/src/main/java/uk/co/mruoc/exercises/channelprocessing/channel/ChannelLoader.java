@@ -1,5 +1,6 @@
 package uk.co.mruoc.exercises.channelprocessing.channel;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import reactor.core.publisher.Flux;
@@ -9,12 +10,20 @@ import uk.co.mruoc.file.content.ContentLoader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.UnaryOperator;
 
+@RequiredArgsConstructor
 @Slf4j
 public class ChannelLoader {
 
+    private final UnaryOperator<String> contentLoader;
+
+    public ChannelLoader() {
+        this(ContentLoader::loadContentFromClasspath);
+    }
+
     public Channels load(String path) {
-        String content = ContentLoader.loadContentFromClasspath(path);
+        String content = contentLoader.apply(path);
         return new Channels(toArguments(content));
     }
 

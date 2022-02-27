@@ -8,9 +8,9 @@ import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static uk.co.mruoc.exercises.channelprocessing.function.spec.InputSpec.channel;
-import static uk.co.mruoc.exercises.channelprocessing.function.spec.InputSpec.constant;
-import static uk.co.mruoc.exercises.channelprocessing.function.spec.InputSpec.parameter;
+import static uk.co.mruoc.exercises.channelprocessing.function.spec.InputSpecFactory.channel;
+import static uk.co.mruoc.exercises.channelprocessing.function.spec.InputSpecFactory.constant;
+import static uk.co.mruoc.exercises.channelprocessing.function.spec.InputSpecFactory.parameter;
 
 class ArithmeticFunctionTest {
 
