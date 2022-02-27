@@ -1,16 +1,16 @@
 package uk.co.mruoc.exercises.channelprocessing.function;
 
 import lombok.extern.slf4j.Slf4j;
-import uk.co.mruoc.exercises.channelprocessing.spec.FunctionSpec;
+import uk.co.mruoc.exercises.channelprocessing.function.spec.FunctionSpec;
 
-import static uk.co.mruoc.exercises.channelprocessing.spec.InputSpec.parameter;
-import static uk.co.mruoc.exercises.channelprocessing.spec.InputSpec.variable;
+import static uk.co.mruoc.exercises.channelprocessing.function.spec.InputSpec.channel;
+import static uk.co.mruoc.exercises.channelprocessing.function.spec.InputSpec.parameter;
 
 @Slf4j
 public class Function1 extends ArithmeticFunction {
 
     public Function1() {
-        super(new FunctionSpec("Y=m*X+c", parameter('m'), variable('X'), parameter('c')));
+        super(new FunctionSpec("Y=m*X+c", parameter('m'), channel('X'), parameter('c')));
     }
 
 }

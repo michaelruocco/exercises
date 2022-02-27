@@ -1,4 +1,4 @@
-package uk.co.mruoc.exercises.channelprocessing.spec;
+package uk.co.mruoc.exercises.channelprocessing.function.spec;
 
 import com.fathzer.soft.javaluator.StaticVariableSet;
 import lombok.Data;

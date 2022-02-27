@@ -2,28 +2,26 @@ package uk.co.mruoc.exercises.channelprocessing.function;
 
 import org.junit.jupiter.api.Test;
 import uk.co.mruoc.exercises.channelprocessing.Variables;
-import uk.co.mruoc.exercises.channelprocessing.spec.FunctionSpec;
+import uk.co.mruoc.exercises.channelprocessing.function.spec.FunctionSpec;
 import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
 
 import java.math.BigDecimal;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static uk.co.mruoc.exercises.channelprocessing.spec.InputSpec.constant;
-import static uk.co.mruoc.exercises.channelprocessing.spec.InputSpec.variable;
+import static uk.co.mruoc.exercises.channelprocessing.function.spec.InputSpec.channel;
+import static uk.co.mruoc.exercises.channelprocessing.function.spec.InputSpec.constant;
+import static uk.co.mruoc.exercises.channelprocessing.function.spec.InputSpec.parameter;
 
 class ArithmeticFunctionTest {
 
     @Test
     void shouldPerformAddition() {
-        Variables inputs = new Variables(Map.of(
-                'A', new BigDecimal("2"),
-                'B', new BigDecimal("3")
-        ));
-        FunctionSpec spec = new FunctionSpec("C=A+B", variable('A'), variable('B'));
+        Variables inputs = new Variables('A', new BigDecimal("2"));
+        Parameters parameters = new Parameters('b', new BigDecimal("3"));
+        FunctionSpec spec = new FunctionSpec("C=A+b", channel('A'), parameter('b'));
         ChannelFunction function = new ArithmeticFunction(spec);
 
-        Variables outputs = function.apply(new Parameters(), inputs);
+        Variables outputs = function.apply(parameters, inputs);
 
         assertThat(outputs.get(spec.getTarget())).isEqualTo(new BigDecimal("5"));
     }
@@ -31,7 +29,7 @@ class ArithmeticFunctionTest {
     @Test
     void shouldPerformDivision() {
         Variables inputs = new Variables('E', new BigDecimal("5"));
-        FunctionSpec spec = new FunctionSpec("F=10/E", constant(new BigDecimal(10)), variable('E'));
+        FunctionSpec spec = new FunctionSpec("F=10/E", constant(10), channel('E'));
         ChannelFunction function = new ArithmeticFunction(spec);
 
         Variables outputs = function.apply(new Parameters(), inputs);
@@ -41,28 +39,24 @@ class ArithmeticFunctionTest {
 
     @Test
     void shouldPerformMultiplication() {
-        Variables inputs = new Variables(Map.of(
-                'H', new BigDecimal("3"),
-                'I', new BigDecimal("4")
-        ));
-        FunctionSpec spec = new FunctionSpec("J=H*I", variable('H'), variable('I'));
+        Variables inputs = new Variables('H', new BigDecimal("3"));
+        Parameters parameters = new Parameters('i', new BigDecimal("4"));
+        FunctionSpec spec = new FunctionSpec("J=H*i", channel('H'), parameter('i'));
         ChannelFunction function = new ArithmeticFunction(spec);
 
-        Variables outputs = function.apply(new Parameters(), inputs);
+        Variables outputs = function.apply(parameters, inputs);
 
         assertThat(outputs.get(spec.getTarget())).isEqualTo(new BigDecimal("12"));
     }
 
     @Test
     void shouldPerformSubtraction() {
-        Variables inputs = new Variables(Map.of(
-                'K', new BigDecimal("6"),
-                'L', new BigDecimal("8")
-        ));
-        FunctionSpec spec = new FunctionSpec("M=K-L", variable('K'), variable('L'));
+        Variables inputs = new Variables('K', new BigDecimal("6"));
+        Parameters parameters = new Parameters('l', new BigDecimal("8"));
+        FunctionSpec spec = new FunctionSpec("M=K-l", channel('K'), parameter('l'));
         ChannelFunction function = new ArithmeticFunction(spec);
 
-        Variables outputs = function.apply(new Parameters(), inputs);
+        Variables outputs = function.apply(parameters, inputs);
 
         assertThat(outputs.get(spec.getTarget())).isEqualTo(new BigDecimal("-2"));
     }

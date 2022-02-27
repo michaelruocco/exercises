@@ -4,7 +4,7 @@ import com.fathzer.soft.javaluator.StaticVariableSet;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import uk.co.mruoc.exercises.channelprocessing.Variables;
-import uk.co.mruoc.exercises.channelprocessing.spec.FunctionSpec;
+import uk.co.mruoc.exercises.channelprocessing.function.spec.FunctionSpec;
 import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
 
 import java.math.BigDecimal;

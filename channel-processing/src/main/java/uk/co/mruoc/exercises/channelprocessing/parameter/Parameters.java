@@ -16,6 +16,10 @@ public class Parameters {
         this(Collections.emptyMap());
     }
 
+    public Parameters(char id, BigDecimal value) {
+        this(Map.of(id, value));
+    }
+
     public BigDecimal get(char id) {
         return Optional.ofNullable(values.get(id))
                 .orElseThrow(() -> new ParameterNotFoundException(id));

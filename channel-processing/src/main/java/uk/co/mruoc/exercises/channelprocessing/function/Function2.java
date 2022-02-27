@@ -1,28 +1,16 @@
 package uk.co.mruoc.exercises.channelprocessing.function;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import uk.co.mruoc.exercises.channelprocessing.Variables;
-import uk.co.mruoc.exercises.channelprocessing.spec.FunctionSpec;
-import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
+import uk.co.mruoc.exercises.channelprocessing.function.spec.FunctionSpec;
 
-import static uk.co.mruoc.exercises.channelprocessing.spec.InputSpec.variable;
+import static uk.co.mruoc.exercises.channelprocessing.function.spec.InputSpec.channel;
 
-@RequiredArgsConstructor
 @Slf4j
-public class Function2 implements ChannelFunction {
-
-    private final ChannelFunction add;
-    private final ChannelFunction mean;
+public class Function2 extends CompositeFunction {
 
     public Function2() {
-        this(new ArithmeticFunction(new FunctionSpec("B=A+Y", variable('A'), variable('Y'))),
-                new MeanFunction(variable('B'), 'b'));
-    }
-
-    @Override
-    public Variables apply(Parameters parameters, Variables variables) {
-        return mean.apply(parameters, add.apply(parameters, variables));
+        super(new ArithmeticFunction(new FunctionSpec("B=A+Y", channel('A'), channel('Y'))),
+                new MeanFunction(channel('B'), 'b'));
     }
 
 }

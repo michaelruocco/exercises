@@ -1,4 +1,4 @@
-package uk.co.mruoc.exercises.channelprocessing.spec;
+package uk.co.mruoc.exercises.channelprocessing.function.spec;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -9,18 +9,18 @@ import java.math.BigDecimal;
 
 @RequiredArgsConstructor
 @Data
-class VariableInputSpec implements InputSpec {
+class ConstantInputSpec implements InputSpec {
 
-    private final char id;
+    private final BigDecimal value;
 
     @Override
     public String getId() {
-        return Character.toString(id);
+        return value.toString();
     }
 
     @Override
     public BigDecimal select(Parameters parameters, Variables variables) {
-        return variables.get(id);
+        return value;
     }
 
 }
