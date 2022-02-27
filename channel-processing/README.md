@@ -63,15 +63,15 @@ of multiple ids (e.g. Y,b)
 e.g.
 
 ```bash
-./gradlew run --args="./src/main/resources/channels.txt \
-    ./src/main/resources/parameters.txt \
-    ./src/main/resources/functions-metric-b.csv \
-    b"
+./gradlew run --args="-c ./src/main/resources/channels.txt \
+    -p ./src/main/resources/parameters.txt \
+    -f ./src/main/resources/functions-metric-b.csv \
+    -o b"
 ```
 
 ## TODO
 
 * Make variables immutable
-* Add change command line args to use JCommander library
 * Add unit tests for function loader and input spec loader
 * Add main class integration test
+* Load / Volume test
