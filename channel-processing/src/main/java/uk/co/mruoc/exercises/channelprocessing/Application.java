@@ -24,13 +24,13 @@ public class Application {
         Parameters parameters = new ParameterLoader(fileSystemLoader).load(appArgs.getParametersPath());
         ChannelFunction function = new FunctionLoader(fileSystemLoader).load(appArgs.getFunctionsPath());
 
-        Variables outputVariables = channels.getVariables()
+        Variables result = channels.getVariables()
                 .map(variables -> function.apply(parameters, variables))
                 .last()
                 .blockOptional()
                 .orElseThrow(() -> new IllegalStateException("no output variables calculated"));
 
-        appArgs.getOutputTargetsCollection().forEach(target -> log.info("{} value is {}", target, outputVariables.get(target)));
+        appArgs.getOutputTargetsCollection().forEach(target -> log.info("{} value is {}", target, result.get(target)));
     }
 
 }

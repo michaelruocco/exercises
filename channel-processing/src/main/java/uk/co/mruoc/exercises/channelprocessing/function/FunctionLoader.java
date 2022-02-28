@@ -54,7 +54,7 @@ public class FunctionLoader {
     }
 
     private ChannelFunction toCombineFunction(String[] specs) {
-        return new CombineFunction(Arrays.stream(specs)
+        return new CompositeFunction(Arrays.stream(specs)
                 .map(this::toSingleFunction)
                 .collect(Collectors.toList()));
     }
