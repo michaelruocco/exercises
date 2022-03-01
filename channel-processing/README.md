@@ -61,3 +61,12 @@ e.g.
     -f ./src/main/resources/functions-metric-b.csv \
     -o b"
 ```
+
+or:
+
+```bash
+./gradlew run --args="-c ./src/main/resources/channels.txt \
+    -p ./src/main/resources/parameters.txt \
+    -f ./src/main/resources/functions-channel-c.csv \
+    -o b,C"
+```
