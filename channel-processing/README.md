@@ -43,13 +43,6 @@ From the channels.txt and parameters.txt files provided, what is the value of th
 
 ## Running the application
 
-To run the application with the default channels, parameters and functions configured
-you can run the following command:
-
-```bash
-./gradlew run
-```
-
 If you want to specify different input files you can provide the paths to those files
 as command line arguments by using the following command template
 
