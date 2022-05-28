@@ -1,20 +1,17 @@
-package uk.co.mruoc.exercises.naughtsandcrosses;
+package uk.co.mruoc.exercises.naughtsandcrosses.board;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
 @AllArgsConstructor
 @EqualsAndHashCode
-public class Location implements Comparable<Location> {
+@Data
+public class Location {
 
     private static final String FREE_TOKEN = "-";
 
     private final String key;
-
-    @Getter
-    @Setter
     private String token;
 
     public Location(String key) {
@@ -22,12 +19,10 @@ public class Location implements Comparable<Location> {
     }
 
     public boolean isFree() {
-        return token.equals(FREE_TOKEN);
+        return hasToken(FREE_TOKEN);
     }
 
-    @Override
-    public int compareTo(Location location) {
-        return key.compareTo(location.key);
+    public boolean hasToken(String tokenToCheck) {
+        return token.equals(tokenToCheck);
     }
-
 }
