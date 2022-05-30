@@ -15,7 +15,7 @@ public class SelectUserInputLocationStrategy implements SelectLocationStrategy {
 
     @Override
     public Location apply(Board board) {
-        System.out.println("input location to place key");
+        System.out.print("input location (as x-y) to place token: ");
         String key = scanner.next();
         return board.getLocation(key);
     }

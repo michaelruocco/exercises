@@ -2,31 +2,30 @@ package uk.co.mruoc.exercises.naughtsandcrosses;
 
 import lombok.RequiredArgsConstructor;
 import uk.co.mruoc.exercises.naughtsandcrosses.board.Board;
+import uk.co.mruoc.exercises.naughtsandcrosses.board.ConsoleBoardFormatter;
+import uk.co.mruoc.exercises.naughtsandcrosses.board.InvalidTurnException;
 import uk.co.mruoc.exercises.naughtsandcrosses.board.Location;
+import uk.co.mruoc.exercises.naughtsandcrosses.board.LocationNotFreeException;
 import uk.co.mruoc.exercises.naughtsandcrosses.board.SelectLocationStrategy;
-import uk.co.mruoc.exercises.naughtsandcrosses.board.SelectUserInputLocationStrategy;
 
 @RequiredArgsConstructor
-public class Game {
+public class ConsoleGame {
 
     private final Players players;
     private final Board board;
+    private final ConsoleBoardFormatter boardFormatter;
     private final SelectLocationStrategy selectLocationStrategy;
 
     private boolean complete = false;
 
-    public Game() {
-        //this(new SelectSpecificLocationStrategy("2-0", "1-0", "1-1", "2-1", "0-2"));
-        this(new SelectUserInputLocationStrategy());
-    }
-
-    public Game(SelectLocationStrategy selectLocationStrategy) {
-        this(new Players(), new Board(), selectLocationStrategy);
+    public ConsoleGame(SelectLocationStrategy selectLocationStrategy) {
+        this(new Players(), new Board(), new ConsoleBoardFormatter(), selectLocationStrategy);
     }
 
     public void play() {
         System.out.println("game started");
         System.out.println();
+        printBoard();
         while (!complete) {
             playTurn();
         }
@@ -35,7 +34,12 @@ public class Game {
     private void playTurn() {
         String player = players.getCurrentPlayer();
         System.out.printf("player %s taking turn%n", player);
-        placeToken(player);
+        try {
+            placeToken(player);
+        } catch (InvalidTurnException e) {
+            System.err.println(e.getMessage());
+            return;
+        }
         if (board.hasWinner(player)) {
             declareWinner(player);
             return;
@@ -44,29 +48,32 @@ public class Game {
             declareDraw();
             return;
         }
-        printGridState();
+        printBoard();
         players.switchPlayer();
     }
 
     private void placeToken(String token) {
         Location location = board.selectLocation(selectLocationStrategy);
+        if (!location.isFree()) {
+            throw new LocationNotFreeException(location.getKey());
+        }
         location.setToken(token);
     }
 
     private void declareWinner(String player) {
         complete = true;
-        printGridState();
+        printBoard();
         System.out.printf("player %s wins%n", player);
     }
 
     private void declareDraw() {
         complete = true;
-        printGridState();
+        printBoard();
         System.out.println("game ends a draw");
     }
 
-    private void printGridState() {
-        System.out.println(board.getState());
+    private void printBoard() {
+        System.out.println(boardFormatter.format(board));
         System.out.println();
     }
 }

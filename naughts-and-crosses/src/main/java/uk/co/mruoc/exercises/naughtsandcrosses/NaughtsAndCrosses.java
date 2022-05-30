@@ -3,18 +3,29 @@ package uk.co.mruoc.exercises.naughtsandcrosses;
 public class NaughtsAndCrosses {
 
     public static void main(String[] args) {
-        Game game = toGame(args);
+        ConsoleGame game = toGame(args);
         game.play();
     }
 
-    private static Game toGame(String[] args) {
+    private static ConsoleGame toGame(String[] args) {
         if (shouldPlayInteractiveGame(args)) {
-            return new InteractiveGame();
+            return new InteractiveConsoleGame();
         }
-        return new RandomSelectionGame();
+        if (shouldPlayFixedGame(args)) {
+            return new FixedConsoleGame();
+        }
+        return new RandomSelectionConsoleGame();
     }
 
     private static boolean shouldPlayInteractiveGame(String[] args) {
-        return args.length > 0 && args[0].equals("interactive");
+        return shouldPlayGameType(args,"interactive");
+    }
+
+    private static boolean shouldPlayFixedGame(String[] args) {
+        return shouldPlayGameType(args,"fixed");
+    }
+
+    private static boolean shouldPlayGameType(String[] args, String type) {
+        return args.length > 0 && args[0].equals(type);
     }
 }

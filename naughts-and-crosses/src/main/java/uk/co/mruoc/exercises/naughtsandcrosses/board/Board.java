@@ -1,19 +1,20 @@
 package uk.co.mruoc.exercises.naughtsandcrosses.board;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RequiredArgsConstructor
 public class Board {
 
+    @Getter
     private final int size;
     private final Map<String, Location> locations;
 
@@ -29,12 +30,17 @@ public class Board {
         return strategy.selectLocation(this);
     }
 
+    public String getToken(int x, int y) {
+        return getLocation(x, y).getToken();
+    }
+
     public Location getLocation(int x, int y) {
         return getLocation(toKey(x, y));
     }
 
     public Location getLocation(String key) {
-        return locations.get(key);
+        return Optional.ofNullable(locations.get(key))
+                .orElseThrow(() -> new LocationNotFoundException(key));
     }
 
     public Location getRandomFreeLocation() {
@@ -53,18 +59,6 @@ public class Board {
 
     public boolean isFull() {
         return getFreeLocations().findAny().isEmpty();
-    }
-
-    public String getState() {
-        Collection<String> rows = new ArrayList<>();
-        for (int y = 0; y < size; y++) {
-            Collection<String> tokens = new ArrayList<>();
-            for (int x = 0; x < size; x++) {
-                tokens.add(getLocation(x, y).getToken());
-            }
-            rows.add(String.join(" ", tokens));
-        }
-        return rows.stream().collect(Collectors.joining(System.lineSeparator()));
     }
 
     public boolean hasWinner(String token) {
@@ -87,7 +81,7 @@ public class Board {
     }
 
     private boolean hasVerticalWinner(String token) {
-        for (int x = 0; x < size; x++) {
+        for (int x = 1; x < size + 1; x++) {
             if (winsColumn(x, token)) {
                 return true;
             }
@@ -96,7 +90,7 @@ public class Board {
     }
 
     private boolean winsColumn(int x, String token) {
-        for (int y = 0; y < size; y++) {
+        for (int y = 1; y < size + 1; y++) {
             Location location = getLocation(x, y);
             if (!location.hasToken(token)) {
                 return false;
@@ -106,7 +100,7 @@ public class Board {
     }
 
     private boolean hasHorizontalWinner(String token) {
-        for (int y = 0; y < size; y++) {
+        for (int y = 1; y < size + 1; y++) {
             if (winsRow(y, token)) {
                 return true;
             }
@@ -115,7 +109,7 @@ public class Board {
     }
 
     private boolean winsRow(int y, String token) {
-        for (int x = 0; x < size; x++) {
+        for (int x = 1; x < size + 1; x++) {
             Location location = getLocation(x, y);
             if (!location.hasToken(token)) {
                 return false;
@@ -125,8 +119,8 @@ public class Board {
     }
 
     private boolean hasForwardSlashWinner(String token) {
-        int y = 0;
-        int x = size - 1;
+        int y = 1;
+        int x = size;
         do {
             Location location = getLocation(x, y);
             if (!location.hasToken(token)) {
@@ -138,22 +132,22 @@ public class Board {
     }
 
     private boolean hasBackSlashWinner(String token) {
-        int y = 0;
-        int x = 0;
+        int y = 1;
+        int x = 1;
         do {
             Location location = getLocation(x, y);
             if (!location.hasToken(token)) {
                 return false;
             }
             y++; x++;
-        } while (y < size && x < size);
+        } while (y < size + 1 && x < size + 1);
         return true;
     }
 
     private static Map<String, Location> buildLocations(int size) {
         Map<String, Location> locations = new LinkedHashMap<>();
-        for (int y = 0; y < size; y++) {
-            for (int x = 0; x < size; x++) {
+        for (int y = 1; y < size + 1; y++) {
+            for (int x = 1; x < size + 1; x++) {
                 Location location = new Location(toKey(x, y));
                 locations.put(location.getKey(), location);
             }

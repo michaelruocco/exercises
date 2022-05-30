@@ -2,9 +2,9 @@ package uk.co.mruoc.exercises.naughtsandcrosses;
 
 import uk.co.mruoc.exercises.naughtsandcrosses.board.SelectRandomLocationStrategy;
 
-public class RandomSelectionGame extends Game {
+public class RandomSelectionConsoleGame extends ConsoleGame {
 
-    public RandomSelectionGame() {
+    public RandomSelectionConsoleGame() {
         super(new SelectRandomLocationStrategy());
     }
 }
