@@ -2,6 +2,7 @@ package uk.co.mruoc.exercises.naughtsandcrosses.board;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import uk.co.mruoc.exercises.naughtsandcrosses.locationselector.LocationSelector;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -26,39 +27,56 @@ public class Board {
         this(size, buildLocations(size));
     }
 
-    public Location selectLocation(SelectLocationStrategy strategy) {
+    public void reset() {
+        locations.putAll(buildLocations(size));
+    }
+
+    public String selectLocation(LocationSelector strategy) {
         return strategy.selectLocation(this);
     }
 
     public String getToken(int x, int y) {
-        return getLocation(x, y).getToken();
+        return getToken(toKey(x, y));
     }
 
-    public Location getLocation(int x, int y) {
-        return getLocation(toKey(x, y));
+    public String getToken(String locationKey) {
+        return getLocation(locationKey).getToken();
     }
 
-    public Location getLocation(String key) {
-        return Optional.ofNullable(locations.get(key))
-                .orElseThrow(() -> new LocationNotFoundException(key));
+    public boolean isFree(String locationKey) {
+        return getLocation(locationKey).isFree();
     }
 
-    public Location getRandomFreeLocation() {
+    public void placeToken(String locationKey, String token) {
+        Location location = getLocation(locationKey);
+        if (!location.isFree()) {
+            throw new LocationAlreadyTakenException(location.getKey());
+        }
+        locations.put(locationKey, location.withToken(token));
+    }
+
+    public String getRandomFreeLocation() {
         List<Location> randomLocations = getFreeLocations().collect(Collectors.toList());
         Collections.shuffle(randomLocations);
         return randomLocations.stream()
                 .findFirst()
-                .orElseThrow(NoLocationsRemainingException::new);
+                .map(Location::getKey)
+                .orElseThrow(NoFreeLocationsRemainingException::new);
     }
 
-    public Location getNextFreeLocation() {
+    public String getNextFreeLocation() {
         return getFreeLocations()
                 .findFirst()
-                .orElseThrow(NoLocationsRemainingException::new);
+                .map(Location::getKey)
+                .orElseThrow(NoFreeLocationsRemainingException::new);
     }
 
     public boolean isFull() {
         return getFreeLocations().findAny().isEmpty();
+    }
+
+    public boolean allLocationsFree() {
+        return getFreeLocations().count() == locations.size();
     }
 
     public boolean hasWinner(String token) {
@@ -142,6 +160,15 @@ public class Board {
             y++; x++;
         } while (y < size + 1 && x < size + 1);
         return true;
+    }
+
+    private Location getLocation(int x, int y) {
+        return getLocation(toKey(x, y));
+    }
+
+    private Location getLocation(String key) {
+        return Optional.ofNullable(locations.get(key))
+                .orElseThrow(() -> new LocationNotFoundException(key));
     }
 
     private static Map<String, Location> buildLocations(int size) {

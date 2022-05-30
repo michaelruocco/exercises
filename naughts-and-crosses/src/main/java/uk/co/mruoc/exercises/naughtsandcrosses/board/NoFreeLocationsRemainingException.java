@@ -1,6 +1,6 @@
 package uk.co.mruoc.exercises.naughtsandcrosses.board;
 
-public class NoLocationsRemainingException extends RuntimeException {
+public class NoFreeLocationsRemainingException extends RuntimeException {
 
     // intentionally blank
 

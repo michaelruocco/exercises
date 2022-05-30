@@ -2,17 +2,17 @@ package uk.co.mruoc.exercises.naughtsandcrosses.board;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.With;
 
 @AllArgsConstructor
-@EqualsAndHashCode
 @Data
-public class Location {
+class Location {
 
     private static final String FREE_TOKEN = "-";
 
     private final String key;
-    private String token;
+    @With
+    private final String token;
 
     public Location(String key) {
         this(key, FREE_TOKEN);

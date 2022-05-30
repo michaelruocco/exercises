@@ -1,27 +1,27 @@
-package uk.co.mruoc.exercises.naughtsandcrosses;
+package uk.co.mruoc.exercises.naughtsandcrosses.game;
 
 import lombok.RequiredArgsConstructor;
+import uk.co.mruoc.exercises.naughtsandcrosses.Players;
 import uk.co.mruoc.exercises.naughtsandcrosses.board.Board;
 import uk.co.mruoc.exercises.naughtsandcrosses.board.ConsoleBoardFormatter;
-import uk.co.mruoc.exercises.naughtsandcrosses.board.InvalidTurnException;
-import uk.co.mruoc.exercises.naughtsandcrosses.board.Location;
-import uk.co.mruoc.exercises.naughtsandcrosses.board.LocationNotFreeException;
-import uk.co.mruoc.exercises.naughtsandcrosses.board.SelectLocationStrategy;
+import uk.co.mruoc.exercises.naughtsandcrosses.board.LocationAlreadyTakenException;
+import uk.co.mruoc.exercises.naughtsandcrosses.locationselector.LocationSelector;
 
 @RequiredArgsConstructor
-public class ConsoleGame {
+public class ConsoleGame implements Game {
 
     private final Players players;
     private final Board board;
     private final ConsoleBoardFormatter boardFormatter;
-    private final SelectLocationStrategy selectLocationStrategy;
+    private final LocationSelector locationSelector;
 
     private boolean complete = false;
 
-    public ConsoleGame(SelectLocationStrategy selectLocationStrategy) {
-        this(new Players(), new Board(), new ConsoleBoardFormatter(), selectLocationStrategy);
+    public ConsoleGame(LocationSelector locationSelector) {
+        this(new Players(), new Board(), new ConsoleBoardFormatter(), locationSelector);
     }
 
+    @Override
     public void play() {
         System.out.println("game started");
         System.out.println();
@@ -53,11 +53,11 @@ public class ConsoleGame {
     }
 
     private void placeToken(String token) {
-        Location location = board.selectLocation(selectLocationStrategy);
-        if (!location.isFree()) {
-            throw new LocationNotFreeException(location.getKey());
+        String location = board.selectLocation(locationSelector);
+        if (!board.isFree(location)) {
+            throw new LocationAlreadyTakenException(location);
         }
-        location.setToken(token);
+        board.placeToken(location, token);
     }
 
     private void declareWinner(String player) {
