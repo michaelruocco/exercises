@@ -1,4 +1,6 @@
-package uk.co.mruoc.exercises.naughtsandcrosses.board;
+package uk.co.mruoc.exercises.naughtsandcrosses.game;
+
+import uk.co.mruoc.exercises.naughtsandcrosses.board.Board;
 
 import java.util.ArrayList;
 import java.util.Collection;

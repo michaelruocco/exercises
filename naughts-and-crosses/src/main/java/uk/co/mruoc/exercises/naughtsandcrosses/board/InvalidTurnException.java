@@ -1,4 +1,4 @@
-package uk.co.mruoc.exercises.naughtsandcrosses.game;
+package uk.co.mruoc.exercises.naughtsandcrosses.board;
 
 public class InvalidTurnException extends RuntimeException {
 

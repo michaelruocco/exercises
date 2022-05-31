@@ -3,7 +3,7 @@ package uk.co.mruoc.exercises.naughtsandcrosses.game;
 import lombok.RequiredArgsConstructor;
 import uk.co.mruoc.exercises.naughtsandcrosses.Players;
 import uk.co.mruoc.exercises.naughtsandcrosses.board.Board;
-import uk.co.mruoc.exercises.naughtsandcrosses.board.ConsoleBoardFormatter;
+import uk.co.mruoc.exercises.naughtsandcrosses.board.InvalidTurnException;
 import uk.co.mruoc.exercises.naughtsandcrosses.board.LocationAlreadyTakenException;
 import uk.co.mruoc.exercises.naughtsandcrosses.locationselector.LocationSelector;
 

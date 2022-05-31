@@ -1,9 +1,16 @@
 package uk.co.mruoc.exercises.naughtsandcrosses.board;
 
 import org.junit.jupiter.api.Test;
+import uk.co.mruoc.exercises.naughtsandcrosses.locationselector.LocationSelector;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class BoardTest {
 
@@ -122,5 +129,115 @@ class BoardTest {
         board.reset();
 
         assertThat(board.allLocationsFree()).isTrue();
+    }
+
+    @Test
+    void shouldReturnTokenAtCoordinates() {
+        assertThat(board.getToken(1, 1)).isEqualTo(FREE);
+        board.placeToken("1-1", NAUGHT);
+        assertThat(board.getToken(1, 1)).isEqualTo(NAUGHT);
+
+        assertThat(board.getToken(2, 2)).isEqualTo(FREE);
+        board.placeToken("2-2", CROSS);
+        assertThat(board.getToken(2, 2)).isEqualTo(CROSS);
+    }
+
+    @Test
+    void shouldReturnLocationSelectedFromBoard() {
+        LocationSelector selector = mock(LocationSelector.class);
+        String expectedLocation = "expected-location";
+        when(selector.selectLocation(board)).thenReturn(expectedLocation);
+
+        String location = board.selectLocation(selector);
+
+        assertThat(location).isEqualTo(expectedLocation);
+    }
+
+    @Test
+    void shouldReturnRandomFreeLocations() {
+        Collection<String> allLocations = Arrays.asList(
+                "1-1", "1-2", "1-3",
+                "2-1", "2-2", "2-3",
+                "3-1", "3-2", "3-3");
+        Collection<String> locations = new ArrayList<>(allLocations);
+        int count = 0;
+        while (!locations.isEmpty()) {
+            String location = board.getRandomFreeLocation();
+            board.placeToken(location, CROSS);
+            assertThat(locations.remove(location)).isTrue();
+            count++;
+        }
+        assertThat(count).isEqualTo(allLocations.size());
+    }
+
+    @Test
+    void shouldReturnTrueWhenBoardContainsVerticalWinner() {
+        String token = CROSS;
+        assertThat(board.hasWinner(token)).isFalse();
+        board.placeToken("1-1", token);
+
+        assertThat(board.hasWinner(token)).isFalse();
+        board.placeToken("1-2", token);
+
+        assertThat(board.hasWinner(token)).isFalse();
+        board.placeToken("1-3", token);
+
+        assertThat(board.hasWinner(token)).isTrue();
+    }
+
+    @Test
+    void shouldReturnTrueWhenBoardContainsHorizontalWinner() {
+        String token = NAUGHT;
+        assertThat(board.hasWinner(token)).isFalse();
+        board.placeToken("1-1", token);
+
+        assertThat(board.hasWinner(token)).isFalse();
+        board.placeToken("2-1", token);
+
+        assertThat(board.hasWinner(token)).isFalse();
+        board.placeToken("3-1", token);
+
+        assertThat(board.hasWinner(token)).isTrue();
+    }
+
+    @Test
+    void shouldReturnTrueWhenBoardContainsForwardSlashWinner() {
+        String token = CROSS;
+        assertThat(board.hasWinner(token)).isFalse();
+        board.placeToken("1-3", token);
+
+        assertThat(board.hasWinner(token)).isFalse();
+        board.placeToken("2-2", token);
+
+        assertThat(board.hasWinner(token)).isFalse();
+        board.placeToken("3-1", token);
+
+        assertThat(board.hasWinner(token)).isTrue();
+    }
+
+    @Test
+    void shouldReturnTrueWhenBoardContainsBackSlashWinner() {
+        String token = NAUGHT;
+        assertThat(board.hasWinner(token)).isFalse();
+        board.placeToken("3-1", token);
+
+        assertThat(board.hasWinner(token)).isFalse();
+        board.placeToken("2-2", token);
+
+        assertThat(board.hasWinner(token)).isFalse();
+        board.placeToken("1-3", token);
+
+        assertThat(board.hasWinner(token)).isTrue();
+    }
+
+    @Test
+    void shouldThrowExceptionIfLocationDoesNotExist() {
+        String location = "4-4";
+
+        Throwable error = catchThrowable(() -> board.getToken(location));
+
+        assertThat(error)
+                .isInstanceOf(LocationDoesNotExistException.class)
+                .hasMessage("location 4-4 does not exist");
     }
 }

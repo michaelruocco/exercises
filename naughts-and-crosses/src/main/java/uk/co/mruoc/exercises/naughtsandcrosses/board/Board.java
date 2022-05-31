@@ -31,8 +31,8 @@ public class Board {
         locations.putAll(buildLocations(size));
     }
 
-    public String selectLocation(LocationSelector strategy) {
-        return strategy.selectLocation(this);
+    public String selectLocation(LocationSelector selector) {
+        return selector.selectLocation(this);
     }
 
     public String getToken(int x, int y) {
@@ -168,7 +168,7 @@ public class Board {
 
     private Location getLocation(String key) {
         return Optional.ofNullable(locations.get(key))
-                .orElseThrow(() -> new LocationNotFoundException(key));
+                .orElseThrow(() -> new LocationDoesNotExistException(key));
     }
 
     private static Map<String, Location> buildLocations(int size) {
