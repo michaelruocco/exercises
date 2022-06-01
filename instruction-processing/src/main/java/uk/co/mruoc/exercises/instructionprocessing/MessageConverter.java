@@ -12,7 +12,7 @@ import static java.time.Instant.EPOCH;
 @RequiredArgsConstructor
 public class MessageConverter {
 
-    private static final Pattern PRODUCT_CODE_PATTERN = Pattern.compile("^[A-Z]{2}[0-9]{2}$");
+    private static final Pattern PRODUCT_CODE_PATTERN = Pattern.compile("^[A-Z]{2}\\d{2}$");
 
     private final Clock clock;
 
