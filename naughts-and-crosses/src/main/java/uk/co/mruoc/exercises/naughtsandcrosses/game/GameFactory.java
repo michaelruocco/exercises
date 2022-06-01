@@ -2,25 +2,21 @@ package uk.co.mruoc.exercises.naughtsandcrosses.game;
 
 public class GameFactory {
 
-    public ConsoleGame build(String[] args) {
-        if (containsInteractive(args)) {
+    public ConsoleGame build(String type) {
+        if (isInteractive(type)) {
             return new InteractiveConsoleGame();
         }
-        if (containsFixed(args)) {
+        if (isFixed(type)) {
             return new FixedConsoleGame();
         }
-        return new RandomSelectionConsoleGame();
+        return new RandomConsoleGame();
     }
 
-    private static boolean containsInteractive(String[] args) {
-        return containsType(args,"interactive");
+    private static boolean isInteractive(String type) {
+        return "interactive".equals(type);
     }
 
-    private static boolean containsFixed(String[] args) {
-        return containsType(args,"fixed");
-    }
-
-    private static boolean containsType(String[] args, String type) {
-        return args.length > 0 && args[0].equals(type);
+    private static boolean isFixed(String type) {
+        return "fixed".equals(type);
     }
 }
