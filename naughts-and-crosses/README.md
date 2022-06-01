@@ -1,7 +1,3 @@
 # Naughts and Crosses
 
-Simple naughts and crosses implementation
-
-## TODO
-
-*   Winner detection
+Simple console naughts and crosses game implementation
