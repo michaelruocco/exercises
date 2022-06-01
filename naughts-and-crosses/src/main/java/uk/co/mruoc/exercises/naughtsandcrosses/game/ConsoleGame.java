@@ -24,7 +24,6 @@ public class ConsoleGame implements Game {
     @Override
     public void play() {
         System.out.println("game started");
-        System.out.println();
         printBoard();
         while (!complete) {
             playTurn();
@@ -37,7 +36,7 @@ public class ConsoleGame implements Game {
         try {
             placeToken(player);
         } catch (InvalidTurnException e) {
-            System.err.println(e.getMessage());
+            System.out.printf("%s%n%n", e.getMessage());
             return;
         }
         if (board.hasWinner(player)) {
@@ -57,6 +56,7 @@ public class ConsoleGame implements Game {
         if (!board.isFree(location)) {
             throw new LocationAlreadyTakenException(location);
         }
+        System.out.printf("placing token %s at %s%n", token, location);
         board.placeToken(location, token);
     }
 

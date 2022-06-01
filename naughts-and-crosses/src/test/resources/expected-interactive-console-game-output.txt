@@ -1,0 +1,48 @@
+game started
+  1 2 3
+1 - - -
+2 - - -
+3 - - -
+
+player X taking turn
+input location (as x-y) to place token: location 4-4 does not exist
+
+player X taking turn
+input location (as x-y) to place token: placing token X at 1-1
+  1 2 3
+1 X - -
+2 - - -
+3 - - -
+
+player O taking turn
+input location (as x-y) to place token: location 1-1 already taken
+
+player O taking turn
+input location (as x-y) to place token: placing token O at 1-2
+  1 2 3
+1 X - -
+2 O - -
+3 - - -
+
+player X taking turn
+input location (as x-y) to place token: placing token X at 2-1
+  1 2 3
+1 X X -
+2 O - -
+3 - - -
+
+player O taking turn
+input location (as x-y) to place token: placing token O at 2-2
+  1 2 3
+1 X X -
+2 O O -
+3 - - -
+
+player X taking turn
+input location (as x-y) to place token: placing token X at 3-1
+  1 2 3
+1 X X X
+2 O O -
+3 - - -
+
+player X wins
