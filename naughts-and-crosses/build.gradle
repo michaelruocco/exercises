@@ -1,0 +1,5 @@
+dependencies {
+    testImplementation "uk.org.webcompere:system-stubs-jupiter:2.0.1"
+    testImplementation "com.github.michaelruocco:file-loader:6.0.5"
+
+}

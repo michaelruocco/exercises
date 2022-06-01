@@ -27,6 +27,15 @@ class GameFactoryTest {
     }
 
     @Test
+    void shouldCreateDrawGameIfTypeIsDraw() {
+        String type = "draw";
+
+        Game game = factory.build(type);
+
+        assertThat(game).isInstanceOf(DrawConsoleGame.class);
+    }
+
+    @Test
     void shouldCreateRandomGameForAnyOtherType() {
         String type = "other";
 

@@ -9,6 +9,9 @@ public class GameFactory {
         if (isFixed(type)) {
             return new FixedConsoleGame();
         }
+        if (isDraw(type)) {
+            return new DrawConsoleGame();
+        }
         return new RandomConsoleGame();
     }
 
@@ -18,5 +21,9 @@ public class GameFactory {
 
     private static boolean isFixed(String type) {
         return "fixed".equals(type);
+    }
+
+    private static boolean isDraw(String type) {
+        return "draw".equals(type);
     }
 }
