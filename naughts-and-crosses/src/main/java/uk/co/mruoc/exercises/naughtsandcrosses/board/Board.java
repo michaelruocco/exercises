@@ -1,6 +1,5 @@
 package uk.co.mruoc.exercises.naughtsandcrosses.board;
 
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import uk.co.mruoc.exercises.naughtsandcrosses.locationselector.LocationSelector;
 
@@ -13,9 +12,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RequiredArgsConstructor
-public class Board {
+public class Board implements BoardState {
 
-    @Getter
     private final int size;
     private final Map<String, Location> locations;
 
@@ -32,13 +30,24 @@ public class Board {
     }
 
     public String selectLocation(LocationSelector selector) {
-        return selector.selectLocation(this);
+        String location = selector.selectLocation(this);
+        if (isFree(location)) {
+            return location;
+        }
+        throw new LocationAlreadyTakenException(location);
     }
 
+    @Override
+    public int getSize() {
+        return size;
+    }
+
+    @Override
     public String getToken(int x, int y) {
         return getToken(toKey(x, y));
     }
 
+    @Override
     public String getToken(String locationKey) {
         return getLocation(locationKey).getToken();
     }

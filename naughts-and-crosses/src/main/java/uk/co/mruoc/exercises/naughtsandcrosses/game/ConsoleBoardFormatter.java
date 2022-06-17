@@ -1,6 +1,6 @@
 package uk.co.mruoc.exercises.naughtsandcrosses.game;
 
-import uk.co.mruoc.exercises.naughtsandcrosses.board.Board;
+import uk.co.mruoc.exercises.naughtsandcrosses.board.BoardState;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 public class ConsoleBoardFormatter {
 
-    public String format(Board board) {
+    public String format(BoardState board) {
         int size = board.getSize() + 1;
         Collection<String> rows = new ArrayList<>();
         rows.add(buildHeader(size));
@@ -26,7 +26,7 @@ public class ConsoleBoardFormatter {
         return String.format("  %s", header);
     }
 
-    private static String buildRow(Board board, int size, int y) {
+    private static String buildRow(BoardState board, int size, int y) {
         Collection<String> tokens = new ArrayList<>();
         tokens.add(Integer.toString(y));
         for (int x = 1; x < size; x++) {

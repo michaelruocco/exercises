@@ -1,4 +1,10 @@
-package uk.co.mruoc.exercises.naughtsandcrosses.game;
+package uk.co.mruoc.exercises.naughtsandcrosses;
+
+import uk.co.mruoc.exercises.naughtsandcrosses.game.ConsoleGame;
+import uk.co.mruoc.exercises.naughtsandcrosses.game.DrawConsoleGame;
+import uk.co.mruoc.exercises.naughtsandcrosses.game.FixedConsoleGame;
+import uk.co.mruoc.exercises.naughtsandcrosses.game.InteractiveConsoleGame;
+import uk.co.mruoc.exercises.naughtsandcrosses.game.RandomConsoleGame;
 
 public class GameFactory {
 

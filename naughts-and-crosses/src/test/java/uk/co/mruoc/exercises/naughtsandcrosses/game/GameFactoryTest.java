@@ -1,6 +1,8 @@
 package uk.co.mruoc.exercises.naughtsandcrosses.game;
 
 import org.junit.jupiter.api.Test;
+import uk.co.mruoc.exercises.naughtsandcrosses.Game;
+import uk.co.mruoc.exercises.naughtsandcrosses.GameFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -145,12 +145,26 @@ class BoardTest {
     @Test
     void shouldReturnLocationSelectedFromBoard() {
         LocationSelector selector = mock(LocationSelector.class);
-        String expectedLocation = "expected-location";
+        String expectedLocation = "1-2";
         when(selector.selectLocation(board)).thenReturn(expectedLocation);
 
         String location = board.selectLocation(selector);
 
         assertThat(location).isEqualTo(expectedLocation);
+    }
+
+    @Test
+    void shouldThrowExceptionIfLocationSelectedFromBoardIsNotFree() {
+        LocationSelector selector = mock(LocationSelector.class);
+        String expectedLocation = "1-2";
+        board.placeToken(expectedLocation, "X");
+        when(selector.selectLocation(board)).thenReturn(expectedLocation);
+
+        Throwable error = catchThrowable(() -> board.selectLocation(selector));
+
+        assertThat(error)
+                .isInstanceOf(LocationAlreadyTakenException.class)
+                .hasMessageContaining(expectedLocation);
     }
 
     @Test

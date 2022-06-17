@@ -2,8 +2,6 @@ package uk.co.mruoc.exercises.naughtsandcrosses;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import uk.co.mruoc.exercises.naughtsandcrosses.game.Game;
-import uk.co.mruoc.exercises.naughtsandcrosses.game.GameFactory;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class NaughtsAndCrosses {
