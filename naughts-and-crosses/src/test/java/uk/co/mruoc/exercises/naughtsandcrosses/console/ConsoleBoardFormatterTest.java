@@ -1,4 +1,4 @@
-package uk.co.mruoc.exercises.naughtsandcrosses.game;
+package uk.co.mruoc.exercises.naughtsandcrosses.console;
 
 import org.junit.jupiter.api.Test;
 import uk.co.mruoc.exercises.naughtsandcrosses.board.Board;

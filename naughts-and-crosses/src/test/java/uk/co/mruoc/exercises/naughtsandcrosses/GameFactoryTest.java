@@ -1,8 +1,10 @@
-package uk.co.mruoc.exercises.naughtsandcrosses.game;
+package uk.co.mruoc.exercises.naughtsandcrosses;
 
 import org.junit.jupiter.api.Test;
-import uk.co.mruoc.exercises.naughtsandcrosses.Game;
-import uk.co.mruoc.exercises.naughtsandcrosses.GameFactory;
+import uk.co.mruoc.exercises.naughtsandcrosses.console.DrawConsoleGame;
+import uk.co.mruoc.exercises.naughtsandcrosses.console.FixedConsoleGame;
+import uk.co.mruoc.exercises.naughtsandcrosses.console.InteractiveConsoleGame;
+import uk.co.mruoc.exercises.naughtsandcrosses.console.RandomConsoleGame;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

@@ -1,4 +1,4 @@
-package uk.co.mruoc.exercises.naughtsandcrosses.game;
+package uk.co.mruoc.exercises.naughtsandcrosses.console;
 
 import lombok.RequiredArgsConstructor;
 import uk.co.mruoc.exercises.naughtsandcrosses.Game;
