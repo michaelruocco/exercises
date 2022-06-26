@@ -1,14 +1,14 @@
 package uk.co.mruoc.exercises.naughtsandcrosses;
 
-import uk.co.mruoc.exercises.naughtsandcrosses.console.ConsoleGame;
 import uk.co.mruoc.exercises.naughtsandcrosses.console.DrawConsoleGame;
 import uk.co.mruoc.exercises.naughtsandcrosses.console.FixedConsoleGame;
 import uk.co.mruoc.exercises.naughtsandcrosses.console.InteractiveConsoleGame;
 import uk.co.mruoc.exercises.naughtsandcrosses.console.RandomConsoleGame;
+import uk.co.mruoc.exercises.naughtsandcrosses.gui.GuiGame;
 
 public class GameFactory {
 
-    public ConsoleGame build(String type) {
+    public Game build(String type) {
         if (isInteractive(type)) {
             return new InteractiveConsoleGame();
         }
@@ -17,6 +17,9 @@ public class GameFactory {
         }
         if (isDraw(type)) {
             return new DrawConsoleGame();
+        }
+        if (isGui(type)) {
+            return new GuiGame();
         }
         return new RandomConsoleGame();
     }
@@ -31,5 +34,9 @@ public class GameFactory {
 
     private static boolean isDraw(String type) {
         return "draw".equals(type);
+    }
+
+    private static boolean isGui(String type) {
+        return "gui".equals(type);
     }
 }

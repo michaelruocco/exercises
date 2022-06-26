@@ -52,6 +52,11 @@ public class Board implements BoardState {
         return getLocation(locationKey).getToken();
     }
 
+    @Override
+    public Stream<String> getLocationKeys() {
+        return locations.keySet().stream();
+    }
+
     public boolean isFree(String locationKey) {
         return getLocation(locationKey).isFree();
     }

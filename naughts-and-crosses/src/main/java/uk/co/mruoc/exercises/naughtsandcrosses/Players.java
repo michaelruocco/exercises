@@ -3,6 +3,8 @@ package uk.co.mruoc.exercises.naughtsandcrosses;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import java.util.stream.Stream;
+
 @AllArgsConstructor
 public class Players {
 
@@ -14,6 +16,10 @@ public class Players {
 
     public Players() {
         this(PLAYER_1);
+    }
+
+    public Stream<String> stream() {
+        return Stream.of(PLAYER_1, PLAYER_2);
     }
 
     public void switchPlayer() {

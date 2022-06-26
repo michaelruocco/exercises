@@ -6,7 +6,7 @@ import lombok.With;
 
 @AllArgsConstructor
 @Data
-class Location {
+public class Location {
 
     private static final String FREE_TOKEN = "-";
 

@@ -5,16 +5,24 @@ import uk.co.mruoc.exercises.naughtsandcrosses.board.Board;
 import uk.co.mruoc.exercises.naughtsandcrosses.board.BoardState;
 import uk.co.mruoc.exercises.naughtsandcrosses.locationselector.LocationSelector;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 public class GameState {
 
     private final Players players;
     private final Board board;
 
-    private boolean complete = false;
-
     public GameState() {
         this(new Players(), new Board());
+    }
+
+    public void reset() {
+        board.reset();
+    }
+
+    public String getTokenAt(String location) {
+        return board.getToken(location);
     }
 
     public String selectLocation(LocationSelector locationSelector) {
@@ -26,7 +34,11 @@ public class GameState {
     }
 
     public boolean isComplete() {
-        return complete;
+        return hasWinner(players.getCurrentPlayer()) || isBoardFull();
+    }
+
+    public Optional<String> getWinner() {
+        return players.stream().filter(board::hasWinner).findFirst();
     }
 
     public boolean hasWinner(String player) {
@@ -41,11 +53,9 @@ public class GameState {
         String player = getCurrentPlayer();
         board.placeToken(location, player);
         if (hasWinner(player)) {
-            complete = true;
             return;
         }
         if (isBoardFull()) {
-            complete = true;
             return;
         }
         switchPlayer();
