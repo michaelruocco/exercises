@@ -8,7 +8,7 @@ import org.springframework.web.reactive.function.server.RequestPredicates;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
-import uk.co.mruoc.exercises.palindrome.domain.PalindromeCalculator;
+import uk.co.mruoc.exercises.palindrome.domain.PalindromeFinder;
 
 @Configuration
 public class PalindromeRouter {
@@ -21,13 +21,12 @@ public class PalindromeRouter {
     }
 
     @Bean
-    public PalindromeHandler handler(PalindromeCalculator calculator) {
+    public PalindromeHandler handler(PalindromeFinder calculator) {
         return new PalindromeHandler(calculator);
     }
 
     @Bean
-    public PalindromeCalculator calculator() {
-        return new PalindromeCalculator();
+    public PalindromeFinder calculator() {
+        return new PalindromeFinder();
     }
-
 }

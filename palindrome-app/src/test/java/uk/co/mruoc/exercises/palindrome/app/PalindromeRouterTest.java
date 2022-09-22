@@ -3,12 +3,12 @@ package uk.co.mruoc.exercises.palindrome.app;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import uk.co.mruoc.exercises.palindrome.client.PalindromeClient;
 import uk.co.mruoc.exercises.palindrome.domain.PalindromeResult;
 
-import java.util.Optional;
+import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,43 +20,33 @@ class PalindromeRouterTest {
     private int port;
 
     @Test
-    void shouldReturnInputInResponse() {
-        String input = "my-input";
+    void shouldReturnEmptyPalindromeIfInputDoesNotContainPalindrome() {
+        String input = "my input";
         PalindromeClient client = toClient(port);
 
-        Optional<PalindromeResult> result = client.isPalindrome(input).blockOptional();
+        PalindromeResult result = Objects.requireNonNull(client.findPalindromes(input).block());
 
-        assertThat(result).map(PalindromeResult::getInput).contains(input);
+        assertThat(result.getPalindromes()).isEmpty();
     }
 
     @Test
-    void shouldReturnReversedInputInResponse() {
-        String input = "abcdef";
-        PalindromeClient client = toClient(port);
-
-        Optional<PalindromeResult> result = client.isPalindrome(input).blockOptional();
-
-        assertThat(result).map(PalindromeResult::getReversed).contains("fedcba");
-    }
-
-    @Test
-    void shouldReturnFalseIfInputIsNotPalindrome() {
-        String input = "non-palindrome-input";
-        PalindromeClient client = toClient(port);
-
-        Optional<PalindromeResult> result = client.isPalindrome(input).blockOptional();
-
-        assertThat(result).map(PalindromeResult::isPalindrome).contains(false);
-    }
-
-    @Test
-    void shouldReturnTrueIfInputIsPalindrome() {
+    void shouldReturnPalindromeIfInputIsPalindrome() {
         String input = "racecar";
         PalindromeClient client = toClient(port);
 
-        Optional<PalindromeResult> result = client.isPalindrome(input).blockOptional();
+        PalindromeResult result = Objects.requireNonNull(client.findPalindromes(input).block());
 
-        assertThat(result).map(PalindromeResult::isPalindrome).contains(true);
+        assertThat(result.getPalindromes()).contains(input);
+    }
+
+    @Test
+    void shouldReturnPalindromeIfInputContainsPalindrome() {
+        String input = "was it a palindrome, or was it a rat i saw in here";
+        PalindromeClient client = toClient(port);
+
+        PalindromeResult result = Objects.requireNonNull(client.findPalindromes(input).block());
+
+        assertThat(result.getPalindromes()).contains("wasitaratisaw");
     }
 
     private static PalindromeClient toClient(int port) {

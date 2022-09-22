@@ -19,17 +19,24 @@ GET /palindromes/{input}
 
 A get endpoint was used to support easier testing using curl or even through a web
 browser. The response returns a json payload which plays back the input string,
-the reversed input string, and a boolean value indicating if the input is a palindrome
-or not.
+along with an array of all the palindromes found within the string, any that are
+duplicates or shorter than 3 characters will not be included:
+
+As an example, if `racecar` is input, then technically there are multiple 
+palindromes `racecar`, `aceca`, `cec` and even `e` but only the longest i.e. `racecar`
+will be returned.
+
+If the input string does not contain any palindromes then an empty array will be
+returned.
 
 Some curl commands with the responses returned from the calls are shown below:
 
 ```curl
 curl http://localhost:8010/palindromes/racecar
-{"input":"racecar","reversed":"racecar","palindrome":true}
+{"input":"racecar","palindromes":["racecar"]}
 
 curl http://localhost:8010/palindromes/1234
-{"input":"1234","reversed":"4321","palindrome":false}
+{"input":"1234","palindromes":[]}
 ```
 
 ## Running the app

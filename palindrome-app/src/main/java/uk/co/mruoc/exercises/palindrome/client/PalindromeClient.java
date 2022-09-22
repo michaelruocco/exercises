@@ -17,7 +17,7 @@ public class PalindromeClient {
         this.client = client;
     }
 
-    public Mono<PalindromeResult> isPalindrome(String input) {
+    public Mono<PalindromeResult> findPalindromes(String input) {
         return client.get().uri(toGetIsPalindromeUri(input))
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
