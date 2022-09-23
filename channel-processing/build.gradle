@@ -10,7 +10,7 @@ testSets {
 dependencies {
     implementation "io.projectreactor:reactor-core:${projectReactorVersion}"
     implementation "com.github.michaelruocco:file-loader:${fileLoaderVersion}"
-    implementation "org.slf4j:slf4j-simple:1.7.36"
+    implementation "org.slf4j:slf4j-simple:${slf4jVersion}"
     implementation "com.google.guava:guava:31.1-jre"
     implementation "org.apache.commons:commons-lang3:${commonsLangVersion}"
     implementation "com.fathzer:javaluator:3.0.3"
