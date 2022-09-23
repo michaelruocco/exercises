@@ -28,6 +28,7 @@ public class PalindromeHandler {
         log.info("received request palindrome request {}", request);
         ApiPalindromeResponse response = ApiPalindromeResponse.builder()
                 .input(request.getInput())
+                .filter(request.getFilter())
                 .minLength(request.getMinLength())
                 .palindromes(calculator.findPalindromes(request))
                 .build();

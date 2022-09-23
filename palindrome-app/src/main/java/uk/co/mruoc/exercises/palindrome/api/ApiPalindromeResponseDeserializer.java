@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import uk.co.mruoc.exercises.palindrome.domain.filter.Filter;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -26,6 +27,7 @@ public class ApiPalindromeResponseDeserializer extends StdDeserializer<ApiPalind
         return ApiPalindromeResponse.builder()
                 .input(node.get("input").asText())
                 .minLength(node.get("minLength").asInt())
+                .filter(Filter.valueOf(node.get("filter").asText()))
                 .palindromes(node.get("palindromes").traverse(parser.getCodec()).readValueAs(STRING_COLLECTION))
                 .build();
     }

@@ -13,13 +13,15 @@ import uk.co.mruoc.exercises.palindrome.client.PalindromeClient;
 
 import static java.util.Objects.requireNonNull;
 import static org.assertj.core.api.Assertions.assertThat;
+import static uk.co.mruoc.exercises.palindrome.domain.filter.Filter.REMOVE_DUPLICATES;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class PalindromeRouterTest {
 
     private final ApiPalindromeRequestBuilder requestBuilder = ApiPalindromeRequest.builder()
-            .minLength(3);
+            .minLength(3)
+            .filter(REMOVE_DUPLICATES);
 
     @LocalServerPort
     private int port;

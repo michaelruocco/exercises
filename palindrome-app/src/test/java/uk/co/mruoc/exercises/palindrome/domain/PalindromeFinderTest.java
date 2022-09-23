@@ -3,6 +3,7 @@ package uk.co.mruoc.exercises.palindrome.domain;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import uk.co.mruoc.exercises.palindrome.domain.filter.Filter;
 
 import java.util.Collection;
 
@@ -12,7 +13,7 @@ import static org.mockito.Mockito.when;
 
 class PalindromeFinderTest {
 
-    private final PalindromeRequest request = givenRequestWithMinLength(3);
+    private final PalindromeRequest request = givenRequest();
 
     private final PalindromeFinder finder = new PalindromeFinder();
 
@@ -46,9 +47,10 @@ class PalindromeFinderTest {
         assertThat(palindromes).isEmpty();
     }
 
-    private static PalindromeRequest givenRequestWithMinLength(int minLength) {
+    private static PalindromeRequest givenRequest() {
         PalindromeRequest request = mock(PalindromeRequest.class);
-        when(request.getMinLength()).thenReturn(minLength);
+        when(request.getMinLength()).thenReturn(3);
+        when(request.getFilter()).thenReturn(Filter.REMOVE_DUPLICATES);
         return request;
     }
 }
