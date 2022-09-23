@@ -1,12 +1,12 @@
 buildscript {
     ext {
-        springBootVersion = "2.7.1"
+        springBootVersion = "2.7.4"
     }
 }
 
 plugins {
     id "org.springframework.boot" version "${springBootVersion}"
-    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+    id "io.spring.dependency-management" version "1.0.14.RELEASE"
 }
 
 configurations {
@@ -18,8 +18,8 @@ repositories {
 }
 
 ext {
-    jacksonVersion = "2.13.3"
-    webFluxVersion = "5.3.21"
+    jacksonVersion = "2.13.4"
+    webFluxVersion = "5.3.23"
 }
 
 dependencies {
