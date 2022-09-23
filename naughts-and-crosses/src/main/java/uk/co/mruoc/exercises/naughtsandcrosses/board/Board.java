@@ -3,12 +3,12 @@ package uk.co.mruoc.exercises.naughtsandcrosses.board;
 import lombok.RequiredArgsConstructor;
 import uk.co.mruoc.exercises.naughtsandcrosses.locationselector.LocationSelector;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RequiredArgsConstructor
@@ -70,8 +70,8 @@ public class Board implements BoardState {
     }
 
     public String getRandomFreeLocation() {
-        List<Location> randomLocations = getFreeLocations().collect(Collectors.toList());
-        Collections.shuffle(randomLocations);
+        List<Location> randomLocations = getFreeLocations().toList();
+        Collections.shuffle(new ArrayList<>(randomLocations));
         return randomLocations.stream()
                 .findFirst()
                 .map(Location::getKey)

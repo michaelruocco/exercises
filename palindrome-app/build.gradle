@@ -34,7 +34,7 @@ dependencies {
     implementation "org.springframework:spring-webflux:${webFluxVersion}"
     implementation "org.apache.commons:commons-lang3:${commonsLangVersion}"
 
-
     testImplementation "org.springframework.boot:spring-boot-starter-test"
     testImplementation "org.springframework.boot:spring-boot-test:${springBootVersion}"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:${junitVersion}"
 }

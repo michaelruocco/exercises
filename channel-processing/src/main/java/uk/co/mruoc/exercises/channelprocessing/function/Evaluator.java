@@ -20,8 +20,8 @@ public class Evaluator extends AbstractEvaluator<BigDecimal> {
 
     @Override
     protected BigDecimal evaluate(Operator operator, Iterator<BigDecimal> operands, Object evaluationContext) {
-        if (operator instanceof ArithemticOperator) {
-            return ((ArithemticOperator) operator).apply(operands.next(), operands.next());
+        if (operator instanceof ArithemticOperator arithemticOperator) {
+            return arithemticOperator.apply(operands.next(), operands.next());
         }
         return super.evaluate(operator, operands, evaluationContext);
     }

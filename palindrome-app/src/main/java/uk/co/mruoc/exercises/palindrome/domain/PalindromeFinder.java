@@ -8,7 +8,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RequiredArgsConstructor
@@ -30,7 +29,7 @@ public class PalindromeFinder {
         Collection<String> palindromes = calculateAllUniqueSubstringsLongestFirst(sanitized)
                 .map(PalindromeFinder::isPalindrome)
                 .flatMap(Optional::stream)
-                .collect(Collectors.toList());
+                .toList();
         return filterFunction.apply(palindromes);
     }
 

@@ -6,7 +6,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 @Data
 public class ApplicationArgs {
@@ -27,6 +26,6 @@ public class ApplicationArgs {
         return Arrays.stream(outputTargets.split(","))
                 .map(StringUtils::deleteWhitespace)
                 .map(target -> target.charAt(0))
-                .collect(Collectors.toList());
+                .toList();
     }
 }

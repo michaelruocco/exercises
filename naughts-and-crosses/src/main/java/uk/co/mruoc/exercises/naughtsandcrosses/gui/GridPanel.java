@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 public class GridPanel extends JPanel {
 
@@ -32,6 +31,6 @@ public class GridPanel extends JPanel {
     private Collection<GridButton> buildButtons(GameState game, BoardState board) {
         return board.getLocationKeys()
                 .map(location -> new GridButton(game, location))
-                .collect(Collectors.toList());
+                .toList();
     }
 }
