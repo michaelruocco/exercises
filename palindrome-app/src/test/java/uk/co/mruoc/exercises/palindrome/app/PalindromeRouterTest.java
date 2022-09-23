@@ -5,48 +5,53 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import uk.co.mruoc.exercises.palindrome.api.ApiPalindromeRequest;
+import uk.co.mruoc.exercises.palindrome.api.ApiPalindromeRequest.ApiPalindromeRequestBuilder;
+import uk.co.mruoc.exercises.palindrome.api.ApiPalindromeResponse;
 import uk.co.mruoc.exercises.palindrome.client.PalindromeClient;
-import uk.co.mruoc.exercises.palindrome.domain.PalindromeResult;
 
-import java.util.Objects;
 
+import static java.util.Objects.requireNonNull;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class PalindromeRouterTest {
 
+    private final ApiPalindromeRequestBuilder requestBuilder = ApiPalindromeRequest.builder()
+            .minLength(3);
+
     @LocalServerPort
     private int port;
 
     @Test
     void shouldReturnEmptyPalindromeIfInputDoesNotContainPalindrome() {
-        String input = "my input";
         PalindromeClient client = toClient(port);
+        ApiPalindromeRequest request = requestBuilder.input("my input").build();
 
-        PalindromeResult result = Objects.requireNonNull(client.findPalindromes(input).block());
+        ApiPalindromeResponse response = requireNonNull(client.findPalindromes(request).block());
 
-        assertThat(result.getPalindromes()).isEmpty();
+        assertThat(response.getPalindromes()).isEmpty();
     }
 
     @Test
     void shouldReturnPalindromeIfInputIsPalindrome() {
-        String input = "racecar";
         PalindromeClient client = toClient(port);
+        ApiPalindromeRequest request = requestBuilder.input("racecar").build();
 
-        PalindromeResult result = Objects.requireNonNull(client.findPalindromes(input).block());
+        ApiPalindromeResponse response = requireNonNull(client.findPalindromes(request).block());
 
-        assertThat(result.getPalindromes()).contains(input);
+        assertThat(response.getPalindromes()).contains(request.getInput());
     }
 
     @Test
     void shouldReturnPalindromeIfInputContainsPalindrome() {
-        String input = "was it a palindrome, or was it a rat i saw in here";
         PalindromeClient client = toClient(port);
+        ApiPalindromeRequest request = requestBuilder.input("was it a palindrome, or was it a rat i saw in here").build();
 
-        PalindromeResult result = Objects.requireNonNull(client.findPalindromes(input).block());
+        ApiPalindromeResponse response = requireNonNull(client.findPalindromes(request).block());
 
-        assertThat(result.getPalindromes()).contains("wasitaratisaw");
+        assertThat(response.getPalindromes()).contains("wasitaratisaw");
     }
 
     private static PalindromeClient toClient(int port) {

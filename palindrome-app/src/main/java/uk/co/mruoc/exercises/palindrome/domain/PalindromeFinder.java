@@ -14,32 +14,30 @@ import java.util.stream.Stream;
 @Slf4j
 public class PalindromeFinder {
 
-    private static final int DEFAULT_MIN_LENGTH = 3;
-
-    private final int minLength;
     private final FilterFunction filterFunction;
 
     public PalindromeFinder() {
-        this(DEFAULT_MIN_LENGTH, new OnlyLongestFilterFunction());
+        this(new OnlyLongestFilterFunction());
     }
 
-    public Collection<String> findPalindromes(String input) {
+    public Collection<String> findPalindromes(PalindromeRequest request) {
+        String input = request.getInput();
         log.info("checking if {} contains a palindrome", input);
-        String sanitized = sanitize(input);
-        Collection<String> palindromes = calculateAllUniqueSubstringsLongestFirst(sanitized)
+        Collection<String> palindromes = calculateAllUniqueSubstringsLongestFirst(request)
                 .map(PalindromeFinder::isPalindrome)
                 .flatMap(Optional::stream)
                 .toList();
         return filterFunction.apply(palindromes);
     }
 
-    private Stream<String> calculateAllUniqueSubstringsLongestFirst(String input) {
+    private Stream<String> calculateAllUniqueSubstringsLongestFirst(PalindromeRequest request) {
+        String sanitized = sanitize(request.getInput());
         Set<String> substrings = new HashSet<>();
-        int length = input.length();
+        int length = sanitized.length();
         for (int start = 0; start < length; start++) {
             for (int end = start + 1; end <= length; ++end) {
-                if (end - start >= minLength) {
-                    substrings.add(input.substring(start, end));
+                if (end - start >= request.getMinLength()) {
+                    substrings.add(sanitized.substring(start, end));
                 }
             }
         }

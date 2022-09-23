@@ -1,9 +1,9 @@
 package uk.co.mruoc.exercises.palindrome.client;
 
-import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import uk.co.mruoc.exercises.palindrome.domain.PalindromeResult;
+import uk.co.mruoc.exercises.palindrome.api.ApiPalindromeRequest;
+import uk.co.mruoc.exercises.palindrome.api.ApiPalindromeResponse;
 
 public class PalindromeClient {
 
@@ -17,15 +17,10 @@ public class PalindromeClient {
         this.client = client;
     }
 
-    public Mono<PalindromeResult> findPalindromes(String input) {
-        return client.get().uri(toGetIsPalindromeUri(input))
-                .accept(MediaType.APPLICATION_JSON)
+    public Mono<ApiPalindromeResponse> findPalindromes(ApiPalindromeRequest request) {
+        return client.post().uri("/palindromes")
+                .bodyValue(request)
                 .retrieve()
-                .bodyToMono(PalindromeResult.class);
+                .bodyToMono(ApiPalindromeResponse.class);
     }
-
-    private static String toGetIsPalindromeUri(String input) {
-        return String.format("/palindromes/%s", input);
-    }
-
 }

@@ -14,7 +14,11 @@ This example solves the problem by building a reactive web service using spring 
 flux. The application exposes the following get endpoint:
 
 ```http
-GET /palindromes/{input}
+POST /palindromes
+{
+  "input": "racecar",
+  "minLength": 3
+}
 ```
 
 A get endpoint was used to support easier testing using curl or even through a web
@@ -32,11 +36,17 @@ returned.
 Some curl commands with the responses returned from the calls are shown below:
 
 ```curl
-curl http://localhost:8010/palindromes/racecar
-{"input":"racecar","palindromes":["racecar"]}
+curl -X POST \
+  -d '{"input":"racecar","minLength":3}' \
+  -H "Content-Type:application/json" \
+  http://localhost:8010/palindromes
+{"input":"racecar","minLength":3,"palindromes":["racecar"]}
 
-curl http://localhost:8010/palindromes/1234
-{"input":"1234","palindromes":[]}
+curl -X POST \
+  -d '{"input":"1234","minLength":3}' \
+  -H "Content-Type:application/json" \
+  http://localhost:8010/palindromes
+{"input":"1234","minLength":3,"palindromes":[]}
 ```
 
 ## Running the app
