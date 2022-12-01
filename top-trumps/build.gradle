@@ -1,0 +1,5 @@
+dependencies {
+    runtimeOnly "org.slf4j:slf4j-simple:${slf4jVersion}"
+    implementation "com.neovisionaries:nv-i18n:1.29"
+    implementation "com.github.michaelruocco:file-loader:7.0.2"
+}
