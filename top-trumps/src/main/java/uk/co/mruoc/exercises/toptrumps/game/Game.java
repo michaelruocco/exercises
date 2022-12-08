@@ -4,8 +4,9 @@ import lombok.Builder;
 import lombok.extern.slf4j.Slf4j;
 import uk.co.mruoc.exercises.toptrumps.game.card.Card;
 import uk.co.mruoc.exercises.toptrumps.game.card.Deck;
-import uk.co.mruoc.exercises.toptrumps.game.card.DeckLoader;
 import uk.co.mruoc.exercises.toptrumps.game.card.Pile;
+import uk.co.mruoc.exercises.toptrumps.game.card.Shuffler;
+import uk.co.mruoc.exercises.toptrumps.game.card.attribute.Attribute;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,33 +18,30 @@ import java.util.Optional;
 @Builder
 public class Game {
 
-    private final DeckLoader deckLoader;
+    private final Deck deck;
+    private final Shuffler shuffler;
     private final Players players;
     private final Pile pile;
     private final int maxTurns;
 
     public void play() {
         log.info("starting game");
-        logPlayers();
+        shuffle();
         deal();
         int turns = 0;
         while (!isFinished() && turns <= maxTurns) {
-            Collection<String> attributes = getAvailableAttributes();
-            String attribute = selectRandom(attributes);
-            takeTurn(attribute);
+            takeTurn(selectRandomAttribute());
             log.info("turn {} complete ", turns++);
-            logPlayers();
         }
         log.info("winner is {}", getWinner());
     }
 
-    public void deal() {
-        Deck deck = deckLoader.load();
-        deck.shuffle();
-        players.deal(deck);
+    public void shuffle() {
+        deck.shuffle(shuffler);
+    }
 
-        log.info("cards dealt");
-        logPlayers();
+    public void deal() {
+        players.deal(deck);
     }
 
     public boolean isFinished() {
@@ -54,49 +52,31 @@ public class Game {
         return players.getWinner();
     }
 
-    public Collection<String> getAvailableAttributes() {
+    public Attribute selectRandomAttribute() {
+        return selectRandom(getAvailableAttributes());
+    }
+
+    public Collection<Attribute> getAvailableAttributes() {
         return players.getNextCards()
                 .stream()
                 .findFirst()
-                .map(Card::getAttributeNames)
+                .map(Card::getAttributes)
                 .orElse(Collections.emptyList());
     }
 
-    public void takeTurn(String attributeName) {
-        List<PlayedCard> playedCards = players.removeNextPlayedCards();
+    public void takeTurn(Attribute selectedAttribute) {
+        Collection<PlayedCard> playedCards = players.removeNextPlayedCards();
         pile.addAll(playedCards);
-        Optional<Player> turnWinner = calculateTurnWinner(playedCards, attributeName);
+        Optional<Player> turnWinner = selectedAttribute.calculateWinner(playedCards);
         turnWinner.ifPresent(player -> player.addCards(pile.removeAll()));
+        players.log();
     }
 
-    //TODO tidy up this method or create turn class which might help break down
-    private Optional<Player> calculateTurnWinner(List<PlayedCard> playedCards, String attributeName) {
-        Optional<PlayedCard> turnWinner = Optional.empty();
-        for (int i = 0; i + 1 < playedCards.size(); i++) {
-            PlayedCard playedCard1 = playedCards.get(i);
-            PlayedCard playedCard2 = playedCards.get(i + 1);
-            Optional<PlayedCard> cardWinner = playedCard1.calculateWinner(playedCard2, attributeName);
-            if (cardWinner.isPresent() && turnWinner.isPresent() && !turnWinner.get().getPlayerName().equals(cardWinner.get().getPlayerName())) {
-                turnWinner = turnWinner.get().calculateWinner(cardWinner.get(), attributeName);
-            } else if (cardWinner.isPresent()) {
-                turnWinner = cardWinner;
-            }
-        }
-        turnWinner.ifPresent(playedCard -> log.info("winning card {} from {}",
-                playedCard.getCardId(),
-                playedCard.getPlayer().getName()));
-        return turnWinner.map(PlayedCard::getPlayer);
-    }
-
-    private void logPlayers() {
-        players.forEach(player -> log.info(player.toString()));
-    }
-
-    private static String selectRandom(Collection<String> attributes) {
-        List<String> randomized = new ArrayList<>(attributes);
+    private static Attribute selectRandom(Collection<Attribute> attributes) {
+        List<Attribute> randomized = new ArrayList<>(attributes);
         Collections.shuffle(randomized);
-        String attribute = randomized.get(0);
-        log.info("selected random attribute {}", attribute);
+        Attribute attribute = randomized.get(0);
+        log.info("selected random attribute {}", attribute.getName());
         return attribute;
     }
 }

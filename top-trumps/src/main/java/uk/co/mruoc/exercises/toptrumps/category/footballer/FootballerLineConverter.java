@@ -45,7 +45,7 @@ public class FootballerLineConverter implements LineConverter {
                 new NumericHighestWinsAttribute("pace", Double.parseDouble(fields[4])),
                 new NumericHighestWinsAttribute("shooting", Double.parseDouble(fields[5])),
                 new NumericHighestWinsAttribute("passing", Double.parseDouble(fields[6])),
-                new NumericHighestWinsAttribute("tacking", Double.parseDouble(fields[7])),
+                new NumericHighestWinsAttribute("tackling", Double.parseDouble(fields[7])),
                 new NumericHighestWinsAttribute("stamina", Double.parseDouble(fields[8])),
                 new NumericHighestWinsAttribute("dribbling", Double.parseDouble(fields[9]))
         );

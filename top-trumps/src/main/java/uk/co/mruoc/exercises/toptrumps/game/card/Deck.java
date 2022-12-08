@@ -3,26 +3,29 @@ package uk.co.mruoc.exercises.toptrumps.game.card;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.Deque;
-import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
-public class Deck implements Iterable<Card> {
+public class Deck {
 
     private Deque<Card> cards;
+
+    public Deck(Card... cards) {
+        this(List.of(cards));
+    }
 
     public Deck(Collection<Card> cards) {
         this(new ArrayDeque<>(cards));
     }
 
-    public void shuffle() {
-        List<Card> shuffled = new ArrayList<>(cards);
-        Collections.shuffle(shuffled);
-        cards = new ArrayDeque<>(shuffled);
+    public void shuffle(Comparator<Card> comparator) {
+        cards = cards.stream()
+                .sorted(comparator)
+                .collect(Collectors.toCollection(ArrayDeque::new));
     }
 
     public boolean hasCardsRemaining() {
@@ -33,12 +36,11 @@ public class Deck implements Iterable<Card> {
         return cards.isEmpty();
     }
 
-    public Card removeNextCard() {
-        return cards.poll();
+    public Card removeTopCard() {
+        return cards.pollLast();
     }
 
-    @Override
-    public Iterator<Card> iterator() {
-        return cards.iterator();
+    public Collection<Long> toIds() {
+        return cards.stream().map(Card::getId).toList();
     }
 }

@@ -2,6 +2,7 @@ package uk.co.mruoc.exercises.toptrumps.game;
 
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 import uk.co.mruoc.exercises.toptrumps.game.card.Card;
 import uk.co.mruoc.exercises.toptrumps.game.card.Deck;
 
@@ -12,6 +13,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @ToString
+@Slf4j
 public class Players implements Iterable<Player> {
 
     private final List<Player> values;
@@ -37,15 +39,17 @@ public class Players implements Iterable<Player> {
     }
 
     public void deal(Deck deck) {
-        int dealIndex = 0;
-        while(deck.hasCardsRemaining()) {
-            Player player = values.get(dealIndex);
-            player.addCard(deck.removeNextCard());
-            dealIndex++;
-            if (dealIndex >= values.size()) {
-                dealIndex = 0;
+        int playerIndex = 0;
+        while (deck.hasCardsRemaining()) {
+            Player player = values.get(playerIndex);
+            player.addCard(deck.removeTopCard());
+            playerIndex++;
+            if (playerIndex >= values.size()) {
+                playerIndex = 0;
             }
         }
+        log.info("cards dealt");
+        log();
     }
 
     @Override
@@ -60,11 +64,15 @@ public class Players implements Iterable<Player> {
                 .toList();
     }
 
-    public List<PlayedCard> removeNextPlayedCards() {
+    public Collection<PlayedCard> removeNextPlayedCards() {
         return values.stream()
                 .filter(Player::hasCards)
                 .map(player -> new PlayedCard(player, player.removeNextCard()))
                 .toList();
+    }
+
+    public void log() {
+        values.forEach(player -> log.info(player.toString()));
     }
 
     private Collection<Player> getRemainingPlayers() {
