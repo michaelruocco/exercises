@@ -7,7 +7,7 @@ import reactor.core.publisher.Flux;
 import uk.co.mruoc.exercises.channelprocessing.function.spec.FunctionSpec;
 import uk.co.mruoc.exercises.channelprocessing.function.spec.InputSpec;
 import uk.co.mruoc.exercises.channelprocessing.function.spec.InputSpecFactory;
-import uk.co.mruoc.file.content.ContentLoader;
+import uk.co.mruoc.file.FileLoader;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,7 +21,7 @@ public class FunctionLoader {
     private final InputSpecFactory inputSpecFactory;
 
     public FunctionLoader() {
-        this(ContentLoader::loadContentFromClasspath);
+        this(FileLoader::loadContentFromClasspath);
     }
 
     public FunctionLoader(UnaryOperator<String> contentLoader) {

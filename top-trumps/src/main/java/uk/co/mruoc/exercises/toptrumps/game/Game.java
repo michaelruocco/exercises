@@ -7,11 +7,10 @@ import uk.co.mruoc.exercises.toptrumps.game.card.Deck;
 import uk.co.mruoc.exercises.toptrumps.game.card.Pile;
 import uk.co.mruoc.exercises.toptrumps.game.card.Shuffler;
 import uk.co.mruoc.exercises.toptrumps.game.card.attribute.Attribute;
+import uk.co.mruoc.exercises.toptrumps.game.card.attribute.AttributeSelector;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -23,6 +22,7 @@ public class Game {
     private final Players players;
     private final Pile pile;
     private final int maxTurns;
+    private final AttributeSelector attributeSelector;
 
     public void play() {
         log.info("starting game");
@@ -30,7 +30,7 @@ public class Game {
         deal();
         int turns = 0;
         while (!isFinished() && turns <= maxTurns) {
-            takeTurn(selectRandomAttribute());
+            takeTurn(selectAttribute());
             log.info("turn {} complete ", turns++);
         }
         log.info("winner is {}", getWinner());
@@ -52,8 +52,8 @@ public class Game {
         return players.getWinner();
     }
 
-    public Attribute selectRandomAttribute() {
-        return selectRandom(getAvailableAttributes());
+    public Attribute selectAttribute() {
+        return attributeSelector.select(getAvailableAttributes());
     }
 
     public Collection<Attribute> getAvailableAttributes() {
@@ -66,17 +66,9 @@ public class Game {
 
     public void takeTurn(Attribute selectedAttribute) {
         Collection<PlayedCard> playedCards = players.removeNextPlayedCards();
-        pile.addAll(playedCards);
+        pile.addAll(playedCards.stream().map(PlayedCard::getCard).toList());
         Optional<Player> turnWinner = selectedAttribute.calculateWinner(playedCards);
         turnWinner.ifPresent(player -> player.addCards(pile.removeAll()));
         players.log();
-    }
-
-    private static Attribute selectRandom(Collection<Attribute> attributes) {
-        List<Attribute> randomized = new ArrayList<>(attributes);
-        Collections.shuffle(randomized);
-        Attribute attribute = randomized.get(0);
-        log.info("selected random attribute {}", attribute.getName());
-        return attribute;
     }
 }

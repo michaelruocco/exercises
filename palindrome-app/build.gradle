@@ -6,7 +6,7 @@ buildscript {
 
 plugins {
     id "org.springframework.boot" version "${springBootVersion}"
-    id "io.spring.dependency-management" version "1.0.14.RELEASE"
+    id "io.spring.dependency-management" version "1.1.0"
 }
 
 configurations {
@@ -18,7 +18,7 @@ repositories {
 }
 
 ext {
-    jacksonVersion = "2.13.4"
+    jacksonVersion = "2.14.2"
     webFluxVersion = "5.3.23"
 }
 
