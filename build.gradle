@@ -56,7 +56,7 @@ subprojects {
         assertjVersion = "3.24.2"
         mockitoVersion = "5.1.1"
         fileLoaderVersion = "7.0.2"
-        systemStubsVersion = "2.0.1"
+        systemStubsVersion = "2.0.2"
     }
 
     dependencies {
