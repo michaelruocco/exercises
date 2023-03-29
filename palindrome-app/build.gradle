@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = "3.0.2"
+        springBootVersion = "3.0.5"
     }
 }
 
@@ -19,7 +19,7 @@ repositories {
 
 ext {
     jacksonVersion = "2.14.2"
-    webFluxVersion = "6.0.5"
+    webFluxVersion = "6.0.7"
 }
 
 dependencies {
