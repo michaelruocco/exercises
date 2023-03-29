@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import reactor.core.publisher.Flux;
 import uk.co.mruoc.exercises.channelprocessing.Variables;
-import uk.co.mruoc.file.content.ContentLoader;
+import uk.co.mruoc.file.FileLoader;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class ChannelLoader {
     private final UnaryOperator<String> contentLoader;
 
     public ChannelLoader() {
-        this(ContentLoader::loadContentFromClasspath);
+        this(FileLoader::loadContentFromClasspath);
     }
 
     public Channels load(String path) {

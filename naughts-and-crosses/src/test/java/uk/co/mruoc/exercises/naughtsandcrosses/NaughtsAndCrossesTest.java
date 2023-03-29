@@ -3,7 +3,7 @@ package uk.co.mruoc.exercises.naughtsandcrosses;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static uk.co.mruoc.file.content.ContentLoader.loadContentFromClasspath;
+import static uk.co.mruoc.file.FileLoader.loadContentFromClasspath;
 import static uk.org.webcompere.systemstubs.SystemStubs.tapSystemErrAndOut;
 import static uk.org.webcompere.systemstubs.SystemStubs.tapSystemOut;
 import static uk.org.webcompere.systemstubs.SystemStubs.withTextFromSystemIn;

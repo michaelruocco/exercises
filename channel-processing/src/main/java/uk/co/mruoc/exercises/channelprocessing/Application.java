@@ -8,7 +8,7 @@ import uk.co.mruoc.exercises.channelprocessing.function.ChannelFunction;
 import uk.co.mruoc.exercises.channelprocessing.function.FunctionLoader;
 import uk.co.mruoc.exercises.channelprocessing.parameter.Parameters;
 import uk.co.mruoc.exercises.channelprocessing.parameter.ParameterLoader;
-import uk.co.mruoc.file.content.ContentLoader;
+import uk.co.mruoc.file.FileLoader;
 
 import java.util.function.UnaryOperator;
 
@@ -19,7 +19,7 @@ public class Application {
         ApplicationArgs appArgs = new ApplicationArgs();
         JCommander.newBuilder().addObject(appArgs).build().parse(args);
         log.debug("running application with arguments {}", appArgs);
-        UnaryOperator<String> fileSystemLoader = ContentLoader::loadContentFromFileSystem;
+        UnaryOperator<String> fileSystemLoader = FileLoader::loadContentFromFileSystem;
         Channels channels = new ChannelLoader(fileSystemLoader).load(appArgs.getChannelsPath());
         Parameters parameters = new ParameterLoader(fileSystemLoader).load(appArgs.getParametersPath());
         ChannelFunction function = new FunctionLoader(fileSystemLoader).load(appArgs.getFunctionsPath());

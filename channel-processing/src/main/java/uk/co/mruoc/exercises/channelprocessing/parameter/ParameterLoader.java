@@ -1,7 +1,7 @@
 package uk.co.mruoc.exercises.channelprocessing.parameter;
 
 import lombok.RequiredArgsConstructor;
-import uk.co.mruoc.file.content.ContentLoader;
+import uk.co.mruoc.file.FileLoader;
 
 import java.math.BigDecimal;
 import java.util.AbstractMap.SimpleEntry;
@@ -16,7 +16,7 @@ public class ParameterLoader {
     private final UnaryOperator<String> contentLoader;
 
     public ParameterLoader() {
-        this(ContentLoader::loadContentFromClasspath);
+        this(FileLoader::loadContentFromClasspath);
     }
 
     public Parameters load(String path) {
