@@ -35,5 +35,5 @@ This repo contains a collection of different exercises that I have had a go at a
 // runs tests
 // checks for gradle issues
 // checks dependency versions
-./gradlew clean currentVersion dependencyUpdates lintGradle spotlessApply build
+./gradlew clean currentVersion dependencyUpdates criticalLintGradle spotlessApply build
 ```

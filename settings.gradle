@@ -11,4 +11,5 @@ include ':cake-factory'
 include ':binary-gap'
 include ':naughts-and-crosses'
 include ':channel-processing'
+include ':top-trumps'
 
