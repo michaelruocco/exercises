@@ -68,11 +68,9 @@ subprojects {
     testing {
         suites {
             configureEach {
-                useJUnitJupiter()
+                useJUnitJupiter(junitVersion)
                 dependencies {
                     runtimeOnly "org.slf4j:slf4j-simple:${slf4jVersion}"
-                    implementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
-                    implementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
                     implementation "org.assertj:assertj-core:${assertjVersion}"
                     implementation "org.mockito:mockito-core:${mockitoVersion}"
                 }
