@@ -1,10 +1,15 @@
 plugins {
-    id "org.unbroken-dome.test-sets" version "4.0.0"
     id "java-test-fixtures"
 }
 
-testSets {
-    integrationTest
+testing {
+    suites {
+        integrationTest(JvmTestSuite) {}
+    }
+}
+
+configurations {
+    integrationTestImplementation.extendsFrom testImplementation
 }
 
 dependencies {
