@@ -1,10 +1,19 @@
 plugins {
     id "application"
-    id "org.unbroken-dome.test-sets" version "4.0.0"
 }
 
-testSets {
-    loadTest
+testing {
+    suites {
+        performanceTest(JvmTestSuite) {
+            dependencies {
+                implementation project()
+            }
+        }
+    }
+}
+
+configurations {
+    performanceTestImplementation.extendsFrom testImplementation
 }
 
 dependencies {
@@ -22,8 +31,4 @@ dependencies {
 
 application {
     mainClass = "uk.co.mruoc.exercises.channelprocessing.Application"
-}
-
-loadTest {
-    systemProperty "org.slf4j.simpleLogger.defaultLogLevel", "info"
 }

@@ -63,17 +63,30 @@ subprojects {
         testAnnotationProcessor "org.projectlombok:lombok:${lombokVersion}"
 
         implementation "org.slf4j:slf4j-api:${slf4jVersion}"
-
-        testRuntimeOnly "org.slf4j:slf4j-simple:${slf4jVersion}"
-        testImplementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
-        testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
-        testImplementation "org.assertj:assertj-core:${assertjVersion}"
-        testImplementation "org.mockito:mockito-core:${mockitoVersion}"
     }
 
-    tasks.withType(Test) {
-        useJUnitPlatform()
-        systemProperty "org.slf4j.simpleLogger.defaultLogLevel", "debug"
+    testing {
+        suites {
+            configureEach {
+                useJUnitJupiter()
+                dependencies {
+                    runtimeOnly "org.slf4j:slf4j-simple:${slf4jVersion}"
+                    implementation "org.junit.jupiter:junit-jupiter:${junitVersion}"
+                    implementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+                    implementation "org.assertj:assertj-core:${assertjVersion}"
+                    implementation "org.mockito:mockito-core:${mockitoVersion}"
+                }
+            }
+            test {
+                targets {
+                    all {
+                        testTask.configure {
+                            systemProperty "org.slf4j.simpleLogger.defaultLogLevel", "debug"
+                        }
+                    }
+                }
+            }
+        }
     }
 
     testlogger {
